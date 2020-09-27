@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block msg %}
+    {% if msg %}
+        <h1 class="text-center bg bg-success">Code Updated Succesfully</h1>
+    {% endif %}
+    <h1>Auto generated url is here : {{db_row.poster_url}} </h1>
+    <h4>You send this poster with other user by this url </h4>      
+    <hr> 
+{% endblock msg %}
+
+{% block content %}
+    <div class="col-md-12 my-5">
+        <h4>Posted By: <a href="/">{{db_row.user_name}}</a> </h4><br>
+        <h4>Poster Name: {{db_row.poster_name}} </h4><br>
+        <h4>Date: {{db_row.timestamp|date}}</h4><br>
+        <h4>Time: {{db_row.timestamp|time}}</h4>
+        <pre class="my-5"><code class="language-{{db_row.poster_type}}">{{db_row.poster}}</code></pre>
+
+        <a href="{% url 'update_url' db_row.id %}" class="btn btn-info">Edit</a>
+        <a href="{% url 'delete_url' db_row.id %}" class="btn btn-danger">Delete</a>
+    </div>
+{% endblock content %}
