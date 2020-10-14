@@ -15,13 +15,15 @@ class Link(models.Model):
 
 #Posts model 
 class Post(models.Model):
-    post = models.CharField(max_length=80)
+    content = models.CharField(max_length=80)
     date = models.DateTimeField(auto_now=True)
     postlink = models.ForeignKey(Link,on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
 
 #comments model
 class Comment(models.Model):
     comment = models.CharField(max_length=75)
+    date = models.DateTimeField(auto_now=True)
     post = models.ForeignKey(Post,on_delete=models.CASCADE)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 

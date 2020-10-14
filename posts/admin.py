@@ -7,9 +7,9 @@ class LinkAdmin(admin.ModelAdmin):
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display=['id','post','date','postlink']
+    list_display=['id','content','date','postlink','user']
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display= ['id','comment','post','user']
+    list_display= ['id','comment','date','post','user']
 
