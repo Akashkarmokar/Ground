@@ -22,8 +22,12 @@
             </div>
         </div>
         <div class="row">
-            {% block content %}
-            {% endblock content %}
+            {% include 'home/sidebarLeft.html' %}
+            <div class="col-sm-8">
+                {% block content %}
+                {% endblock content %}
+            </div>
+            {% include 'home/sidebarRight.html' %}
         </div>
     </div>
 

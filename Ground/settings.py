@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'home',
     'pastebin',
     'users',
+    'posts',
 ]
 
 MIDDLEWARE = [

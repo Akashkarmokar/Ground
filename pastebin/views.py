@@ -29,7 +29,7 @@ def bin(request):
             #print('poster url :',pst_url)
 
             user_posted_code_details = Pastebindb(
-                user_name='none',
+                user=request.user,
                 poster_name=pst_nm,
                 poster=pst,
                 poster_type=pst_tp,
@@ -66,7 +66,7 @@ def delete(request,id):
             #print('poster url :',pst_url)
 
             user_posted_code_details = Pastebindb(
-                user_name='none',
+                user=request.user,
                 poster_name=pst_nm,
                 poster=pst,
                 poster_type=pst_tp,
