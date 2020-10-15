@@ -13,18 +13,25 @@ class Link(models.Model):
     addressname = models.CharField(max_length=80)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.address
+    
+
 #Posts model 
 class Post(models.Model):
     content = models.CharField(max_length=80)
     date = models.DateTimeField(auto_now=True)
-    postlink = models.ForeignKey(Link,on_delete=models.CASCADE)
+    postlink = models.ForeignKey(Link,on_delete=models.CASCADE,related_name="problem")
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.postlink 
 
 #comments model
 class Comment(models.Model):
-    comment = models.CharField(max_length=75)
+    body = models.CharField(max_length=75)
     date = models.DateTimeField(auto_now=True)
-    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name="comments")
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
     
