@@ -1,6 +1,7 @@
 {% extends 'home/base.html' %}
 {% load static %}
 
+
 {% block msg %} 
     {% if messages %}
         {% for message in messages %}
@@ -13,7 +14,11 @@
 {% endblock msg %}  
 
 {% block content %}
-    <div class="col-md-12">
+
+<div class="row">
+{% include 'home/sidebarLeft.html' %}
+
+    <div class="col-lg-8">
         <h4 class="text-center my-5">Home Page</h4>
         <div class="row-full">
             {% for post in all_posts %}
@@ -47,4 +52,7 @@
             {% endfor %}
         </div>
     </div>
+    {% include 'home/sidebarRight.html' %}
+</div>
+
 {% endblock content %}

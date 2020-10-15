@@ -65,7 +65,7 @@ class pasteFm(forms.ModelForm):
         }
         widgets = {
             'poster_name':forms.TextInput(
-                attrs={'class':'form-group'}
+                attrs={'class':'form-group poster-name'}
             ),
             'poster':forms.Textarea(
                 attrs={'class':'form-control','rows':'15','cols':'150'}

@@ -2,49 +2,37 @@
 {% load static %}
 
 {% if msg %}
-    {% block msg %}
-         <h2 class="bg-info">{{msg}}</h2>
-    {% endblock msg %}
+{% block msg %}
+<h2 class="bg-info">{{msg}}</h2>
+{% endblock msg %}
 {% endif %}
 
 {% block content %}
-    <div class="col-md-12">
-        <h1 class="my-5">Pastebin Page</h1>
+
+
+<div class="pastbin-area ptb-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-12">
+                <h1 class="text-center">Ground <span style="color: tomato;">Pastebin</span></h1>
+                <p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Placeat veritatis dolorum neque provident rem odio,
+                    beatae at similique ab commodi voluptates fugit eaque sapiente a,
+                    earum cum et consequuntur officia! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Voluptatem neque impedit blanditiis voluptatum exercitationem ea vitae dolor,
+                    aut eveniet veritatis consectetur tempora voluptates, est maiores voluptatibus dolorem esse quae
+                    molestias?
+                </p>
+
+                <div class="single-pastbin">
+                    <form action="" method="POST"> {% csrf_token %}
+                        {{form.as_p}}
+                        <button type="submit" class="box-btn mt-3">Paste</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
-    <div class="col-md-12 my-5">
-        <form action="" method = "POST"> {% csrf_token %}
-            {{form.as_p}}
-            <!--<input type="submit" value="Paste" class="my-3"> -->
-            <button type="submit" class="btn btn-success">Paste</button>
-        </form>
-    </div>
-
-    <!-- 
-
-    <form action="" method = "POST"> {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit" value="Paste">
-    </form>
-
-    
-
-    <form action="{% url 'show_url' %}" method="post"> {% csrf_token %}
-        <label for="poster_name">Name of post:</label><br>
-        <input id='name' type='text' name='name' maxlength='300' size='70'><br><br>
-        <label for="syntax name">Syntax: </label><br>
-        <select name="poster_type" id="poster_id">
-            <option value="none" selected >None</option>
-            <option value="c">C</option>
-            <option value="cpp">C++</option>
-            <option value="py">Python</option>
-            <option value="java">Java</option>
-        </select><br><br>
-
-        <label for="content">Content of post:</label><br>
-        <textarea name='content' rows="12" cols="150"></textarea><br><br>
-        <input type="submit" value="Paste"/>
-    </form>
-    
-    -->
 {% endblock content %}

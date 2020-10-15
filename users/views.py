@@ -17,7 +17,7 @@ def signup(request):
         if form.is_valid():
             messages.success(request,'SignUp Done !! . You can login now')
             form.save()
-            return HttpResponseRedirect('/')
+            return HttpResponseRedirect('../login')
     else:        
         form = SignUpForm()
     return render(request,'users/signup.html',{'form':form})
