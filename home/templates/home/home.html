@@ -2,34 +2,35 @@
 {% load static %}
 
 
-{% block msg %} 
-    {% if messages %}
-        {% for message in messages %}
-            <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %}>
-                <strong>{{message}}</strong>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            </div>
-        {% endfor %}
-    {% endif %}
-{% endblock msg %}  
+{% block msg %}
+{% if messages %}
+{% for message in messages %}
+<div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %}>
+    <strong>{{message}}</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endblock msg %}
 
 {% block content %}
 
 <div class="row">
-{% include 'home/sidebarLeft.html' %}
+    {% include 'home/sidebarLeft.html' %}
 
-    <div class="col-lg-8">
+    <!-- <div class="col-lg-8">
         <h4 class="text-center my-5">Home Page</h4>
         <div class="row-full">
             {% for post in all_posts %}
                 <div class="jumbotron">
-                    <a href="">{{post.user}}</a>
+                    <a href="#">{{post.user}}</a>
                     <small>{{post.date}}</small>
                     {% if post.user == request.user %}
                         <a href="" class="btn btn-danger">Delete</a>
                     {% endif %}
                     <p>Problem Link: <a href="{{post.postlink}}">{{post.postlink}}</a></p>
-                    <p class="lead">{{post.content}}</p>
+                    <p class="lead show-read-more">{{post.content}}</p>
                     <hr class="my-2">
 
 
@@ -49,6 +50,81 @@
                         {% endfor %}
                     {% endif %}
                 </div>
+            {% endfor %}
+        </div>
+    </div> -->
+    <div class="col-lg-7 col-md-6 ptb-50">
+        <div class="home-post-area">
+            {% for post in all_posts %}
+            <div class="single-post">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="profile d-flex">
+                            <img src="../../static/basic/demo.png" alt="demo">
+                            <ul class="user-details">
+                                <li>
+                                    <a class="username" href="#">{{post.user}}</a>
+                                </li>
+                                <li>
+                                    <p>{{post.date}}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <a href=""><i class='bx bx-dots-vertical-rounded'></i></a>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <div class="post-content">
+                            <p class="p-link">Problem Link: <a target="_blank"
+                                    href="{{post.postlink}}">{{post.postlink}}</a></p>
+                            <p class="show-read-more">{{post.content}}</p>
+                        </div>
+
+                        <div class="like-comment">
+                            <div class="like">
+                                <a href="javascript:void(0);" class="like-button">
+                                    <i class="material-icons not-liked bouncy">favorite_border</i>
+                                    <i class="material-icons is-liked bouncy">favorite</i>
+                                    <span class="like-overlay"></span>
+                                </a>
+                                <span class="like-count">0</span>
+                            </div>
+                            <div class="comment">
+                                <a href=""><i class='bx bxs-comment-dots'></i></a>
+                                <span class="comment-count">0 Comments</span>
+                            </div>
+                        </div>
+
+                        <div class="post-comment">
+                            <form action="">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Write a comment">
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="comments">
+                            {% if not post.comments.all %}
+                            <h2>No comments Yet....</h2>
+                            {% else %}
+                            {% for comment in post.comments.all %}
+                            <div class="row-full rounded bg-light aa">
+                                <small>Commentd By: </small>
+                                <a href="">{{comment.user}}</a><br>
+                                <small>Date: </small>
+                                <small>{{comment.date}}</small>
+                                <p>{{comment.body}}</p>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
             {% endfor %}
         </div>
     </div>

@@ -111,7 +111,7 @@ ul {
 .form-control {
   height: 50px;
   color: #293a5c;
-  border: 1px solid #e8e8e8;
+  border: 1px solid #e2caca;
   background-color: transparent;
   border-radius: 0;
   padding: 0;
@@ -621,5 +621,240 @@ Signup Area Css
 
 .signup-area .section-tittle {
   margin-bottom: 30px;
+}
+
+.show-read-more .more-text {
+  display: none;
+}
+
+.home-post-area {
+  position: relative;
+}
+
+.home-post-area .single-post {
+  position: relative;
+  padding: 30px;
+  border: 1px solid #e8e8e8;
+  border-radius: 2px;
+  margin-bottom: 30px;
+}
+
+.home-post-area .single-post .profile {
+  margin-bottom: 20px;
+}
+
+.home-post-area .single-post .profile img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.home-post-area .single-post .profile .user-details {
+  margin-left: 15px;
+}
+
+.home-post-area .single-post .profile .user-details .username {
+  text-transform: capitalize;
+  line-height: normal;
+  font-size: 20px;
+}
+
+.home-post-area .single-post .profile .user-details p {
+  font-size: 12px;
+  margin-top: -1px;
+}
+
+.home-post-area .single-post .post-content {
+  border-bottom: 1px solid #eeeeee;
+}
+
+.home-post-area .single-post .post-content .p-link {
+  font-size: 17px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.home-post-area .single-post .post-content .p-link a {
+  font-size: 15px;
+  font-weight: normal;
+}
+
+.home-post-area .single-post .post-content .show-read-more {
+  font-size: 17px;
+  margin-bottom: 15px;
+}
+
+.home-post-area .single-post .like-comment {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 8px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.home-post-area .single-post .like-comment .like {
+  -webkit-box-flex: 15%;
+      -ms-flex: 15%;
+          flex: 15%;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.home-post-area .single-post .like-comment .like .like-count {
+  position: absolute;
+  top: 5px;
+  right: 35%;
+}
+
+.home-post-area .single-post .like-comment .like .like-button {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ccc;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+  overflow: hidden;
+}
+
+.home-post-area .single-post .like-comment .like .like-button .like-overlay {
+  display: block;
+  position: absolute;
+  top: -8px;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #ed4956;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+  z-index: 0;
+}
+
+.home-post-area .single-post .like-comment .like .like-button i.not-liked {
+  display: block;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.home-post-area .single-post .like-comment .like .like-button i.is-liked {
+  display: none;
+  color: #ffffff;
+  position: relative;
+  z-index: 1;
+}
+
+.home-post-area .single-post .like-comment .like .like-button.is-active .like-overlay {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+}
+
+.home-post-area .single-post .like-comment .like .like-button.is-active i.not-liked {
+  display: none;
+}
+
+.home-post-area .single-post .like-comment .like .like-button.is-active i.is-liked {
+  display: block;
+}
+
+@-webkit-keyframes bouncy {
+  from,
+  to {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(0.9, 1.1);
+            transform: scale(0.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 0.9);
+            transform: scale(1.1, 0.9);
+  }
+  75% {
+    -webkit-transform: scale(0.95, 1.15);
+            transform: scale(0.95, 1.15);
+  }
+}
+
+@keyframes bouncy {
+  from,
+  to {
+    -webkit-transform: scale(1, 1);
+            transform: scale(1, 1);
+  }
+  25% {
+    -webkit-transform: scale(0.9, 1.1);
+            transform: scale(0.9, 1.1);
+  }
+  50% {
+    -webkit-transform: scale(1.1, 0.9);
+            transform: scale(1.1, 0.9);
+  }
+  75% {
+    -webkit-transform: scale(0.95, 1.15);
+            transform: scale(0.95, 1.15);
+  }
+}
+
+.home-post-area .single-post .like-comment .like .bouncy {
+  -webkit-animation: bouncy 0.6s;
+          animation: bouncy 0.6s;
+  -webkit-animation-duration: 0.6s;
+          animation-duration: 0.6s;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+
+.home-post-area .single-post .like-comment .comment {
+  -webkit-box-flex: 85%;
+      -ms-flex: 85%;
+          flex: 85%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.home-post-area .single-post .like-comment .comment a {
+  font-size: 30px;
+}
+
+.home-post-area .single-post .like-comment .comment .comment-count {
+  position: absolute;
+  top: 10px;
+  margin-left: 5px;
+}
+
+.home-post-area .single-post .post-comment input.form-control {
+  margin-top: 15px;
+  border-radius: 50px;
+}
+
+i.bx.bx-dots-vertical-rounded {
+  font-size: 20px;
 }
 /*# sourceMappingURL=style.css.map */

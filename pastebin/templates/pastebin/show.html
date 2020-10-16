@@ -35,7 +35,7 @@
     </div>
 
     <!-- <h4>Posted By: <a href="/">{{db_row.user}}</a> </h4><br> -->
-    <h1>Url:"{{current_site}}<span>&#47;</span>pastebin<span>&#47;</span>sharedCode<span>&#47;</span>{{db_row.poster_url}}"</h1>
+    <h1>Url:"{{current_site}}<span>&#47;</span>pastebin<span>&#47;</span>sharedCode &#47; {{db_row.poster_url}}"</h1>
     <pre class="my-5"><code class="language-{{db_row.poster_type}}">{{db_row.poster}}</code></pre>
 
     <a href="{% url 'update_url' db_row.id %}" class="btn btn-info">Edit</a>

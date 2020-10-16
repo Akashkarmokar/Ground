@@ -19,13 +19,13 @@ class Link(models.Model):
 
 #Posts model 
 class Post(models.Model):
-    content = models.CharField(max_length=80)
+    content = models.CharField(max_length=500)
     date = models.DateTimeField(auto_now=True)
     postlink = models.ForeignKey(Link,on_delete=models.CASCADE,related_name="problem")
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.postlink 
+        return str(self.postlink)
 
 #comments model
 class Comment(models.Model):

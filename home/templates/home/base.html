@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{% static 'basic/css/prism.css' %}">
     <!-- Boxicon  CSS -->
     <link rel="stylesheet" href="{% static 'basic/css/boxicons.min.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'basic/css/style.css' %}">
     <title>Ground</title>
@@ -52,6 +53,26 @@
     <script src="{% static 'basic/js/boxicons.js' %}"></script>
     <!-- Main Js  -->
     <script src="{% static 'basic/js/main.js' %}"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('.like-button').click(function () {
+                $(this).toggleClass('is-active');
+            })
+
+        })
+
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $(".comment").click(function () {
+                $(".comments").toggle();
+            });
+        });
+    </script>
 
 </body>
 
