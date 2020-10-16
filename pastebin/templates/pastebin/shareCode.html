@@ -1,0 +1,13 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="col-lg-12 col-12 ptb-50">
+    <h1 class="text-center">Ground <span style="color: tomato;">Pastebin</span></h1>
+    <div class="paste-info d-flex justify-content-center">
+        <p>Paste from <span style="color: tomato; margin-right:5px">{{sharedCode.poster_name}}</span> </p>
+        <p> {{sharedCode.timestamp|date}} , {{sharedCode.timestamp|time}} </p>
+    </div>
+    <pre class="my-5"><code class="language-{{sharedCode.poster_type}}">{{sharedCode.poster}}</code></pre>
+</div>
+{% endblock content %}

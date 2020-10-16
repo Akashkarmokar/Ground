@@ -1,14 +1,15 @@
 {% extends 'home/base.html' %}
 {% load static %}
 
-{% if msg %}
-{% block msg %}
-<h2 class="bg-info">{{msg}}</h2>
-{% endblock msg %}
-{% endif %}
-
 {% block content %}
-
+    {% if messages %}
+        {% for msg in messages %}
+            <div {% if msg.tags %} class="alert alert-{{msg.tags}} alert-dismissible fade show" {% endif %}>
+                <strong>{{msg}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        {% endfor %}
+    {% endif %}
 
 <div class="pastbin-area ptb-50">
     <div class="container">

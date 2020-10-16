@@ -1,6 +1,7 @@
 {% extends 'home/base.html' %}
 {% load static %}
 
+<!--
 {% block msg %}
 {% if msg %}
 <h1 class="text-center bg bg-success">Code Updated Succesfully</h1>
@@ -15,9 +16,17 @@
 <h4>You send this poster with other user by this url </h4>
 <hr>
 {% endblock msg %}
-
+-->
 
 {% block content %}
+    {% if messages %}
+        {% for msg in messages %}
+            <div {% if msg.tags %} class="alert alert-{{msg.tags}} alert-dismissible fade show" {% endif %}>
+                <strong>{{msg}}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+        {% endfor %}
+    {% endif %}
 <div class="col-lg-12 col-12 ptb-50">
     <h1 class="text-center">Ground <span style="color: tomato;">Pastebin</span></h1>
     <div class="paste-info d-flex justify-content-center">
@@ -26,7 +35,7 @@
     </div>
 
     <!-- <h4>Posted By: <a href="/">{{db_row.user}}</a> </h4><br> -->
-
+    <h1>Url:"{{current_site}}<span>&#47;</span>pastebin<span>&#47;</span>sharedCode<span>&#47;</span>{{db_row.poster_url}}"</h1>
     <pre class="my-5"><code class="language-{{db_row.poster_type}}">{{db_row.poster}}</code></pre>
 
     <a href="{% url 'update_url' db_row.id %}" class="btn btn-info">Edit</a>
