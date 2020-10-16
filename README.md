@@ -1,9 +1,9 @@
 # Ground
 
 
-# Set Database (Make Sure you are in directory same as manage.py)
+**Set Database (Make Sure you are in directory same as manage.py)**
 python manage.py makemigrations
 python manage.py migrate
 
-# Create SuperUser
+**Create SuperUser**
 python manage.py createsuperuser
