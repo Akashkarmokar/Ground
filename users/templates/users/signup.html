@@ -17,7 +17,7 @@
                                 {% csrf_token %}
                                 {% for fm in form %}
                                 <div class="form-group">
-                                    {{fm.label_tag}} {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+                                    {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
                                 </div>
                                 {% endfor %}
                             </div>

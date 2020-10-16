@@ -6,8 +6,8 @@ from django.utils.translation import gettext,gettext_lazy as _
 
 #Custom user SignUpForm
 class SignUpForm(UserCreationForm):
-    password1 = forms.CharField(label='Password',widget=forms.PasswordInput(attrs={'class':'form-control'}))
-    password2 = forms.CharField(label='Confirm Password',widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    password1 = forms.CharField(label='Password',widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Password'}))
+    password2 = forms.CharField(label='Confirm Password',widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Confirm Password'}))
     class Meta:
         model = User
         fields = ['username','first_name','last_name','email']
@@ -18,9 +18,9 @@ class SignUpForm(UserCreationForm):
         }
         widgets={
             'username':forms.TextInput(attrs={'class':'form-control','placeholder':'UserName'}),
-            'first_name':forms.TextInput(attrs={'class':'form-control'}),
-            'last_name':forms.TextInput(attrs={'class':'form-control'}),
-            'email':forms.TextInput(attrs={'class':'form-control'}),
+            'first_name':forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}),
+            'last_name':forms.TextInput(attrs={'class':'form-control','placeholder':'Last Name'}),
+            'email':forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}),
         }
 
 
