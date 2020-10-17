@@ -1,14 +1,34 @@
 from django.shortcuts import render,HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from .forms import SignUpForm,LoginForm
+from .forms import SignUpForm,LoginForm,ProfileModelForm
+from .models import Profile
+from posts.models import Post
 
 # Create your views here.
 
 
 #profile function 
 def profile(request):
-    return render(request,'users/profile.html')
+    profile = Profile.objects.get(user=request.user)
+    form = ProfileModelForm(request.POST or None, request.FILES or None , instance=profile)
+
+    update_confirm = False
+
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            update_confirm = True
+
+
+
+
+    context = {
+        'profile':profile,
+        'form':form,
+        'update_confirm':update_confirm,
+    }
+    return render(request,'users/profile.html',context)
 
 #signup function
 def signup(request):
