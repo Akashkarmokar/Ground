@@ -12,7 +12,7 @@ from posts.models import Post
 def profile(request):
     profile = Profile.objects.get(user=request.user)
     form = ProfileModelForm(request.POST or None, request.FILES or None , instance=profile)
-
+    
     update_confirm = False
 
     if request.method == "POST":
