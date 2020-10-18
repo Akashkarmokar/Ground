@@ -1,19 +1,8 @@
-
-// function copyText() {
-//     var copyText = document.getElementById("copyText");
-//     copyText.select();
-//     copyText.setSelectionRange(0, 99999)
-//     alert("Copied : " + copyText.value);
-// }
-
-
-
-
 jQuery(function ($) {
     'use strict';
 
     // Sticky Nav1
-    $(document).on("scroll", function () {
+    $(document).on("scroll", function() {
         if ($(document).scrollTop() > 150) {
             $(".main-nav").addClass("is-sticky ");
         } else {
@@ -22,7 +11,7 @@ jQuery(function ($) {
     });
 
     // Sticky Nav2
-    $(document).on("scroll", function () {
+    $(document).on("scroll", function() {
         if ($(document).scrollTop() > 0) {
             $(".mobile-nav").addClass("is-sticky ");
         } else {
@@ -57,7 +46,7 @@ jQuery(function ($) {
                     var newStr = myStr.substring(0, maxLength);
                     var removedStr = myStr.substring(maxLength, $.trim(myStr).length);
                     $(this).empty().html(newStr);
-                    $(this).append(' <a href="javascript:void(0);" class="read-more">See more..</a>');
+                    $(this).append(' <a href="javascript:void(0);" class="read-more">..See more</a>');
                     $(this).append('<span class="more-text">' + removedStr + '</span>');
                 }
             });

@@ -19,40 +19,6 @@
 <div class="row">
     {% include 'home/sidebarLeft.html' %}
 
-    <!-- <div class="col-lg-8">
-        <h4 class="text-center my-5">Home Page</h4>
-        <div class="row-full">
-            {% for post in all_posts %}
-                <div class="jumbotron">
-                    <a href="#">{{post.user}}</a>
-                    <small>{{post.date}}</small>
-                    {% if post.user == request.user %}
-                        <a href="" class="btn btn-danger">Delete</a>
-                    {% endif %}
-                    <p>Problem Link: <a href="{{post.postlink}}">{{post.postlink}}</a></p>
-                    <p class="lead show-read-more">{{post.content}}</p>
-                    <hr class="my-2">
-
-
-
-                    <p>Comments......</p>
-                    {% if not post.comments.all %}
-                        <h2>No comments Yet....</h2>
-                    {% else %}
-                        {% for comment in post.comments.all %}
-                            <div class="row-full rounded bg-light">
-                                <small>Commentd By: </small>
-                                <a href="">{{comment.user}}</a><br>
-                                <small>Date: </small>
-                                <small>{{comment.date}}</small>
-                                <p>{{comment.body}}</p>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-            {% endfor %}
-        </div>
-    </div> -->
     <div class="col-lg-7 col-md-6 ptb-50">
         <div class="home-post-area">
             {% for post in all_posts %}
@@ -72,7 +38,14 @@
                         </div>
                     </div>
                     <div class="col-lg-6 text-right">
-                        <a href=""><i class='bx bx-dots-vertical-rounded'></i></a>
+                        <div class="post-menu">
+                            <a class="postbtn bx bx-dots-vertical-rounded"></a>
+                            <div class="menu-content">
+                                <a href="#">Edit</a>
+                                <a href="#">Delete</a>
+                                <a href="#">Hide</a>
+                            </div>
+                        </div>
 
                     </div>
                 </div>
@@ -99,28 +72,54 @@
                             </div>
                         </div>
 
+
+                        <div class="comments">
+
+                            <!-- {% if not post.comments.all %}
+                            <h2>No comments Yet....</h2>
+                            {% else %} -->
+                            {% for comment in post.comments.all %}
+                            <div class="single-comment">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="comment comment-box d-flex">
+                                            <img src="../../static/basic/demo.png" alt="demo">
+                                            <ul class="user-details">
+                                                <li>
+                                                    <a class="username" href="#">{{comment.user}}</a>
+                                                </li>
+                                                <li>
+                                                    <p>{{comment.date}}</p>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="comment-itmes">
+                                            <p class="comment-content">{{comment.body}}</p>
+                                            <button onclick="replyFunction()" id="reply">Reply</button>
+                                            <form action="">
+                                                <div class="form-group">
+                                                    <input id="replyField" type="text" class="form-control hide"
+                                                        placeholder="Write a reply">
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% endif %}
+                        </div>
+
                         <div class="post-comment">
                             <form action="">
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="Write a comment">
+                                    <a href="">
+                                        <i class='bx bx-send'></i>
+                                    </a>
                                 </div>
                             </form>
-                        </div>
-
-                        <div class="comments">
-                            {% if not post.comments.all %}
-                            <h2>No comments Yet....</h2>
-                            {% else %}
-                            {% for comment in post.comments.all %}
-                            <div class="row-full rounded bg-light aa">
-                                <small>Commentd By: </small>
-                                <a href="">{{comment.user}}</a><br>
-                                <small>Date: </small>
-                                <small>{{comment.date}}</small>
-                                <p>{{comment.body}}</p>
-                            </div>
-                            {% endfor %}
-                            {% endif %}
                         </div>
                     </div>
                 </div>

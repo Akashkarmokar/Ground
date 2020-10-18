@@ -32,7 +32,9 @@ $heading-color: #293a5c;
 $white-color: #ffffff;
 $black-color: #000000;
 $dark-blue-color: #051242;
-$box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.05);
+$box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+// box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+
 $transition: all 0.5s;
 $border-ra: all 0.5s;
 $border-radius: 4px;
@@ -151,7 +153,7 @@ textarea {
 .box-btn {
     font-size: 16px;
     color: $white-color;
-    padding: 15px 25px;
+    padding: 12px 25px;
     line-height: 1;
     transition: $transition;
     text-transform: capitalize;
@@ -211,7 +213,8 @@ Navbar Area Css
         left: 0;
     }
     .main-nav {
-        background: #000000;
+        background: #fff;
+        box-shadow: 0 2px 6px 0 rgba(0,0,0,0.12);
         transition: 0.4s;
         padding: 5px 0;
         position: relative !important;
@@ -245,7 +248,7 @@ Navbar Area Css
                             size: 16px;
                             weight: 400;
                         }
-                        color: #fff;
+                        color: $heading-color;
                         text-transform: capitalize;
                         padding: {
                             left: 0;
@@ -436,8 +439,11 @@ Navbar Area Css
     transition: 0.3s;
     box-shadow: 0 1px 10px rgba(221, 221, 221, 0.2);
     background: $dark-blue-color !important;
+    background: red;
 }
-
+.navbar-light .navbar-brand, .navbar-light .navbar-brand {
+    color: $heading-color;
+}
 .main-nav {
     position: relative !important;
 }
@@ -446,23 +452,6 @@ Pastebin Area Css
 ======================================================*/
 .pastbin-area {
     position: relative;
-    // h1{
-    //     position: relative;
-    //     display: inline-block;
-    //     span{
-    //         position: relative;
-    //         z-index: 1;
-    //         &::before{
-    //             position: absolute;
-    //             content: "";
-    //             width: 100px;
-    //             height: 2px;
-    //             background: tomato;
-    //             top: 0;
-    //             left: 0;
-    //         }
-    //     }
-    // }
     .single-pastbin {
         margin-top: 30px;
     }
@@ -511,6 +500,97 @@ Pastebin Area Css
         display: flex;
         justify-content: center;
     }
+}
+
+#inviteCode.invite-page {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 3px;
+    justify-content: space-between;
+    width: 55%;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.07);
+    margin-top: 40px;
+    #link {
+        align-self: center;
+        font-size: 1.2em;
+        color: $heading-color;
+        font-weight: bold;
+        flex-grow: 2;
+        background-color: #fff;
+        border: none;
+        &:focus {
+            color: $black-color;
+            background-color: transparent;
+            box-shadow: unset;
+            outline: 0;
+        }
+    }
+    #copy {
+        width: 30px;
+        height: 30px;
+        margin-left: 20px;
+        border: 1px solid black;
+        border-radius: 5px;
+        background-color: #f8f8f8;
+        i {
+            display: block;
+            line-height: 30px;
+            position: relative;
+            &::before {
+                display: block;
+                width: 15px;
+                margin: 0 auto;
+            }
+            &.copied::after {
+                position: absolute;
+                top: 0px;
+                right: 35px;
+                height: 30px;
+                line-height: 20px;
+                display: block;
+                content: "copied";
+                font-size: 1.5em;
+                padding: 2px 10px;
+                color: #fff;
+                background-color: tomato;
+                border-radius: 3px;
+                opacity: 1;
+                will-change: opacity, transform;
+                animation: showcopied 1.5s ease;
+            }
+        }
+        &:hover {
+            cursor: pointer;
+            background-color: darken(#f8f8f8, 10%);
+            transition: background-color 0.3s ease-in;
+        }
+    }
+}
+
+@keyframes showcopied {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+    70% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    100% {
+        opacity: 0;
+    }
+}
+.copymsg {
+    font-size: 15px;
+    color: tomato;
+    margin-top: -10px;
+    padding-left: 10px;
+    margin-bottom: 40px;
 }
 
 /*
@@ -581,7 +661,8 @@ Signup Area Css
     .single-post {
         position: relative;
         padding: 30px;
-        border: 1px solid #e8e8e8;
+        // border: 1px solid #e8e8e8;
+        box-shadow: $box-shadow;
         border-radius: 2px;
         margin-bottom: 30px;
         .profile {
@@ -733,14 +814,140 @@ Signup Area Css
             }
         }
         .post-comment {
+            position: relative;
             input.form-control {
                 margin-top: 15px;
                 border-radius: 50px;
+            }
+            a {
+                position: absolute;
+                top: 3px;
+                right: 20px;
+                font-size: 25px;
+            }
+        }
+
+        .single-comment {
+            position: relative;
+            border-bottom: 1px solid #eeeeee;
+            padding: 15px 0;
+            &:last-child {
+                border-bottom: 0;
+            }
+
+            .comment {
+                img {
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                }
+
+                .user-details {
+                    margin-left: 15px;
+                    .username {
+                        text-transform: capitalize;
+                        line-height: normal;
+                        font-size: 16px;
+                        font-weight: 600;
+                    }
+                    p {
+                        font-size: 12px;
+                        margin-top: -1px;
+                    }
+                }
+            }
+            .comment-itmes {
+                padding-left: 65px;
+                .comment-content {
+                    font-size: 17px;
+                    font-weight: normal;
+                    margin-top: 5px;
+                }
+                .hide {
+                    display: none;
+                }
+                .show {
+                    display: block;
+                }
+                #replyField {
+                    margin-top: 15px;
+                    height: 42px;
+                    color: $heading-color;
+                    border: 1px solid #e2caca;
+                    background-color: transparent;
+                    padding: 0;
+                    font-size: 15px;
+                    padding: 10px 20px;
+                    width: 100%;
+                    border-radius: 50px;
+
+                    &::placeholder {
+                        color: #495057;
+                        font-size: 13px;
+                    }
+                    &:focus {
+                        color: $black-color;
+                        background-color: transparent;
+                        box-shadow: unset;
+                        outline: 0;
+                        border: 1px solid $main-color;
+                    }
+                }
+                #reply {
+                    line-height: 0;
+                    border-radius: 3px;
+                    width: 60px;
+                    height: 25px;
+                }
+            }
+        }
+
+        .post-menu {
+            position: relative;
+            display: inline-block;
+            .postbtn {
+                background-color: rgb(233, 225, 225);
+                color: $heading-color;
+                padding: 10px;
+                font-size: 20px;
+                border: none;
+                cursor: pointer;
+                border-radius: 50%;
+            }
+            .menu-content {
+                display: none;
+                position: absolute;
+                background-color: #fff;
+                min-width: 140px;
+                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                z-index: 1;
+                transition: 0.3s;
+
+                a {
+                    color: black;
+                    padding: 10px 25px;
+                    text-decoration: none;
+                    display: block;
+                    text-align: left;
+                    &:hover {
+                        color: tomato;
+                    }
+                }
+            }
+            &:hover {
+                .menu-content {
+                    display: block;
+                }
             }
         }
     }
 }
 
-i.bx.bx-dots-vertical-rounded {
-    font-size: 20px;
+.alert {
+    margin: 0 auto;
+    width: 450px;
+    top: 30px;
+}
+.comment-box {
+    display: none;
 }

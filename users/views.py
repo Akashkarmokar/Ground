@@ -15,7 +15,7 @@ def signup(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
-            messages.success(request,'SignUp Done !! . You can login now')
+            messages.success(request,'SignUp Done !! You can login now')
             form.save()
             return HttpResponseRedirect('../login')
     else:        

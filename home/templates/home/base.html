@@ -13,7 +13,8 @@
     <link rel="stylesheet" href="{% static 'basic/css/prism.css' %}">
     <!-- Boxicon  CSS -->
     <link rel="stylesheet" href="{% static 'basic/css/boxicons.min.css' %}">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Icon CSS -->
+    <link rel="stylesheet" href="{% static 'basic/css/icon.css' %}">
     <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'basic/css/style.css' %}">
     <title>Ground</title>
@@ -72,6 +73,80 @@
                 $(".comments").toggle();
             });
         });
+    </script>
+
+    <!-- <script>
+        $( document ).ready(function() {
+            let display = false
+            $(".comment_icon").click(function () {
+                if (display===false) {
+                    $(this).next(".comment-box").show("slow");
+                    display=true
+                } else {
+                    $(this).next(".comment-box").hide("slow");
+                    display=false
+                }  
+            });
+        });
+    </script> -->
+    <script>
+        function replyFunction() {
+            document.getElementById('replyField').className = "show";
+        }
+    </script>
+
+    <script>
+        function postMenuFunction() {
+            document.getElementById("postdrop").classList.toggle("show");
+        }
+        window.onclick = function (event) {
+            if (!event.target.matches('.postbtn')) {
+                var dropdowns = document.getElementsByClassName("menu-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+
+    <script>
+
+        $('#copy').on('click', function (event) {
+            console.log(event);
+            copyToClipboard(event);
+        });
+
+        function copyToClipboard(e) {
+            var
+                t = e.target,
+                c = t.dataset.copytarget,
+                inp = (c ? document.querySelector(c) : null);
+            console.log(inp);
+            if (inp && inp.select) {
+                inp.select();
+                try {
+                    document.execCommand('copy');
+                    inp.blur();
+
+                    t.classList.add('copied');
+                    setTimeout(function () {
+                        t.classList.remove('copied');
+                    }, 1500);
+                } catch (err) {
+                    alert('please press Ctrl/Cmd+C to copy');
+                }
+
+            }
+
+        }
+    </script>
+
+    <script>
+        setTimeout(function(){$('.alert').alert('close')}, 3000);
     </script>
 
 </body>

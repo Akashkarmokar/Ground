@@ -29,6 +29,7 @@ def bin(request):
                     pst_url = str(uuid.uuid4[:15])
 
                 current_site = get_current_site(request)
+                print(current_site)
                 user_posted_code_details = Pastebindb(
                     user=request.user,
                     poster_name=pst_nm,
@@ -41,7 +42,7 @@ def bin(request):
                 context = {'db_row':user_posted_code_details,'current_site':current_site}
                 return render(request,'pastebin/show.html',context)
         else:
-            messages.success(request,"Login First ........onor meessage ta tik koris jodi aro kiccu leka lage")
+            messages.success(request,"Sign In to continue!!!")
             return HttpResponseRedirect('/user/login/')
     else :   
         fm = pasteFm()
