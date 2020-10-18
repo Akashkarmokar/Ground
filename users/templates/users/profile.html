@@ -2,5 +2,85 @@
 {% load static %}
 
 {% block content %}
-    <h1>Profile Pageeeee.............</h1>
+    <div class="row">
+        <div class="col-lg-2 text-center ">
+            
+        </div>
+        <div class="col-lg-8 my-5">
+            {% if update_confirm %}
+                <div  class="alert alert-success alert-dismissible fade show" >
+                    <strong>Your Profile is updated</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+            {% endif %}
+            <div class="row">
+                <div class="col-lg-5">
+                    <img src="{{profile.avater.url}}" alt=""> <br>
+                    <h3>{{request.user|capfirst}}</h3>
+                    <hr>
+                    <p> {{profile.bio}} </p>
+                    <hr>
+                </div>
+                <div class="col-lg-7">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <td>User Name:</td>
+                                <td>{{profile.user}}</td>
+                            </tr>
+                            <tr>
+                                <td>First Name:</td>
+                                <td>{{profile.first_name}}</td>
+                            </tr>
+                            <tr>
+                                <td>Last Name:</td>
+                                <td>{{profile.last_name}}</td>
+                            </tr>
+                            <tr>
+                                <td>Friends:</td>
+                                <td>{{profile.get_friends_no}}</td>
+                            </tr>
+                            <tr>
+                                <td>All Friends:</td>
+                                <td>
+                                    <ul>
+                                        {% for friend in profile.get_friends %}
+                                            <li><a href="">{{friend}}</a></li>
+                                        {% endfor %}
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Total Posts:</td>
+                                <td>{{profile.get_posts_no}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Likes Given:</td>
+                                <td>{{profile.get_likes_given_no}}</td>
+                            </tr>
+                            <tr>
+                                <td>Total Likes Received:</td>
+                                <td>{{profile.get_likes_received_no}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <hr>
+            <!-- Profile Update section-->
+            <div class="row">
+                <form action="" method="POST" enctype='multipart/form-data'>
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit" class="btn btn-success" >Update Profile</button>
+                </form>
+            </div>
+
+        </div>
+        <div class="col-lg-2 text-center">
+
+        </div>
+    </div>
 {% endblock content %}

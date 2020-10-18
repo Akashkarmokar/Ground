@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm,AuthenticationForm,UsernameField
 from django.contrib.auth.models import User
 from django.utils.translation import gettext,gettext_lazy as _
+from .models import Profile
 
 
 #Custom user SignUpForm
@@ -28,3 +29,10 @@ class SignUpForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     username = UsernameField(widget=forms.TextInput(attrs={'autofocus':True,'class':'form-control','placeholder':'User Name'}))
     password = forms.CharField(label=_("Password"),strip=False,widget=forms.PasswordInput(attrs={'autocomplete':'current-password','class':'form-control','placeholder':'Password'}))
+
+
+
+class ProfileModelForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['first_name','last_name','bio','avater']

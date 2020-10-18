@@ -1,37 +1,61 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.contrib.auth.models import User
-
-
+from django.core.validators import FileExtensionValidator
+from users.models import Profile
 # Create your models here.
 
-#Links model 
-class Link(models.Model):
-    address = models.CharField(max_length=100)
-    addressname = models.CharField(max_length=80)
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.address
-    
-
-#Posts model 
+# Post model 
 class Post(models.Model):
-    content = models.CharField(max_length=500)
-    date = models.DateTimeField(auto_now=True)
-    postlink = models.ForeignKey(Link,on_delete=models.CASCADE,related_name="problem")
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    content = models.TextField()
+    image = models.ImageField(upload_to='posts',validators=[FileExtensionValidator(['png','jpg','jpeg'])],blank=True)
+    liked = models.ManyToManyField(Profile,blank=True,related_name='likes')
+    updated = models.DateTimeField(auto_now=True) 
+    created = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='posts')
+
 
     def __str__(self):
-        return str(self.postlink)
+        return str(self.content[:20])
 
-#comments model
+    def num_likes(self):
+        return self.liked.all().count()
+
+
+    def num_comments(self):
+        return self.comment_set.all().count()
+
+
+
+    class Meta:
+        ordering = ('-created',)
+
+
+
+# Comment Model
 class Comment(models.Model):
-    body = models.CharField(max_length=300)
-    date = models.DateTimeField(auto_now=True)
-    post = models.ForeignKey(Post,on_delete=models.CASCADE,related_name="comments")
-    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile,on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    body = models.TextField(max_length=300)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return str(self.pk)
+
+
+# Like Model
+LIKE_CHOICES = {
+    ('Like','Like'),
+    ('Unlike','Unlike'),
+}
+
+class Like(models.Model):
+    user = models.ForeignKey(Profile,on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    value = models.CharField(max_length=10,choices=LIKE_CHOICES)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return f"{self.user}--{self.post}--{self.value}"
     
