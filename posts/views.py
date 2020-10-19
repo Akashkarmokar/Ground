@@ -33,7 +33,7 @@ def list_all_post_comments(request):
             instance.post = Post.objects.get(id = request.POST.get('post_id'))
             instance.save()
             comment_form = CommentModelForm()
-            messages.success(request,'Comment Added')
+            # messages.success(request,'Comment Added')
 
     
     context={

@@ -8,12 +8,13 @@
 
     <div class="col-lg-7 col-md-6 ptb-50">
         {% if messages %}
-            {% for message in messages %}
-                <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %}>
-                    <strong>{{message}}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-            {% endfor %}
+        {% for message in messages %}
+        <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %}>
+            <strong>{{message}}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+        </div>
+        {% endfor %}
         {% endif %}
         <div class="home-post-area">
             {% for post in all_posts %}
@@ -33,8 +34,14 @@
                         </div>
                     </div>
                     <div class="col-lg-6 text-right">
-                        <a href=""><i class='bx bx-dots-vertical-rounded'></i></a>
-
+                        <div class="post-menu">
+                            <a class="postbtn bx bx-dots-vertical-rounded"></a>
+                            <div class="menu-content">
+                                <a href="#">Edit</a>
+                                <a href="#">Delete</a>
+                                <a href="#">Hide</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row">
@@ -44,35 +51,29 @@
                                     href="{{post.postlink}}">{{post.postlink}}</a></p>
                             <p class="show-read-more">{{post.content}}</p>
                             {% if post.image %}
-                                <div>
-                                    <img src="{{post.image.url}}" alt="">
-                                </div>
+                            <div>
+                                <img src="{{post.image.url}}" alt="post-img">
+                            </div>
                             {% endif %}
-                            
+
                         </div>
-                        
+
                         <!--Like  Comments-->
                         <div class="like-comment">
                             <div class="like">
-                                <!--        Eta Tor Code
-                                <a href="javascript:void(0);" class="like-button">
-                                    <i class="material-icons not-liked bouncy">favorite_border</i>
-                                    <i class="material-icons is-liked bouncy">favorite</i>
-                                    <span class="like-overlay"></span>
-                                </a>
-                                <span class="like-count">{{post.num_likes}}</span>
-                                -->
                                 <form action="{% url 'posts:postsLike' %}" method="POST" enctype=multipart/form-data>
                                     {% csrf_token %}
                                     <input type="hidden" name="post_id" value={{post.id}}>
-                                    <button class="btn btn-primary">
+
+                                    <button href="javascript:void(0);" class="like-button">
                                         {% if profile not in post.liked.all %}
-                                            Like
+                                        <i class="material-icons not-liked bouncy">favorite_border</i>
                                         {% else %}
-                                            Unlike
+                                        <i class="material-icons is-liked bouncy">favorite</i>
+                                        <span class="like-overlay"></span>
                                         {% endif %}
                                     </button>
-                                    <h5>{{post.num_likes}}</h5>
+                                    <span class="like-count">{{post.num_likes}}</span>
                                 </form>
                             </div>
                             <div class="comment">
@@ -81,53 +82,48 @@
                             </div>
                         </div>
 
-                        <!--Comments                        
-                        <div class="post-comment">
-                            <form action="">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Write a comment">
-                                </div>
-                            </form>
-                        </div>
-
                         <div class="comments">
-                            {% if not post.comments.all %}
-                                <h2>No comments Yet....</h2>
+                            {% if not post.comment_set.all %}
+
                             {% else %}
-                                {% for comment in post.comments.all %}
-                                    <div class="row-full rounded bg-light aa">
-                                        <small>Commentd By: </small>
-                                        <a href="">{{comment.user}}</a><br>
-                                        <small>Date: </small>
-                                        <small>{{comment.date}}</small>
-                                        <p>{{comment.body}}</p>
+                            {% for comment in post.comment_set.all %}
+                                <div class="single-comment">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="comment comment-box d-flex">
+                                                
+                                                <!-- Comment Image Loading -->
+
+                                                <img src="{{post.comment_set.user.profile.avater.url}}" alt="demo">
+                                                
+                                                <ul class="user-details">
+                                                    <li>
+                                                        <a class="username" href="#">{{comment.user}}</a>
+                                                    </li>
+                                                    <li>
+                                                        <p>{{comment.date}}</p>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <p class="comment-body">{{comment.body}}</p>
+                                        </div>
                                     </div>
-                                {% endfor %}
+                                </div>
+                            {% endfor %}
                             {% endif %}
                         </div>
-                        -->
-                        <div>
+
+                        <div class="comment-field">
                             <form action="" method="POST">
                                 {% csrf_token %}
                                 {{comment_form}}
+                                <div class="comment-img">
+                                    <img src="{{profile.avater.url}}" alt="demo">
+                                </div>
                                 <input type="hidden" name='post_id' value={{post.id}}>
-                                <button type="submit" class="btn btn-primary" name="comment_submit_form">Comment</button>
+                                <button type="submit" class="send-btn" name="comment_submit_form"><i
+                                        class='bx bxs-send'></i></button>
                             </form>
-                        </div>
-                        <div class="comments">
-                            {% if not post.comment_set.all %}
-                                <h2>No comments Yet....</h2>
-                            {% else %}
-                                {% for comment in post.comment_set.all %}
-                                    <div class="row-full rounded bg-light aa">
-                                        <small>Commentd By: </small>
-                                        <a href="">{{comment.user}}</a><br>
-                                        <small>Date: </small>
-                                        <small>{{comment.updatd}}</small>
-                                        <p>{{comment.body}}</p>
-                                    </div>
-                                {% endfor %}
-                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -136,16 +132,37 @@
         </div>
     </div>
 
-   <!--{% include 'home/sidebarRight.html' %}--> 
+    <!--{% include 'home/sidebarRight.html' %}-->
 
-   <!-- ////////////////////      Post Form       //////////////////////// -->
-   <div class="col-lg-2 my-5">
+    <div class="col-lg-2 my-5">
         <form action="" method="POST" enctype=multipart/form-data>
             {% csrf_token %}
             {{post_form}}
             <button type="submit" class="btn btn-primary my-2" name="post_submit_form">Post</button>
         </form>
-   </div>
+
+        <!-- Button trigger modal -->
+        <a class="post-text-area" data-toggle="modal" data-target="#exampleModalCenter">
+            <input class="form-control" type="text" placeholder="What's on your mind {{user}}">
+        </a>
+
+        <!-- Modal -->
+        <div class="modal fade post-modal" id="exampleModalCenter" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <form action="" method="POST" enctype=multipart/form-data>
+                            {% csrf_token %}
+                            {{post_form}}
+                            <button type="submit" class="btn btn-primary my-2" name="post_submit_form">Post</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 </div>
 

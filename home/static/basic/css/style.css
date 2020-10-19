@@ -795,6 +795,8 @@ Home Post Area Css
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .home-post-area .single-post .profile .user-details {
@@ -867,7 +869,6 @@ Home Post Area Css
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: #ccc;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1027,6 +1028,8 @@ Home Post Area Css
   width: 50px;
   height: 50px;
   border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .home-post-area .single-post .single-comment .comment .user-details {
@@ -1155,6 +1158,11 @@ Home Post Area Css
   display: block;
 }
 
+.home-post-area .like-btn {
+  background: transparent;
+  color: red;
+}
+
 .alert {
   margin: 0 auto;
   width: 450px;
@@ -1163,6 +1171,47 @@ Home Post Area Css
 
 .comment-box {
   display: none;
+}
+
+.comment-body {
+  padding-left: 65px;
+}
+
+.comment-field {
+  position: relative;
+}
+
+.comment-field input#id_body {
+  position: relative;
+  border-radius: 30px;
+  height: 45px;
+  width: 91%;
+  margin: 0 0 0 auto;
+}
+
+.comment-field .send-btn {
+  position: absolute;
+  right: 10px;
+  top: 1px;
+  font-size: 25px;
+  background: #fff;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.comment-field .comment-img {
+  position: absolute;
+  top: 4px;
+  left: 0;
+}
+
+.comment-field .comment-img img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 /*
@@ -1207,5 +1256,9 @@ Profile Area Css
   background-color: #051242;
   height: 100%;
   z-index: 1;
+}
+
+.post-modal {
+  background: rgba(0, 0, 0, 0.85) !important;
 }
 /*# sourceMappingURL=style.css.map */
