@@ -4,7 +4,7 @@
 {% block content %}
     {% if messages %}
         {% for msg in messages %}
-            <div {% if msg.tags %} class="alert alert-{{msg.tags}} alert-dismissible fade show" {% endif %}>
+            <div {% if msg.tags %} class="alert alert-danger alert-{{msg.tags}} alert-dismissible fade show" {% endif %}>
                 <strong>{{msg}}</strong>
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
