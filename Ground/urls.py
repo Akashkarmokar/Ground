@@ -24,7 +24,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name="home_url"),
     path('pastebin/',include('pastebin.urls',namespace='pastebin')),
-    path('user/',include('users.urls',namespace='user')),
+    path('user/',include('users.urls',namespace='users')),
     path('posts/',include('posts.urls',namespace='posts')),
 ]
 

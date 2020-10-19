@@ -33,8 +33,16 @@
                         </div>
                     </div>
                     <div class="col-lg-6 text-right">
-                        <a href=""><i class='bx bx-dots-vertical-rounded'></i></a>
-
+                        {% ifequal request.user post.author.user %}
+                            <div class="post-menu">
+                                <a class="postbtn bx bx-dots-vertical-rounded"></a>
+                                <div class="menu-content">
+                                    <a href="{% url 'posts:postsUpdate' post.pk %}">Edit</a>
+                                    <a href="{% url 'posts:postsDelete' post.pk %}">Delete</a>
+                                    <a href="#">Hide</a>
+                                </div>
+                            </div>
+                        {% endifequal %}
                     </div>
                 </div>
                 <div class="row">
