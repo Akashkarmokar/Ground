@@ -1,0 +1,153 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="row">
+    {% include 'home/sidebarLeft.html' %}
+
+    <div class="col-lg-7 col-md-6 ptb-50">
+        {% if messages %}
+            {% for message in messages %}
+                <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %}>
+                    <strong>{{message}}</strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="home-post-area">
+            {% for post in all_posts %}
+            <div class="single-post">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="profile d-flex">
+                            <img src="{{post.author.avater.url}}" alt="demo">
+                            <ul class="user-details">
+                                <li>
+                                    <a class="username" href="#">{{ post.author.user }}</a>
+                                </li>
+                                <li>
+                                    <p>{{ post.created|timesince}} ago</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-right">
+                        <a href=""><i class='bx bx-dots-vertical-rounded'></i></a>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-12">
+                        <div class="post-content">
+                            <p class="p-link">Problem Link: <a target="_blank"
+                                    href="{{post.postlink}}">{{post.postlink}}</a></p>
+                            <p class="show-read-more">{{post.content}}</p>
+                            {% if post.image %}
+                                <div>
+                                    <img src="{{post.image.url}}" alt="">
+                                </div>
+                            {% endif %}
+                            
+                        </div>
+                        
+                        <!--Like  Comments-->
+                        <div class="like-comment">
+                            <div class="like">
+                                <!--        Eta Tor Code
+                                <a href="javascript:void(0);" class="like-button">
+                                    <i class="material-icons not-liked bouncy">favorite_border</i>
+                                    <i class="material-icons is-liked bouncy">favorite</i>
+                                    <span class="like-overlay"></span>
+                                </a>
+                                <span class="like-count">{{post.num_likes}}</span>
+                                -->
+                                <form action="{% url 'posts:postsLike' %}" method="POST" enctype=multipart/form-data>
+                                    {% csrf_token %}
+                                    <input type="hidden" name="post_id" value={{post.id}}>
+                                    <button class="btn btn-primary">
+                                        {% if profile not in post.liked.all %}
+                                            Like
+                                        {% else %}
+                                            Unlike
+                                        {% endif %}
+                                    </button>
+                                    <h5>{{post.num_likes}}</h5>
+                                </form>
+                            </div>
+                            <div class="comment">
+                                <a href=""><i class='bx bxs-comment-dots'></i></a>
+                                <span class="comment-count">{{post.num_comments}} Comments</span>
+                            </div>
+                        </div>
+
+                        <!--Comments                        
+                        <div class="post-comment">
+                            <form action="">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Write a comment">
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="comments">
+                            {% if not post.comments.all %}
+                                <h2>No comments Yet....</h2>
+                            {% else %}
+                                {% for comment in post.comments.all %}
+                                    <div class="row-full rounded bg-light aa">
+                                        <small>Commentd By: </small>
+                                        <a href="">{{comment.user}}</a><br>
+                                        <small>Date: </small>
+                                        <small>{{comment.date}}</small>
+                                        <p>{{comment.body}}</p>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                        -->
+                        <div>
+                            <form action="" method="POST">
+                                {% csrf_token %}
+                                {{comment_form}}
+                                <input type="hidden" name='post_id' value={{post.id}}>
+                                <button type="submit" class="btn btn-primary" name="comment_submit_form">Comment</button>
+                            </form>
+                        </div>
+                        <div class="comments">
+                            {% if not post.comment_set.all %}
+                                <h2>No comments Yet....</h2>
+                            {% else %}
+                                {% for comment in post.comment_set.all %}
+                                    <div class="row-full rounded bg-light aa">
+                                        <small>Commentd By: </small>
+                                        <a href="">{{comment.user}}</a><br>
+                                        <small>Date: </small>
+                                        <small>{{comment.updatd}}</small>
+                                        <p>{{comment.body}}</p>
+                                    </div>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+   <!--{% include 'home/sidebarRight.html' %}--> 
+
+   <!-- ////////////////////      Post Form       //////////////////////// -->
+   <div class="col-lg-2 my-5">
+        <form action="" method="POST" enctype=multipart/form-data>
+            {% csrf_token %}
+            {{post_form}}
+            <button type="submit" class="btn btn-primary my-2" name="post_submit_form">Post</button>
+        </form>
+   </div>
+
+</div>
+
+
+{% endblock content %}
