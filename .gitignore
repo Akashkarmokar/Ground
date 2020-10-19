@@ -10,6 +10,6 @@ __pycache__/
 # !**/migrations/__init__.py
 migrations/
 db.sqlite3
-
+static_cdn/media_root/
 
 

@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponseRedirect
+from django.shortcuts import render,HttpResponseRedirect,redirect
 from .forms import pasteFm      #import paste bin page's form
 from .models import Pastebindb  #import database
 import datetime
@@ -44,6 +44,7 @@ def bin(request):
         else:
             messages.success(request,"Sign In to continue!!!")
             return HttpResponseRedirect('/user/login/')
+            
     else :   
         fm = pasteFm()
         data = {'form':fm}

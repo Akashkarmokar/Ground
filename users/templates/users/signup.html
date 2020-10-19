@@ -35,15 +35,15 @@
                             <div class="col-12 text-center">
                                 <button type="submit" value="Sign Up"  id="submit" disabled class="box-btn">Sign Up</button>
                                 {% if form.non_field_errors %}
-                                {% for error in form.non_field_errors %}
-                                <p>{{error}}</p>
-                                {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <p>{{error}}</p>
+                                    {% endfor %}
                                 {% endif %}
                             </div>
                             <div class="col-12 text-center">
                                 <p class="al-acc">
                                     Already have an account?
-                                    <a href="{% url 'login' %}"> Sign In</a>
+                                    <a href="{% url 'users:login' %}"> Sign In</a>
                                 </p>
                             </div>
                         </div>

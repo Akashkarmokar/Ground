@@ -23,8 +23,9 @@ from home import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name="home_url"),
-    path('pastebin/',include('pastebin.urls')),
-    path('user/',include('users.urls')),
+    path('pastebin/',include('pastebin.urls',namespace='pastebin')),
+    path('user/',include('users.urls',namespace='user')),
+    path('posts/',include('posts.urls',namespace='posts')),
 ]
 
 urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
