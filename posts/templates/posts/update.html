@@ -1,0 +1,13 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div>
+        <h3>Update Post</h3>
+        <form action="" method="POST" enctype=multipart/form-data>
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="btn btn-success">Update</button>
+        </form>
+    </div>
+{% endblock content %}

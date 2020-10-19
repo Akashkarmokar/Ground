@@ -34,14 +34,16 @@
                         </div>
                     </div>
                     <div class="col-lg-6 text-right">
-                        <div class="post-menu">
-                            <a class="postbtn bx bx-dots-vertical-rounded"></a>
-                            <div class="menu-content">
-                                <a href="#">Edit</a>
-                                <a href="#">Delete</a>
-                                <a href="#">Hide</a>
+                        {% ifequal request.user post.author.user %}
+                            <div class="post-menu">
+                                <a class="postbtn bx bx-dots-vertical-rounded"></a>
+                                <div class="menu-content">
+                                    <a href="{% url 'posts:postsUpdate' post.pk %}">Edit</a>
+                                    <a href="{% url 'posts:postsDelete' post.pk %}">Delete</a>
+                                    <a href="#">Hide</a>
+                                </div>
                             </div>
-                        </div>
+                        {% endifequal %}
                     </div>
                 </div>
                 <div class="row">
@@ -91,7 +93,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <div class="comment comment-box d-flex">
-                                                
+
                                                 <!-- Comment Image Loading -->
 
                                                 <img src="{{post.comment_set.user.profile.avater.url}}" alt="demo">
