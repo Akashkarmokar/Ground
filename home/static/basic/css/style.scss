@@ -214,10 +214,13 @@ Navbar Area Css
     }
     .main-nav {
         background: #fff;
-        box-shadow: 0 2px 6px 0 rgba(0,0,0,0.12);
+        box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
         transition: 0.4s;
         padding: 5px 0;
         position: relative !important;
+        border-bottom: 2px solid;
+        border-image-source: linear-gradient(to right, #ef3b36, #ffffff);
+        border-image-slice: 2;
         .navbar {
             transition: 0.4s;
             padding: {
@@ -441,7 +444,8 @@ Navbar Area Css
     background: $dark-blue-color !important;
     background: red;
 }
-.navbar-light .navbar-brand, .navbar-light .navbar-brand {
+.navbar-light .navbar-brand,
+.navbar-light .navbar-brand {
     color: $heading-color;
 }
 .main-nav {
@@ -654,7 +658,9 @@ Signup Area Css
     display: none;
 }
 
-// home-post-area
+/*
+Home Post Area Css
+======================================================*/
 
 .home-post-area {
     position: relative;
@@ -950,4 +956,47 @@ Signup Area Css
 }
 .comment-box {
     display: none;
+}
+
+/*
+Profile Area Css
+======================================================*/
+
+.user-profile {
+    position: relative;
+
+    .bio {
+        .bio-img {
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(to bottom, #fcb045, #fd1d1d, #833ab4);
+            img {
+                width: 300px;
+                height: 300px;
+                border-radius: 50%;
+                border: 6px solid white;
+                object-fit: cover;
+            }
+        }
+    }
+    h2 {
+        margin-bottom: 0;
+    }
+    .pro-msg {
+        text-align: center;
+        color: tomato;
+        margin-bottom: 30px;
+    }
+}
+
+
+.page-title-area {
+    position: relative;
+    overflow: hidden;
+    padding-top: 200px;
+    padding-bottom: 150px;
+    text-align: center;
+    background-color: #051242;
+    height: 100%;
+    z-index: 1;
 }

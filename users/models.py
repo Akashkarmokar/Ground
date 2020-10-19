@@ -10,7 +10,7 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=200,blank=True)
     last_name =  models.CharField(max_length=200,blank=True)
     user = models.OneToOneField(User,on_delete=models.CASCADE)
-    bio =models.TextField(default="No bio...",max_length=300)
+    bio =models.TextField(default="Hey there ! I am using Ground",max_length=500)
     email =models.EmailField(max_length=200,blank=True)
     country = models.CharField(max_length=200,blank=True)
     avater = models.ImageField(default='avater.jpg',upload_to='avaters/')

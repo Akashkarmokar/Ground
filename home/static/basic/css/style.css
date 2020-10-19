@@ -241,6 +241,9 @@ Navbar Area Css
   transition: 0.4s;
   padding: 5px 0;
   position: relative !important;
+  border-bottom: 2px solid;
+  border-image-source: linear-gradient(to right, #ef3b36, #ffffff);
+  border-image-slice: 2;
 }
 
 .navbar-area .main-nav .navbar {
@@ -485,7 +488,8 @@ Navbar Area Css
   background: red;
 }
 
-.navbar-light .navbar-brand, .navbar-light .navbar-brand {
+.navbar-light .navbar-brand,
+.navbar-light .navbar-brand {
   color: #293a5c;
 }
 
@@ -767,6 +771,9 @@ Signup Area Css
   display: none;
 }
 
+/*
+Home Post Area Css
+======================================================*/
 .home-post-area {
   position: relative;
 }
@@ -1156,5 +1163,49 @@ Signup Area Css
 
 .comment-box {
   display: none;
+}
+
+/*
+Profile Area Css
+======================================================*/
+.user-profile {
+  position: relative;
+}
+
+.user-profile .bio .bio-img {
+  border-radius: 50%;
+  padding: 2px;
+  background: -webkit-gradient(linear, left top, left bottom, from(#fcb045), color-stop(#fd1d1d), to(#833ab4));
+  background: linear-gradient(to bottom, #fcb045, #fd1d1d, #833ab4);
+}
+
+.user-profile .bio .bio-img img {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 6px solid white;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.user-profile h2 {
+  margin-bottom: 0;
+}
+
+.user-profile .pro-msg {
+  text-align: center;
+  color: tomato;
+  margin-bottom: 30px;
+}
+
+.page-title-area {
+  position: relative;
+  overflow: hidden;
+  padding-top: 200px;
+  padding-bottom: 150px;
+  text-align: center;
+  background-color: #051242;
+  height: 100%;
+  z-index: 1;
 }
 /*# sourceMappingURL=style.css.map */

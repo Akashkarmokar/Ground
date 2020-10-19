@@ -1,86 +1,122 @@
 {% extends 'home/base.html' %}
 {% load static %}
-
+{% load crispy_forms_tags %}
 {% block content %}
-    <div class="row">
-        <div class="col-lg-2 text-center ">
-            
+{% if update_confirm %}
+<div class="alert alert-success alert-dismissible fade show">
+    <strong>Your Profile is updated</strong>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
+</div>
+{% endif %}
+<div class="row">
+    <!-- Start Page Title Area -->
+    <!-- <div class="page-title-area">
+        <div class="container">
+            <div class="page-title-content">
+                <h2>About</h2>
+            </div>
         </div>
-        <div class="col-lg-8 my-5">
-            {% if update_confirm %}
-                <div  class="alert alert-success alert-dismissible fade show" >
-                    <strong>Your Profile is updated</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-            {% endif %}
-            <div class="row">
-                <div class="col-lg-5">
-                    <img src="{{profile.avater.url}}" alt=""> <br>
-                    <h3>{{request.user|capfirst}}</h3>
+    </div> -->
+    <!-- End Page Title Area -->
+    <div class="user-profile col-lg-8 offset-lg-2 col-md-8 ptb-50">
+        <h2 class="text-center">Welcome, {{profile.first_name}}</h2>
+        <p class="pro-msg">You are Almost Done</p>
+
+        <div class="row">
+            <div class="col-lg-5">
+                <div class="bio">
+                    <div class="bio-img">
+                        <img class="boder-gradient" src="{{profile.avater.url}}" alt="profile">
+                    </div>
                     <hr>
-                    <p> {{profile.bio}} </p>
+                    <p class="text-center"> {{profile.bio}} </p>
                     <hr>
                 </div>
-                <div class="col-lg-7">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>User Name:</td>
-                                <td>{{profile.user}}</td>
-                            </tr>
-                            <tr>
-                                <td>First Name:</td>
-                                <td>{{profile.first_name}}</td>
-                            </tr>
-                            <tr>
-                                <td>Last Name:</td>
-                                <td>{{profile.last_name}}</td>
-                            </tr>
-                            <tr>
-                                <td>Friends:</td>
-                                <td>{{profile.get_friends_no}}</td>
-                            </tr>
-                            <tr>
-                                <td>All Friends:</td>
-                                <td>
-                                    <ul>
-                                        {% for friend in profile.get_friends %}
-                                            <li><a href="">{{friend}}</a></li>
-                                        {% endfor %}
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Total Posts:</td>
-                                <td>{{profile.get_posts_no}}</td>
-                            </tr>
-                            <tr>
-                                <td>Total Likes Given:</td>
-                                <td>{{profile.get_likes_given_no}}</td>
-                            </tr>
-                            <tr>
-                                <td>Total Likes Received:</td>
-                                <td>{{profile.get_likes_received_no}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
+
+                <!-- Edit Prfile -->
+                <button type="button" class="box-btn w-100" data-toggle="modal" data-target="#exampleModalCenter">
+                    Edit
+                </button>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-md modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Update Profile Info</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST" enctype='multipart/form-data'>
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        {{form|crispy}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="box-btn">Save changes</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-
-            <hr>
-            <!-- Profile Update section-->
-            <div class="row">
-                <form action="" method="POST" enctype='multipart/form-data'>
-                    {% csrf_token %}
-                    {{form.as_p}}
-                    <button type="submit" class="btn btn-success" >Update Profile</button>
-                </form>
+            <div class="col-lg-7">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>User Name:</td>
+                            <td>{{profile.user}}</td>
+                        </tr>
+                        <tr>
+                            <td>First Name:</td>
+                            <td>{{profile.first_name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Last Name:</td>
+                            <td>{{profile.last_name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email:</td>
+                            <td>{{profile.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>Followers:</td>
+                            <td>{{profile.get_friends_no}}</td>
+                        </tr>
+                        <tr>
+                            <td>Followers List:</td>
+                            <td>
+                                <ul>
+                                    {% for friend in profile.get_friends %}
+                                    <li><a href="">{{friend}}</a></li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Posts:</td>
+                            <td>{{profile.get_posts_no}}</td>
+                        </tr>
+                        <tr>
+                            <td>Total Likes Given:</td>
+                            <td>{{profile.get_likes_given_no}}</td>
+                        </tr>
+                        <tr>
+                            <td>Total Likes Received:</td>
+                            <td>{{profile.get_likes_received_no}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-
         </div>
-        <div class="col-lg-2 text-center">
+        <hr>
 
-        </div>
     </div>
+</div>
 {% endblock content %}
