@@ -6,7 +6,7 @@
 <div class="row">
     {% include 'home/sidebarLeft.html' %}
 
-    <div class="col-lg-7 col-md-6 ptb-50">
+    <div class="col-lg-5 col-md-6 ptb-50">
         {% if messages %}
         {% for message in messages %}
         <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %}>
@@ -35,22 +35,42 @@
                     </div>
                     <div class="col-lg-6 text-right">
                         {% ifequal request.user post.author.user %}
-                            <div class="post-menu">
-                                <a class="postbtn bx bx-dots-vertical-rounded"></a>
-                                <div class="menu-content">
-                                    <a href="{% url 'posts:postsUpdate' post.pk %}">Edit</a>
-                                    <a href="{% url 'posts:postsDelete' post.pk %}">Delete</a>
-                                    <a href="#">Hide</a>
-                                </div>
+                        <div class="post-menu">
+                            <a class="postbtn bx bx-dots-vertical-rounded"></a>
+                            <div class="menu-content">
+                                <!-- <a href="{% url 'posts:postsUpdate' post.pk %}">Edit</a> -->
+                                <a href="#" data-toggle="modal" data-target="#exampleModalCenter">Edit</a>
+
+                                <a href="{% url 'posts:postsDelete' post.pk %}">Delete</a>
+                                <a href="#">Hide</a>
                             </div>
+                        </div>
                         {% endifequal %}
                     </div>
+
+                    <!--Edit Post Modal -->
+                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <h2>hello</h2>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-12">
                         <div class="post-content">
                             <p class="p-link">Problem Link: <a target="_blank"
                                     href="{{post.postlink}}">{{post.postlink}}</a></p>
+
                             <p class="show-read-more">{{post.content}}</p>
                             {% if post.image %}
                             <div>
@@ -71,8 +91,8 @@
                                         {% if profile not in post.liked.all %}
                                         <i class="material-icons not-liked bouncy">favorite_border</i>
                                         {% else %}
-                                        <i class="material-icons is-liked bouncy">favorite</i>
-                                        <span class="like-overlay"></span>
+                                        <i class="material-icons is-liked">favorite</i>
+                                        <!-- <span class="like-overlay"></span> -->
                                         {% endif %}
                                     </button>
                                     <span class="like-count">{{post.num_likes}}</span>
@@ -89,28 +109,28 @@
 
                             {% else %}
                             {% for comment in post.comment_set.all %}
-                                <div class="single-comment">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="comment comment-box d-flex">
+                            <div class="single-comment">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="comment comment-box d-flex">
 
-                                                <!-- Comment Image Loading -->
+                                            <!-- Comment Image Loading -->
 
-                                                <img src="{{post.comment_set.user.profile.avater.url}}" alt="demo">
-                                                
-                                                <ul class="user-details">
-                                                    <li>
-                                                        <a class="username" href="#">{{comment.user}}</a>
-                                                    </li>
-                                                    <li>
-                                                        <p>{{comment.date}}</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <p class="comment-body">{{comment.body}}</p>
+                                            <img src="{{post.comment_set.user.profile.avater.url}}" alt="demo">
+
+                                            <ul class="user-details">
+                                                <li>
+                                                    <a class="username" href="#">{{comment.user}}</a>
+                                                </li>
+                                                <li>
+                                                    <p>{{comment.date}}</p>
+                                                </li>
+                                            </ul>
                                         </div>
+                                        <p class="comment-body">{{comment.body}}</p>
                                     </div>
                                 </div>
+                            </div>
                             {% endfor %}
                             {% endif %}
                         </div>
@@ -134,39 +154,15 @@
         </div>
     </div>
 
-    <!--{% include 'home/sidebarRight.html' %}-->
-
-    <div class="col-lg-2 my-5">
-        <form action="" method="POST" enctype=multipart/form-data>
+    <div class="col-lg-4 my-5">
+        <form class="post-form" action="" method="POST" enctype=multipart/form-data >
             {% csrf_token %}
             {{post_form}}
-            <button type="submit" class="btn btn-primary my-2" name="post_submit_form">Post</button>
+            <label for="actual-btn"></label>
+            <span id="file-chosen">No file chosen</span>
+            <button type="submit" class="box-btn mt-5 w-100" name="post_submit_form">Post</button>
         </form>
-
-        <!-- Button trigger modal -->
-        <a class="post-text-area" data-toggle="modal" data-target="#exampleModalCenter">
-            <input class="form-control" type="text" placeholder="What's on your mind {{user}}">
-        </a>
-
-        <!-- Modal -->
-        <div class="modal fade post-modal" id="exampleModalCenter" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <form action="" method="POST" enctype=multipart/form-data>
-                            {% csrf_token %}
-                            {{post_form}}
-                            <button type="submit" class="btn btn-primary my-2" name="post_submit_form">Post</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
-
 </div>
-
 
 {% endblock content %}

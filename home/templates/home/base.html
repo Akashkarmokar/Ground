@@ -25,7 +25,7 @@
         {% include 'home/navbar.html' %}
     </div>
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
                 {% block content %}
@@ -69,20 +69,6 @@
         });
     </script> -->
 
-    <!-- <script>
-        $( document ).ready(function() {
-            let display = false
-            $(".comment_icon").click(function () {
-                if (display===false) {
-                    $(this).next(".comment-box").show("slow");
-                    display=true
-                } else {
-                    $(this).next(".comment-box").hide("slow");
-                    display=false
-                }  
-            });
-        });
-    </script> -->
     <script>
         function replyFunction() {
             document.getElementById('replyField').className = "show";
@@ -140,9 +126,53 @@
     </script>
 
     <script>
-        setTimeout(function(){$('.alert').alert('close')}, 3000);
+        setTimeout(function () { $('.alert').alert('close') }, 3000);
     </script>
-    
+
+    <script>
+        var autoExpand = function (field) {
+            field.style.height = 'inherit';
+
+            var computed = window.getComputedStyle(field);
+            var height = parseInt(computed.getPropertyValue('border-top-width'), 10)
+                + parseInt(computed.getPropertyValue('padding-top'), 10)
+                + field.scrollHeight
+                + parseInt(computed.getPropertyValue('padding-bottom'), 10)
+                + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+
+            field.style.height = height + 'px';
+
+        };
+
+        document.addEventListener('input', function (event) {
+            if (event.target.tagName.toLowerCase() !== 'textarea') return;
+            autoExpand(event.target);
+        }, false);
+    </script>
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+    <script>
+        const actualBtn = document.getElementById('actual-btn');
+        const fileChosen = document.getElementById('file-chosen');
+        actualBtn.addEventListener('change', function () {
+            fileChosen.textContent = this.files[0].name
+        })
+    </script>
+
 </body>
 
 </html>

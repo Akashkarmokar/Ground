@@ -80,9 +80,6 @@
             </div>
             <ul class="navbar-nav mr-auto">
                {% if request.user.is_authenticated %}
-               <li class="nav-item postIcon">
-                  <a href="#" class="nav-link"><i class='bx bx-plus'></i></a>
-               </li>
                <li class="nav-item">
                   <a href="{% url 'users:profile' %}" class="nav-link dropdown-toggle">{{user}}</a>
                   <ul class="dropdown-menu">

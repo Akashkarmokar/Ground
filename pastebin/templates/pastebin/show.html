@@ -24,7 +24,7 @@
     </div>
     <p class="copymsg">Copy this link to share code with others!</p>
     <pre class="mb-4"><code class="language-{{db_row.poster_type}}">{{db_row.poster}}</code></pre>
-    <a href="{% url 'update_url' db_row.id %}" class="btn btn-info">Edit</a>
+    <a href="{% url 'pastebin:update_url' db_row.id %}" class="btn btn-info">Edit</a>
     <a type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Delete</a>
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog">
@@ -38,7 +38,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
-                    <a href="{% url 'delete_url' db_row.id %}" class="box-btn">Okay</a>
+                    <a href="{% url 'pastebin:delete_url' db_row.id %}" class="box-btn">Okay</a>
                 </div>
             </div>
         </div>
@@ -46,3 +46,5 @@
 </div>
 </div>
 {% endblock content %}
+
+

@@ -1229,8 +1229,8 @@ Profile Area Css
 }
 
 .user-profile .bio .bio-img img {
-  width: 300px;
-  height: 300px;
+  width: 355px;
+  height: 355px;
   border-radius: 50%;
   border: 6px solid white;
   -o-object-fit: cover;
@@ -1260,5 +1260,91 @@ Profile Area Css
 
 .post-modal {
   background: rgba(0, 0, 0, 0.85) !important;
+}
+
+textarea#id_content {
+  height: 59px;
+  border-radius: 5px;
+  color: #293a5c;
+  border: 1px solid #e2caca;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 0;
+  font-size: 15px;
+  padding: 15px 20px;
+  width: 100%;
+}
+
+textarea#id_content::-webkit-input-placeholder {
+  color: #495057;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+textarea#id_content:-ms-input-placeholder {
+  color: #495057;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+textarea#id_content::-ms-input-placeholder {
+  color: #495057;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+textarea#id_content::placeholder {
+  color: #495057;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+textarea#id_content:focus {
+  color: #000000;
+  background-color: transparent;
+  -webkit-box-shadow: unset;
+          box-shadow: unset;
+  outline: 0;
+  border: 1px solid #1d42d9;
+}
+
+.post-form {
+  position: relative;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  padding: 30px 20px;
+  border-radius: 4px;
+}
+
+.post-form input[type=file] {
+  cursor: pointer;
+  width: 50%;
+  height: 45px;
+  overflow: hidden;
+  color: #293a5c;
+  margin-top: 10px;
+}
+
+.post-form input[type=file]:focus {
+  color: #293a5c;
+  background-color: transparent;
+  -webkit-box-shadow: unset;
+          box-shadow: unset;
+  outline: 0;
+  border: 1px solid #1d42d9;
+}
+
+.post-form input[type=file]:before {
+  width: 100%;
+  height: 44px;
+  font-size: 16px;
+  line-height: 42px;
+  content: 'Select your Image';
+  display: inline-block;
+  background: white;
+  border: 1px solid #e2caca;
+  padding: 0 22px;
+  text-align: left;
+  border-radius: 2px;
 }
 /*# sourceMappingURL=style.css.map */
