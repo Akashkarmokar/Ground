@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect
+from django.http import Http404
 from .models import Post,Like
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
@@ -83,6 +84,9 @@ def like_comment_post(request):
                     like.value = 'Unlike'
                 else:
                     like.value = 'Like'
+            else:
+                like.value = 'Like'
+                
                 postObj.save()
                 like.save()
         return redirect('posts:allposts')
@@ -94,29 +98,64 @@ def like_comment_post(request):
 
 
 
-class PostDeleteView(DeleteView):
-    model = Post
-    template_name = 'posts/confirm_delete.html'
-    success_url = reverse_lazy('posts:allposts')
+# class PostDeleteView(DeleteView):
+#     model = Post
+#     template_name = 'posts/confirm_delete.html'
+#     success_url = reverse_lazy('posts:allposts')
 
-    def get_object(self,*args,**kwargs):
-        pk =  self.kwargs.get('pk')
-        obj = Post.objects.get(pk=pk)
-        if not obj.author.user == self.request.user:
-            messages.warning(request,"Your have no right to delete this post.")
-        return obj 
+#     def get_object(self,*args,**kwargs):
+#         pk =  self.kwargs.get('pk')
+#         obj = Post.objects.get(pk=pk)
+#         if not obj.author.user == self.request.user:
+#             messages.warning(request,"Your have no right to delete this post.")
+#         return obj 
 
-class PostUpdateView(UpdateView):
-    form_class = PostModelForm
-    model = Post
-    template_name = 'posts/update.html'
-    success_url = reverse_lazy('posts:allposts')
+def PostDelete(request,pk):
+    if request.user.is_authenticated:
+        try:
+            obj = Post.objects.get(pk=pk)
+            if obj.author.user == request.user:
+                obj.delete()
+                return redirect('posts:allposts')
+            else:
+                messages.warning(request,"You are not the author of this post")
+                return redirect('posts:allposts')
+        except Post.DoesNotExist:
+            raise Http404("Your link is Wrong or it is not available.Here") 
+    else:
+        messages.info(request,"Login First............!")
+        return redirect('users:login')
 
-    def form_valid(self,form):
-        profile = Profile.objects.get(user=self.request.user)
-        if form.instance.author == profile:
-            return super().form_valid(form)
-        else:
-            form.add_error(None,"You need to be author of the post")
-            return self.form_invalid(form)
-            # return HttpResponseRedirect('/user/login/')
+# class PostUpdateView(UpdateView):
+#     form_class = PostModelForm
+#     model = Post
+#     template_name = 'posts/update.html'
+#     success_url = reverse_lazy('posts:allposts')
+
+#     def form_valid(self,form):
+#         profile = Profile.objects.get(user=self.request.user)
+#         if form.instance.author == profile:
+#             return super().form_valid(form)
+#         else:
+#             form.add_error(None,"You need to be author of the post")
+#             return self.form_invalid(form)
+#             # return HttpResponseRedirect('/user/login/')
+
+def PostUpdate(request,pk):
+    if request.user.is_authenticated:
+        try:
+            obj = Post.objects.get(pk=pk)
+            if obj.author.user == request.user:
+                form = PostModelForm(instance=obj)
+                context = {
+                    'form':form,
+                }
+                return render(request,'posts/update.html',context)
+            else:
+                messages.warning(request,"You are not the author of this post")
+                return redirect('posts:allposts')
+        except Post.DoesNotExist:
+            raise Http404("Your link is Wrong or it is not available.Here") 
+    else:
+        messages.info(request,"Login First............!")
+        return redirect('users:login')

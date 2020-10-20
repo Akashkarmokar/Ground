@@ -87,12 +87,11 @@
                                     {% csrf_token %}
                                     <input type="hidden" name="post_id" value={{post.id}}>
 
-                                    <button href="javascript:void(0);" class="like-button">
-                                        {% if profile not in post.liked.all %}
-                                        <i class="material-icons not-liked bouncy">favorite_border</i>
+                                    <button type="submit" href="javascript:void(0);" class="like-button">
+                                        {% if request.user.profile not in post.liked.all %}
+                                            <span class="material-icons">thumb_up</span>
                                         {% else %}
-                                        <i class="material-icons is-liked">favorite</i>
-                                        <!-- <span class="like-overlay"></span> -->
+                                            <span class="material-icons">thumb_down</span>
                                         {% endif %}
                                     </button>
                                     <span class="like-count">{{post.num_likes}}</span>
@@ -106,32 +105,33 @@
 
                         <div class="comments">
                             {% if not post.comment_set.all %}
-
+                                <h6>No Comments Yet</h6>
                             {% else %}
-                            {% for comment in post.comment_set.all %}
-                            <div class="single-comment">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="comment comment-box d-flex">
+                                {% for comment in post.comment_set.all %}
+                                    <div class="single-comment">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="comment comment-box d-flex">
 
-                                            <!-- Comment Image Loading -->
+                                                    <!-- Comment Image Loading -->
 
-                                            <img src="{{post.comment_set.user.profile.avater.url}}" alt="demo">
-
-                                            <ul class="user-details">
-                                                <li>
-                                                    <a class="username" href="#">{{comment.user}}</a>
-                                                </li>
-                                                <li>
-                                                    <p>{{comment.date}}</p>
-                                                </li>
-                                            </ul>
+                                                    <img src="{{comment.user.avater.url}}" alt="demo">
+                                                    
+                                                    <ul class="user-details">
+                                                        <li>
+                                                            <a class="username" href="#">{{comment.user.user}}</a>
+                                                        </li>
+                                                        <li>
+                                                            <p>{{comment.created}}</p>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <p class="comment-body">{{comment.body}}</p>
+                                            </div>
                                         </div>
                                         <p class="comment-body">{{comment.body}}</p>
                                     </div>
-                                </div>
-                            </div>
-                            {% endfor %}
+                                {% endfor %}
                             {% endif %}
                         </div>
 
@@ -139,9 +139,11 @@
                             <form action="" method="POST">
                                 {% csrf_token %}
                                 {{comment_form}}
-                                <div class="comment-img">
-                                    <img src="{{profile.avater.url}}" alt="demo">
-                                </div>
+                                {% if request.user.is_authenticated %}
+                                    <div class="comment-img">
+                                        <img src="{{request.user.profile.avater.url}}" alt="demo">
+                                    </div>
+                                {% endif %}
                                 <input type="hidden" name='post_id' value={{post.id}}>
                                 <button type="submit" class="send-btn" name="comment_submit_form"><i
                                         class='bx bxs-send'></i></button>

@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect
+from django.http import Http404
 from .forms import pasteFm      #import paste bin page's form
 from .models import Pastebindb  #import database
 import datetime
@@ -29,7 +30,7 @@ def bin(request):
                     pst_url = str(uuid.uuid4[:15])
 
                 current_site = get_current_site(request)
-                print(current_site)
+                # print(current_site)
                 user_posted_code_details = Pastebindb(
                     user=request.user,
                     poster_name=pst_nm,
@@ -41,6 +42,7 @@ def bin(request):
                 user_posted_code_details.save()
                 context = {'db_row':user_posted_code_details,'current_site':current_site}
                 return render(request,'pastebin/show.html',context)
+                
         else:
             messages.success(request,"Sign In to continue!!!")
             return HttpResponseRedirect('/user/login/')
