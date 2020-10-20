@@ -1,4 +1,5 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect
+from django.http import Http404
 from .forms import pasteFm      #import paste bin page's form
 from .models import Pastebindb  #import database
 import datetime
