@@ -71,7 +71,7 @@
                             <p class="p-link">Problem Link: <a target="_blank"
                                     href="{{post.postlink}}">{{post.postlink}}</a></p>
 
-                            <p class="show-read-more">{{post.content}}</p>
+                            <p class="show-read-more">{{post.content|capfirst }}</p>
                             {% if post.image %}
                             <div>
                                 <img src="{{post.image.url}}" alt="post-img">
@@ -83,18 +83,18 @@
                         <!--Like  Comments-->
                         <div class="like-comment">
                             <div class="like">
-                                <form action="{% url 'posts:postsLike' %}" method="POST" enctype=multipart/form-data>
+                                <form class='like-form' id='{{post.id}}' action="{% url 'posts:postsLike' %}" method="POST" enctype=multipart/form-data>
                                     {% csrf_token %}
                                     <input type="hidden" name="post_id" value={{post.id}}>
 
-                                    <button type="submit" href="javascript:void(0);" class="like-button">
+                                    <button type="submit" href="javascript:void(0);" class="like-button{{post.id}}">
                                         {% if request.user.profile not in post.liked.all %}
                                             <span class="material-icons">thumb_up</span>
                                         {% else %}
                                             <span class="material-icons">thumb_down</span>
                                         {% endif %}
                                     </button>
-                                    <span class="like-count">{{post.num_likes}}</span>
+                                    <span class="like-count{{post.id}}">{{post.num_likes}}</span>
                                 </form>
                             </div>
                             <div class="comment">
@@ -113,8 +113,6 @@
                                             <div class="col-lg-12">
                                                 <div class="comment comment-box d-flex">
 
-                                                    <!-- Comment Image Loading -->
-
                                                     <img src="{{comment.user.avater.url}}" alt="demo">
                                                     
                                                     <ul class="user-details">
@@ -124,12 +122,22 @@
                                                         <li>
                                                             <p>{{comment.created}}</p>
                                                         </li>
+                                                    </ul> 
+
+                                                    <!-- Comment edit delete -->
+
+                                                    <ul class="comment-edit">
+                                                        <li>
+                                                            <a href=""><span class="material-icons edit">create </span></a>
+                                                        </li>
+                                                        <li>
+                                                            <a href=""><span class="material-icons delete">delete </span></a>
+                                                        </li>
                                                     </ul>
                                                 </div>
-                                                <p class="comment-body">{{comment.body}}</p>
+                                                <p class="comment-body">{{comment.body|capfirst }}</p>
                                             </div>
                                         </div>
-                                        <p class="comment-body">{{comment.body}}</p>
                                     </div>
                                 {% endfor %}
                             {% endif %}
@@ -156,14 +164,16 @@
         </div>
     </div>
 
-    <div class="col-lg-4 my-5">
-        <form class="post-form" action="" method="POST" enctype=multipart/form-data >
-            {% csrf_token %}
-            {{post_form}}
-            <label for="actual-btn"></label>
-            <span id="file-chosen">No file chosen</span>
-            <button type="submit" class="box-btn mt-5 w-100" name="post_submit_form">Post</button>
-        </form>
+    <div class="col-lg-4 ">
+        <div class="ptb-50">
+            <form class="post-form" action="" method="POST" enctype=multipart/form-data >
+                {% csrf_token %}
+                {{post_form}}
+                <label for="actual-btn"></label>
+                <span id="file-chosen">No file chosen</span>
+                <button type="submit" class="box-btn mt-5 w-100" name="post_submit_form">Post</button>
+            </form>
+        </div>
     </div>
 </div>
 

@@ -32,7 +32,7 @@ def bin(request):
                 current_site = get_current_site(request)
                 # print(current_site)
                 user_posted_code_details = Pastebindb(
-                    user=request.user,
+                    user=request.user.profile,
                     poster_name=pst_nm,
                     poster=pst,
                     poster_type=pst_tp,
