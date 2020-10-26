@@ -1,107 +1,297 @@
 {% extends 'home/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<div class="row">
-    {% include 'home/sidebarLeft.html' %}
 
-    <div class="col-lg-7 col-md-6 ptb-50">
-        <div class="home-post-area">
-            {% for post in all_posts %}
-                <div class="single-post">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6">
-                            <div class="profile d-flex">
-                                <img src="../../static/basic/demo.png" alt="demo">
-                                <ul class="user-details">
-                                    <li>
-                                        <a class="username" href="#">{{post.user}}</a>
-                                    </li>
-                                    <li>
-                                        <p>{{post.date}}</p>
-                                    </li>
-                                </ul>
+<!-- Banner Area -->
+<div class="banner-area">
+    <div class="d-table">
+        <div class="d-table-cell">
+            <div class="container-fluid">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <div class="banner-content">
+                            <h1>
+                                Share & grow the world's knowledge!
+                            </h1>
+                            <p>
+                                We want to connect the people who have knowledge to the people who need it, to bring
+                                together people with different perspectives so they can understand each other better,
+                                and to empower everyone to share their knowledge.
+                            </p>
+                            <div class="banner-btn">
+                                <a href="#" class="box-btn">Ask Question</a>
+                                <a href="#" class="box-btn border-btn">Share Code</a>
                             </div>
-                        </div>
-                        <div class="col-lg-6 text-right">
-                            <div class="post-menu">
-                                <a class="postbtn bx bx-dots-vertical-rounded"></a>
-                                <div class="menu-content">
-                                    <a href="#">Edit</a>
-                                    <a href="#">Delete</a>
-                                    <a href="#">Hide</a>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12 col-md-12 col-12">
-                            <div class="post-content">
-                                <p class="p-link">Problem Link: <a target="_blank"
-                                        href="{{post.postlink}}">{{post.postlink}}</a></p>
-                                <p class="show-read-more">{{post.content}}</p>
-                            </div>
-
-                            <div class="like-comment">
-                                <div class="like">
-                                    <a href="javascript:void(0);" class="like-button">
-                                        <i class="material-icons not-liked bouncy">favorite_border</i>
-                                        <i class="material-icons is-liked bouncy">favorite</i>
-                                        <span class="like-overlay"></span>
-                                    </a>
-                                    <span class="like-count">0</span>
-                                </div>
-                                <div class="comment">
-                                    <a href=""><i class='bx bxs-comment-dots'></i></a>
-                                    <span class="comment-count">0 Comments</span>
-                                </div>
-                            </div>
-
-
-                            <div class="comments">
-
-                                <!-- {% if not post.comments.all %}
-                                    <h2>No comments Yet....</h2>
-                                    {% else %} -->
-                                {% for comment in post.comments.all %}
-                                <div class="single-comment">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="comment comment-box d-flex">
-                                                <img src="../../static/basic/demo.png" alt="demo">
-                                                <ul class="user-details">
-                                                    <li>
-                                                        <a class="username" href="#">{{comment.user}}</a>
-                                                    </li>
-                                                    <li>
-                                                        <p>{{comment.date}}</p>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                                {% endif %}
-                            </div>
-
-                            <div class="post-comment">
-                                <form action="">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Write a comment">
-                                        <a href="">
-                                            <i class='bx bx-send'></i>
-                                        </a>
-                                    </div>
-                                </form>
-                            </div>
+                    <div class="col-lg-6">
+                        <div class="banner-img">
+                            <img src="../../static/basic/images/banner.png" alt="banner-img" />
                         </div>
                     </div>
                 </div>
-            {% endfor %}
+            </div>
         </div>
     </div>
-    {% include 'home/sidebarRight.html' %}
+    <div class="home-shape">
+        <div class="shape1">
+            <img src="../../static/basic/images/2.png" alt="shape">
+        </div>
+        <div class="shape2">
+            <img src="../../static/basic/images/4.png" alt="shape">
+        </div>
+        <div class="shape3">
+            <img src="../../static/basic/images/5.png" alt="shape">
+        </div>
+        <div class="shape4">
+            <img src="../../static/basic/images/3.png" alt="shape">
+        </div>
+
+    </div>
 </div>
+<!-- End Banner Area -->
+
+<!-- Service Area -->
+<section class="home-service-area pt-100 pb-70">
+    <div class="container">
+        <div class="section-title">
+            <span>Smart Services</span>
+            <h2>Ground Provide All Kind of Solutions</h2>
+            <p> We help you get answers to your toughest coding questions, share knowledge with your by others.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-sm-6">
+                <div class="single-service">
+                    <div class="service-img">
+                        <img src="../../static/basic/images/services/1.png" alt="service" />
+                    </div>
+
+                    <div class="service-content">
+                        <h3>Ask Questions</h3>
+                        <p>Get answers to your questions and give back by sharing your knowledge with others. Sign up
+                            for an account.</p>
+
+                        <a href="/" class="line-bnt">
+                            Read More
+                        </a>
+                    </div>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6">
+                <div class="single-service">
+                    <div class="service-img">
+                        <img src="../../static/basic/images/services/2.png" alt="service" />
+                    </div>
+
+                    <div class="service-content">
+                        <h3>Get Answers</h3>
+                        <p>Get answers to your questions and give back by sharing your knowledge with others. Sign up
+                            for an account.</p>
+
+                        <a href="/" class="line-bnt">
+                            Read More
+                        </a>
+                    </div>
+                    <span></span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-sm-6">
+                <div class="single-service">
+                    <div class="service-img">
+                        <img src="../../static/basic/images/services/3.png" alt="service" />
+                    </div>
+
+                    <div class="service-content">
+                        <h3>Share Code</h3>
+                        <p>Write or copy code, then share it with friends and colleagues. Pair program and troubleshoot
+                            together.</p>
+
+                        <a href="/" class="line-bnt">
+                            Read More
+                        </a>
+                    </div>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Service Area -->
+
+<!-- Company Area -->
+<section class="home-company-area bg-color" id="home-company">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 col-md-12">
+                <div class="company-content">
+                    <div class="company-tittle">
+                        <span>About Us</span>
+                        <h2>Innovative It Helping Service All Over the World</h2>
+
+                        <p>We know that all competitive programmers and problem solver sometimes face some obstacles
+                            to solve a contest problem’s or any online judges problems. Sometimes they become helpless
+                            to solve a problem. Then they search problems solution in internet or in those online judge
+                            platform. Though present days online judge has tutorial site , but many online judge are in
+                            internet which has no tutorial site or problems solutions code . Besides this , sometimes
+                            coder’s face problem to share code with other’s. If we share this code with the help of
+                            social
+                            media , that doesn’t follow code indentation .</p>
+
+                        <p>So we are develop a web based
+                            application which have code share option, post option to get help from other and online
+                            judge’s
+                            problems solved code link.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+                <div class="company-img">
+                    <img src="../../static/basic/images/about.png" alt="about" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Company Area -->
+
+<!-- Blog Area -->
+<section class="home-blog-area">
+    <div class="container">
+        <div class="section-title">
+            <span>Blog Post</span>
+            <h2>Our Regular Blogs</h2>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. A facilis vel consequatur tempora atque
+                blanditiis exercitationem incidunt, alias corporis quam assumenda dicta.</p>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="single-blog">
+                    <div class="blog-img">
+                        <a href="blog-details.html">
+                            <img src="../../static/basic/images/3.jpg" alt="blog">
+                        </a>
+                    </div>
+
+                    <div class="content">
+                        <ul>
+                            <li>
+                                10 April 2020
+                            </li>
+                            <li>
+                                <span>By Admin</span>
+                            </li>
+                        </ul>
+
+                        <a href="#">
+                            <h3>Joe’s Company Software Development Case</h3>
+                        </a>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas in fugit minima modi
+                            perspiciatis nam aspernatur porro</p>
+
+                        <a href="#" class="line-bnt">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="blog-btn text-center">
+            <p>We Have More Usefull Blogs For You. <a href="#">View More</a></p>
+        </div>
+    </div>
+</section>
+<!-- End Blog Area -->
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form action="" method="POST" novalidate>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer Area -->
+<footer class="footer-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="content">
+                    <div class="logo">
+                        <a href="/">Ground</a>
+                    </div>
+                    <p>
+                        Ground is a social questions & Answers Engine which will help you establis your community and
+                        connect with other people.
+                    </p>
+
+                    <ul class="social">
+                        <li>
+                            <a href="#" target="_blank"><i class='bx bxl-facebook'></i></a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank"><i class='bx bxl-twitter'></i></a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank"><i class='bx bxl-instagram'></i></a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank"><i class='bx bxl-pinterest'></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="content ml-15">
+                    <h3>Our Service</h3>
+                    <ul class="footer-list">
+                        <li><a href="#">Pastebin</a></li>
+                        <li><a href="#"> Blog</a></li>
+                        <li><a href="#">Post</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <div class="content">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-list">
+                        <li><a href="#home-company">Service</a></li>
+                        <li><a href="privecy.html">Privacy & Policy</a></li>
+                        <li><a href="terms-condition.html">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="content contacts">
+                    <h3 class="ml-40">Contact</h3>
+                    <ul class="footer-list foot-social">
+                        <li><a href="tel:+1975456789"><i class="bx bx-phone"></i> +1 975 456 789</a></li>
+                        <li><a href="mailto:ground.mu@gmail.com"><i class="bx bxs-envelope"></i>ground.mu@gmail.com</a>
+                        </li>
+                        <li><i class="bx bxs-map"></i> Sylhet, Bangladesh</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="lines">
+            <div class="line"></div>
+            <div class="line"></div>
+            <div class="line"></div>
+        </div>
+    </div>
+    <div class="copy-area">
+        <p class="text-center">
+            Copyright @2020 Ground. All Rights Reserved by Ground
+        </p>
+    </div>
+</footer>
+<!-- End Footer Area -->
+
 {% endblock content %}

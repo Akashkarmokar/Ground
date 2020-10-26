@@ -36,6 +36,7 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
+    # 'material.admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,7 +82,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Ground.wsgi.application'
 
 
 # Database
