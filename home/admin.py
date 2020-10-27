@@ -1,8 +1,9 @@
 from django.contrib import admin
-# from .models import Contact
+from .models import Feedback
 
 # Register your models here.
-# @admin.register(Profile)
-# class ProfileAdmin(admin.ModelAdmin):
-#     list_display = ['first_name','last_name','user','bio','email','country','avater','friends','slug','updated','created']
-# admin.site.register(Contact)
+@admin.register(Feedback)
+class FeedbackAdmin(admin.ModelAdmin):
+    list_display = ['content','name','email','mobileNo','created',]
+
+

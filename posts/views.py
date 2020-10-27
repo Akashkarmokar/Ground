@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect
 from django.http import Http404
-from .models import Post,Like
+from .models import Post,Like,Comment
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from users.forms import LoginForm
@@ -8,7 +8,7 @@ from users.models import Profile
 from .forms import PostModelForm,CommentModelForm
 from django.contrib import messages
 from django.views.generic import UpdateView,DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy ,reverse
 
 # Create your views here.
 
@@ -143,18 +143,149 @@ def PostDelete(request,pk):
 
 def PostUpdate(request,pk):
     if request.user.is_authenticated:
+        if request.method == 'POST':
+            # print("0000000000111")
+            try:
+                obj = Post.objects.get(pk=pk)
+                # print("000000000022")
+                if obj.author.user == request.user:
+                    # print("000000000000333")
+                    form = PostModelForm(request.POST,instance=obj)
+                    if form.is_valid():
+                        form.save()
+                        obj = form.save()
+                        obj.save()
+                        # print("000000000000444")
+                        context = {
+                            'form':form,
+                        }
+                        return render(request,'posts/update.html',context)
+                else:
+                    messages.warning(request,"You are not the author of this post")
+                    return redirect('posts:allposts')
+            except Post.DoesNotExist:
+                raise Http404("Your link is Wrong or it is not available.Here")
+
+        else:
+            try:
+                obj = Post.objects.get(pk=pk)
+                if obj.author.user == request.user:
+                    form = PostModelForm(instance=obj)
+                    context = {
+                        'form':form,
+                    }
+                    return render(request,'posts/update.html',context)
+                else:
+                    messages.warning(request,"You are not the author of this post")
+                    return redirect('posts:allposts')
+            except Post.DoesNotExist:
+                raise Http404("Your link is Wrong or it is not available.Here") 
+    else:
+        messages.info(request,"Login First............!")
+        return redirect('users:login')
+
+
+def PostDetails(request,pk):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            if 'comment_submit_form' in request.POST:
+                comment_form = CommentModelForm(request.POST or None)
+                profile = Profile.objects.get(user=request.user)
+                if comment_form.is_valid():
+                    instance = comment_form.save(commit=False)
+                    instance.user = profile
+                    instance.post = Post.objects.get(id = request.POST.get('post_id'))
+                    instance.save()
+                    # comment_form = CommentModelForm()
+                    messages.success(request,'Comment Added')
+                    obj = Post.objects.get(pk=pk)
+                    comment_form = CommentModelForm()
+                    context = {
+                        'post':obj,
+                        'comment_form':comment_form,
+                    }
+                    return render(request,'posts/post_details.html',context)
+        else:
+            messages.info(request,"Login First............!")
+            return redirect('users:login')
+    else:
+        obj = Post.objects.get(pk=pk)
+        comment_form = CommentModelForm()
+        context = {
+            'post':obj,
+            'comment_form':comment_form,
+        }
+        return render(request,'posts/post_details.html',context)
+
+
+
+#///////////////////////////  Comment section ////////////////////////////////////
+def commentEdit(request,pk):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            print("0000000000111")
+            try:
+                obj = Comment.objects.get(pk=pk)
+                print("000000000022")
+                if obj.user.user == request.user:
+                    print("000000000000333")
+                    form = CommentModelForm(request.POST,instance=obj)
+                    if form.is_valid():
+                        form.save()
+                        obj = form.save()
+                        obj.save()
+                        print("000000000000444")
+                        context = {
+                            'form':form,
+                        }
+                        return render(request,'posts/commentEdit.html',context)
+                else:
+                    messages.warning(request,"You are not the author of this post")
+                    return redirect('posts:allposts')
+            except Post.DoesNotExist:
+                raise Http404("Your link is Wrong or it is not available.Here")
+
+        else:
+            try:
+                obj = Comment.objects.get(pk=pk)
+                if obj.user.user == request.user:
+                    form = CommentModelForm(instance=obj)
+                    context = {
+                        'form':form,
+                    }
+                    return render(request,'posts/commentEdit.html',context)
+                else:
+                    messages.warning(request,"You are not the author of this post")
+                    return redirect('posts:allposts')
+            except Post.DoesNotExist:
+                raise Http404("Your link is Wrong or it is not available.Here") 
+    else:
+        messages.info(request,"Login First............!")
+        return redirect('users:login')
+
+
+
+
+
+
+def commentDelete(request,pk,postid):
+    if request.user.is_authenticated:
         try:
-            obj = Post.objects.get(pk=pk)
-            if obj.author.user == request.user:
-                form = PostModelForm(instance=obj)
+            obj = Comment.objects.get(pk=pk)
+            if obj.user.user == request.user:
+                obj.delete()
+                post_obj = Post.objects.get(pk=postid)
+                comment_form = CommentModelForm()
                 context = {
-                    'form':form,
+                    'post':post_obj,
+                    'comment_form':comment_form,
                 }
-                return render(request,'posts/update.html',context)
+                # return render(request,'posts/post_details.html',context)
+                return redirect(reverse('posts:postsDetails',args=postid))
             else:
                 messages.warning(request,"You are not the author of this post")
                 return redirect('posts:allposts')
-        except Post.DoesNotExist:
+        except Comment.DoesNotExist:
             raise Http404("Your link is Wrong or it is not available.Here") 
     else:
         messages.info(request,"Login First............!")

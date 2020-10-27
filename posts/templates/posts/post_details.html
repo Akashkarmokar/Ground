@@ -7,17 +7,9 @@
     {% include 'home/sidebarLeft.html' %}
 
     <div class="col-lg-5 col-md-6 ptb-50">
-        {% if messages %}
-        {% for message in messages %}
-        <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %}>
-            <strong>{{message}}</strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                    aria-hidden="true">&times;</span></button>
-        </div>
-        {% endfor %}
-        {% endif %}
+
         <div class="home-post-area">
-            {% for post in all_posts %}
+            {% comment %} {% for post in all_posts %} {% endcomment %}
             <div class="single-post">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
@@ -143,7 +135,6 @@
                                         </div>
                                     </div>
                                 {% endfor %}
-                                <a href="{% url 'posts:postsDetails' post.pk %}">See more</a>
                             {% endif %}
                         </div>
 
@@ -164,19 +155,7 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
-        </div>
-    </div>
-    <!--Create Post Area-->
-    <div class="col-lg-4 ">
-        <div class="ptb-50">
-            <form class="post-form" action="" method="POST" enctype=multipart/form-data >
-                {% csrf_token %}
-                {{post_form}}
-                <label for="actual-btn"></label>
-                <span id="file-chosen">No file chosen</span>
-                <button type="submit" class="box-btn mt-5 w-100" name="post_submit_form">Post</button>
-            </form>
+            {% comment %} {% endfor %} {% endcomment %}
         </div>
     </div>
 </div>

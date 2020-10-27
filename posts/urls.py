@@ -10,4 +10,7 @@ urlpatterns = [
     path('delete/<pk>/',views.PostDelete,name='postsDelete'),
     # path('update/<pk>/',views.PostUpdateView.as_view(),name='postsUpdate'),
     path('update/<pk>/',views.PostUpdate,name='postsUpdate'),
+    path('details/<pk>',views.PostDetails,name='postsDetails'),
+    path('delete/<pk>/<postid>',views.commentDelete,name='commentDelete'),
+    path('edit/<pk>',views.commentEdit,name='commentEdit'),   
 ]
