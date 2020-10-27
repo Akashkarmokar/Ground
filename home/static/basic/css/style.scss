@@ -160,9 +160,14 @@ textarea {
 }
 
 .ptb-50 {
-    padding: 120px 0;
+    padding-top: 120px;
+    padding-bottom: 120px;
 }
 
+.ptb-50m {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
 /** Animations Css **/
 @keyframes rotaed360 {
     0% {
@@ -901,12 +906,11 @@ Footer Area Css
         margin-top: 70px;
         padding: 20px 0;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
-        p{
-            color:#fff;
+        p {
+            color: #fff;
         }
     }
 }
-
 
 /*
 Pastebin Area Css
@@ -1609,7 +1613,7 @@ Profile Area Css
 
 .user-profile {
     position: relative;
-    padding-bottom:40px ;
+    padding-bottom: 40px;
     .bio {
         .bio-img {
             border-radius: 50%;
@@ -1713,7 +1717,7 @@ textarea#id_content {
 /*
 Profile Content Area Style
 ======================================================*/
-.profile-content-area{
+.profile-content-area {
     .tab {
         &.quote-list-tab {
             // text-align: center;
@@ -1748,7 +1752,318 @@ Profile Content Area Style
 
 .tab .tabs_item {
     display: none;
-  }
+}
 .tab .tabs_item:first-child {
     display: block;
+}
+
+.list-post-area {
+    position: relative;
+
+    .post-banner-area {
+        position: relative;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 330px;
+        background: url(../images/banner.jpg);
+        z-index: 1;
+
+        &::before {
+            position: absolute;
+            content: "";
+            background-color: #000;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.7;
+            z-index: -1;
+        }
+
+        .banner-tittle {
+            margin-top: 65px;
+            h1 {
+                color: tomato;
+            }
+            p {
+                color: $white-color;
+            }
+        }
+    }
+}
+
+.edit-comment {
+    padding: 40px;
+    max-width: 540px;
+    background: #fff;
+    border-radius: 10px;
+    margin: auto;
+    box-shadow: $box-shadow;
+}
+
+// review
+
+.review-area {
+    position: relative;
+    padding-bottom: 0;
+    padding-top: 50px;
+    .review-tittle {
+        text-align: center;
+        span {
+            color: #1d42d9;
+            font-size: 14px;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 8px;
+        }
+        h2 {
+            font-size: 40px;
+            text-transform: capitalize;
+            color: #293a5c;
+            margin-bottom: 20px;
+        }
+    }
+    .single-slider {
+        position: relative;
+        padding: 30px;
+        overflow: hidden;
+        .testimonial-item {
+            padding: 30px;
+            position: relative;
+            padding: 30px 20px 20px 60px;
+            border-radius: 2px;
+            box-shadow: $box-shadow;
+            .review-img {
+                position: absolute;
+                display: block;
+                top: -30px;
+                left: -30px;
+                width: 80px;
+                height: 80px;
+                img {
+                    border-radius: 50%;
+                    border: 1px solid tomato;
+                    padding: 5px;
+                }
+            }
+            .review-content {
+                p {
+                    font-style: italic;
+                    color: $heading-color;
+                }
+                h5 {
+                    font-size: 19px;
+                    margin-bottom: 0;
+                    color: tomato;
+                }
+                span {
+                    font-size: 13px;
+                    color: $heading-color;
+                }
+            }
+        }
+        .shape {
+            position: absolute;
+            right: -40px;
+            bottom: -35px;
+            opacity: 0.7;
+            animation: rotaed360 40s linear infinite;
+        }
+    }
+    .owl-dots {
+        margin-top: 0;
+        button {
+            span {
+                width: 15px;
+                height: 5px;
+                border-radius: 0;
+                background: $body-color;
+                margin: 1px 2px;
+            }
+            &.active {
+                background: $heading-color;
+            }
+        }
+    }
+}
+
+// main post
+
+.main-post-area {
+    position: relative;
+    padding: 10px;
+    box-shadow: $box-shadow;
+    .modal-header {
+        position: absolute;
+        right: -7px;
+        border: 0;
+        z-index: 1;
+        top: -15px;
+    }
+    .close {
+        font-size: 2rem !important;
+    }
+
+    .state-inner {
+        position: relative;
+        margin-top: 30px;
+        .row {
+            margin: 0;
+        }
+        .single-state {
+            position: relative;
+            text-align: center;
+            border: 1px solid #ddd;
+            padding: 5px;
+
+            &::before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 13px;
+                height: 45px;
+                background: tomato;
+                width: 2px;
+            }
+
+            span {
+                font-size: 12px;
+                font-weight: 600;
+            }
+
+            h4 {
+            }
+        }
+    }
+}
+
+// widget
+
+.widget-area {
+    .widget {
+        margin-top: 35px;
+        background-color: $white-color;
+        box-shadow: 0px 0px 29px 0px rgba(102, 102, 102, 0.08);
+        .post-wrap {
+            padding: 20px;
+        }
+        &:first-child {
+            margin-top: 0;
+        }
+        .widget-title {
+            text-transform: capitalize;
+            position: relative;
+            font-size: 20px;
+            margin-bottom: 0;
+            background-color: #ececec;
+            padding: 10px 20px;
+            color: $heading-color;
+            position: relative;
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 2px;
+                height: 100%;
+                background-color: $main-color;
+            }
+        }
+    }
+    .widget_search {
+        form {
+            position: relative;
+            label {
+                display: block;
+                margin-bottom: 0;
+            }
+            .screen-reader-text {
+                display: none;
+            }
+            .search-field {
+                background-color: transparent;
+                height: 50px;
+                padding: 6px 15px;
+                border: 1px solid #eeeeee;
+                width: 100%;
+                display: block;
+                outline: 0;
+                transition: 0.5s;
+                &:focus {
+                    border-color: $main-color;
+                }
+            }
+            button {
+                position: absolute;
+                right: 0;
+                outline: 0;
+                bottom: 0;
+                height: 50px;
+                width: 50px;
+                border: none;
+                color: $white-color;
+                background-color: $main-color;
+                transition: 0.5s;
+                cursor: pointer;
+                &:hover {
+                    background-color: $heading-color;
+                }
+            }
+        }
+    }
+    .widget-peru-posts-thumb {
+        position: relative;
+        overflow: hidden;
+        .item {
+            overflow: hidden;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #efefef;
+            &:last-child {
+                margin-bottom: 0;
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+            .thumb {
+                float: left;
+                height: 80px;
+                overflow: hidden;
+                position: relative;
+                width: 80px;
+                margin-right: 15px;
+                .fullimage {
+                    width: 80px;
+                    height: 80px;
+                    display: inline-block;
+                    background-size: cover !important;
+                    background-repeat: no-repeat;
+                    background-position: center center !important;
+                    position: relative;
+                    background-color: $heading-color;
+                }
+            }
+            .info{
+                .title {
+                    margin-bottom: 0;
+                    line-height: 1.5;
+                    font-size: 18px;
+                    font-weight: 600;
+                    a {
+                        display: inline-block;
+                        color: #474c40;
+                        &:hover {
+                            color: $main-color;
+                        }
+                    }
+                }
+                span{
+                    font-size: 12px;
+                    color: #929292;
+                    display: block;
+                    margin-bottom: 1px;
+                }
+            }
+        }
+    }
 }

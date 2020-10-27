@@ -2,14 +2,18 @@
 {% load static %}
 
 {% block content %}
-    <div class='row'>
-        <div class="col-lg-5 col-md-6 ptb-50">
-            <h3>Edit Comment</h3>
-            <form action="" method="POST" enctype=multipart/form-data>
-                {% csrf_token %}
-                {{form}}
-                <button type="submit" class="btn btn-success">Update</button>
-            </form>
+    <div class="container">
+        <div class='row'>
+            <div class="col-12 ptb-50">
+                <div class="edit-comment">
+                    <h3>Edit Comment</h3>
+                    <form action="" method="POST" enctype=multipart/form-data>
+                        {% csrf_token %}
+                        {{form}}
+                        <a type="submit" class="btn btn-success mt-4">Update</a>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock content %}

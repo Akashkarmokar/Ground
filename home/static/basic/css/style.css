@@ -174,7 +174,13 @@ textarea.form-control {
 }
 
 .ptb-50 {
-  padding: 120px 0;
+  padding-top: 120px;
+  padding-bottom: 120px;
+}
+
+.ptb-50m {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }
 
 /** Animations Css **/
@@ -2163,5 +2169,344 @@ Profile Content Area Style
 
 .tab .tabs_item:first-child {
   display: block;
+}
+
+.list-post-area {
+  position: relative;
+}
+
+.list-post-area .post-banner-area {
+  position: relative;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 330px;
+  background: url(../images/banner.jpg);
+  z-index: 1;
+}
+
+.list-post-area .post-banner-area::before {
+  position: absolute;
+  content: "";
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0.7;
+  z-index: -1;
+}
+
+.list-post-area .post-banner-area .banner-tittle {
+  margin-top: 65px;
+}
+
+.list-post-area .post-banner-area .banner-tittle h1 {
+  color: tomato;
+}
+
+.list-post-area .post-banner-area .banner-tittle p {
+  color: #ffffff;
+}
+
+.edit-comment {
+  padding: 40px;
+  max-width: 540px;
+  background: #fff;
+  border-radius: 10px;
+  margin: auto;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.review-area {
+  position: relative;
+  padding-bottom: 0;
+  padding-top: 50px;
+}
+
+.review-area .review-tittle {
+  text-align: center;
+}
+
+.review-area .review-tittle span {
+  color: #1d42d9;
+  font-size: 14px;
+  position: relative;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.review-area .review-tittle h2 {
+  font-size: 40px;
+  text-transform: capitalize;
+  color: #293a5c;
+  margin-bottom: 20px;
+}
+
+.review-area .single-slider {
+  position: relative;
+  padding: 30px;
+  overflow: hidden;
+}
+
+.review-area .single-slider .testimonial-item {
+  padding: 30px;
+  position: relative;
+  padding: 30px 20px 20px 60px;
+  border-radius: 2px;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.review-area .single-slider .testimonial-item .review-img {
+  position: absolute;
+  display: block;
+  top: -30px;
+  left: -30px;
+  width: 80px;
+  height: 80px;
+}
+
+.review-area .single-slider .testimonial-item .review-img img {
+  border-radius: 50%;
+  border: 1px solid tomato;
+  padding: 5px;
+}
+
+.review-area .single-slider .testimonial-item .review-content p {
+  font-style: italic;
+  color: #293a5c;
+}
+
+.review-area .single-slider .testimonial-item .review-content h5 {
+  font-size: 19px;
+  margin-bottom: 0;
+  color: tomato;
+}
+
+.review-area .single-slider .testimonial-item .review-content span {
+  font-size: 13px;
+  color: #293a5c;
+}
+
+.review-area .single-slider .shape {
+  position: absolute;
+  right: -40px;
+  bottom: -35px;
+  opacity: 0.7;
+  -webkit-animation: rotaed360 40s linear infinite;
+          animation: rotaed360 40s linear infinite;
+}
+
+.review-area .owl-dots {
+  margin-top: 0;
+}
+
+.review-area .owl-dots button span {
+  width: 15px;
+  height: 5px;
+  border-radius: 0;
+  background: #010102;
+  margin: 1px 2px;
+}
+
+.review-area .owl-dots button.active {
+  background: #293a5c;
+}
+
+.main-post-area {
+  position: relative;
+  padding: 10px;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.main-post-area .modal-header {
+  position: absolute;
+  right: -7px;
+  border: 0;
+  z-index: 1;
+  top: -15px;
+}
+
+.main-post-area .close {
+  font-size: 2rem !important;
+}
+
+.main-post-area .state-inner {
+  position: relative;
+  margin-top: 30px;
+}
+
+.main-post-area .state-inner .row {
+  margin: 0;
+}
+
+.main-post-area .state-inner .single-state {
+  position: relative;
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+.main-post-area .state-inner .single-state::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 13px;
+  height: 45px;
+  background: tomato;
+  width: 2px;
+}
+
+.main-post-area .state-inner .single-state span {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.widget-area .widget {
+  margin-top: 35px;
+  background-color: #ffffff;
+  -webkit-box-shadow: 0px 0px 29px 0px rgba(102, 102, 102, 0.08);
+          box-shadow: 0px 0px 29px 0px rgba(102, 102, 102, 0.08);
+}
+
+.widget-area .widget .post-wrap {
+  padding: 20px;
+}
+
+.widget-area .widget:first-child {
+  margin-top: 0;
+}
+
+.widget-area .widget .widget-title {
+  text-transform: capitalize;
+  position: relative;
+  font-size: 20px;
+  margin-bottom: 0;
+  background-color: #ececec;
+  padding: 10px 20px;
+  color: #293a5c;
+  position: relative;
+}
+
+.widget-area .widget .widget-title::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background-color: #1d42d9;
+}
+
+.widget-area .widget_search form {
+  position: relative;
+}
+
+.widget-area .widget_search form label {
+  display: block;
+  margin-bottom: 0;
+}
+
+.widget-area .widget_search form .screen-reader-text {
+  display: none;
+}
+
+.widget-area .widget_search form .search-field {
+  background-color: transparent;
+  height: 50px;
+  padding: 6px 15px;
+  border: 1px solid #eeeeee;
+  width: 100%;
+  display: block;
+  outline: 0;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+}
+
+.widget-area .widget_search form .search-field:focus {
+  border-color: #1d42d9;
+}
+
+.widget-area .widget_search form button {
+  position: absolute;
+  right: 0;
+  outline: 0;
+  bottom: 0;
+  height: 50px;
+  width: 50px;
+  border: none;
+  color: #ffffff;
+  background-color: #1d42d9;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.widget-area .widget_search form button:hover {
+  background-color: #293a5c;
+}
+
+.widget-area .widget-peru-posts-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.widget-area .widget-peru-posts-thumb .item {
+  overflow: hidden;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #efefef;
+}
+
+.widget-area .widget-peru-posts-thumb .item:last-child {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.widget-area .widget-peru-posts-thumb .item .thumb {
+  float: left;
+  height: 80px;
+  overflow: hidden;
+  position: relative;
+  width: 80px;
+  margin-right: 15px;
+}
+
+.widget-area .widget-peru-posts-thumb .item .thumb .fullimage {
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+  background-size: cover !important;
+  background-repeat: no-repeat;
+  background-position: center center !important;
+  position: relative;
+  background-color: #293a5c;
+}
+
+.widget-area .widget-peru-posts-thumb .item .info .title {
+  margin-bottom: 0;
+  line-height: 1.5;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.widget-area .widget-peru-posts-thumb .item .info .title a {
+  display: inline-block;
+  color: #474c40;
+}
+
+.widget-area .widget-peru-posts-thumb .item .info .title a:hover {
+  color: #1d42d9;
+}
+
+.widget-area .widget-peru-posts-thumb .item .info span {
+  font-size: 12px;
+  color: #929292;
+  display: block;
+  margin-bottom: 1px;
 }
 /*# sourceMappingURL=style.css.map */

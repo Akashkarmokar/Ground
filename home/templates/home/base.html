@@ -17,6 +17,11 @@
     <link rel="stylesheet" href="{% static 'basic/css/icon.css' %}">
 
     <link rel="stylesheet" href="{% static 'basic/css/emojionearea.min.css' %}">
+
+    <link rel="stylesheet" href="{% static 'basic/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'basic/css/owl.theme.default.min.css' %}">
+
+
     <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'basic/css/style.css' %}">
     <title>Ground</title>
@@ -46,6 +51,8 @@
     <script src="{% static 'basic/js/boxicons.js' %}"></script>
 
     <script src="{% static 'basic/js/emojionearea.min.js' %}"></script>
+
+    <script src="{% static 'basic/js/owl.carousel.min.js' %}"></script>
     <!-- Main Js  -->
     <script src="{% static 'basic/js/main.js' %}"></script>
 
@@ -117,7 +124,7 @@
                         t.classList.remove('copied');
                     }, 1500);
                 } catch (err) {
-                    alert('please press Ctrl/Cmd+C to copy');
+                    alert('please press Ctrl/Ctrl+C to copy');
                 }
 
             }
@@ -127,27 +134,6 @@
 
     <script>
         setTimeout(function () { $('.alert').alert('close') }, 3000);
-    </script>
-
-    <script>
-        var autoExpand = function (field) {
-            field.style.height = 'inherit';
-
-            var computed = window.getComputedStyle(field);
-            var height = parseInt(computed.getPropertyValue('border-top-width'), 10)
-                + parseInt(computed.getPropertyValue('padding-top'), 10)
-                + field.scrollHeight
-                + parseInt(computed.getPropertyValue('padding-bottom'), 10)
-                + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
-
-            field.style.height = height + 'px';
-
-        };
-
-        document.addEventListener('input', function (event) {
-            if (event.target.tagName.toLowerCase() !== 'textarea') return;
-            autoExpand(event.target);
-        }, false);
     </script>
 
     <script>
@@ -165,13 +151,13 @@
         }
     </script>
 
-    <script>
+    <!-- <script>
         const actualBtn = document.getElementById('actual-btn');
         const fileChosen = document.getElementById('file-chosen');
         actualBtn.addEventListener('change', function () {
             fileChosen.textContent = this.files[0].name
         })
-    </script>
+    </script> -->
 
     <script>
         $(document).on("scroll", function () {
@@ -238,24 +224,6 @@
         });
     </script>
 
-    <!-- <script>
-	$(function() {
-		$('.single-service')
-		.on('mouseenter', function(e) {
-			var parentOffset = $(this).offset(),
-			relX = e.pageX - parentOffset.left,
-			relY = e.pageY - parentOffset.top;
-			$(this).find('span').css({top:relY, left:relX})
-		})
-		.on('mouseout', function(e) {
-			var parentOffset = $(this).offset(),
-			relX = e.pageX - parentOffset.left,
-			relY = e.pageY - parentOffset.top;
-			$(this).find('span').css({top:relY, left:relX})
-		});
-	});
-    </script> -->
-
     <script>
         // Tabs
         $('.tab ul.tabs').addClass('active').find('> li:eq(0)').addClass('current');
@@ -267,6 +235,36 @@
             tab.find('.tab_content').find('div.tabs_item').not('div.tabs_item:eq(' + index + ')').slideUp();
             tab.find('.tab_content').find('div.tabs_item:eq(' + index + ')').slideDown();
             g.preventDefault();
+        });
+    </script>
+
+    <script>
+        $('.review-slider').owlCarousel({
+            loop: true,
+            margin: 20,
+            dots: true,
+            autoplay: false,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                575: {
+                    items: 1,
+                },
+                576: {
+                    items: 1,
+                },
+                768: {
+                    items: 1,
+                },
+                992: {
+                    items: 1,
+                },
+                1200: {
+                    items: 2,
+                }
+            }
         });
     </script>
 
