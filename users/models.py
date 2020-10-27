@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from .utils import get_random_token
 from django.template.defaultfilters import slugify
+from django.utils.safestring import mark_safe
 
 # Create your models here.
 
@@ -47,9 +48,14 @@ class Profile(models.Model):
         for item in posts:
             total_liked += item.liked.all().count()
         return total_liked
+       
 
     def __str__(self):
         return f"{self.user.username}--{self.created.strftime('%d-%m-%y')}"
+
+    def profile_photo(self):
+        return mark_safe('<img src="{}" width="50"/>'.format(self.avater.url))
+
 
     def save(self,*args,**kwargs):
         ex = False

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import FileExtensionValidator
+from django.utils.safestring import mark_safe
 from users.models import Profile
 # Create your models here.
 
@@ -24,7 +25,8 @@ class Post(models.Model):
     def num_comments(self):
         return self.comment_set.all().count()
 
-
+    def post_photo(self):
+        return mark_safe('<img src="{}" width="70"/>'.format(self.image.url))
 
     class Meta:
         ordering = ('-created',)
