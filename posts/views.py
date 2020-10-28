@@ -28,7 +28,6 @@ def list_all_post_comments(request):
                     instance =  post_form.save(commit=False)
                     instance.author = profile
                     instance.save()
-                    # post_form = PostModelForm()
                     messages.success(request,'Your Post successfully posted')
             if 'comment_submit_form' in request.POST:
                 comment_form = CommentModelForm(request.POST or None)
@@ -37,7 +36,6 @@ def list_all_post_comments(request):
                     instance.user = profile
                     instance.post = Post.objects.get(id = request.POST.get('post_id'))
                     instance.save()
-                    # comment_form = CommentModelForm()
                     messages.success(request,'Comment Added')
 
             post_form = PostModelForm()
@@ -96,20 +94,6 @@ def like_comment_post(request):
         return HttpResponseRedirect('/user/login/')
 
 
-
-
-# class PostDeleteView(DeleteView):
-#     model = Post
-#     template_name = 'posts/confirm_delete.html'
-#     success_url = reverse_lazy('posts:allposts')
-
-#     def get_object(self,*args,**kwargs):
-#         pk =  self.kwargs.get('pk')
-#         obj = Post.objects.get(pk=pk)
-#         if not obj.author.user == self.request.user:
-#             messages.warning(request,"Your have no right to delete this post.")
-#         return obj 
-
 def PostDelete(request,pk):
     if request.user.is_authenticated:
         try:
@@ -126,40 +110,22 @@ def PostDelete(request,pk):
         messages.info(request,"Login First............!")
         return redirect('users:login')
 
-# class PostUpdateView(UpdateView):
-#     form_class = PostModelForm
-#     model = Post
-#     template_name = 'posts/update.html'
-#     success_url = reverse_lazy('posts:allposts')
-
-#     def form_valid(self,form):
-#         profile = Profile.objects.get(user=self.request.user)
-#         if form.instance.author == profile:
-#             return super().form_valid(form)
-#         else:
-#             form.add_error(None,"You need to be author of the post")
-#             return self.form_invalid(form)
-#             # return HttpResponseRedirect('/user/login/')
 
 def PostUpdate(request,pk):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            # print("0000000000111")
             try:
                 obj = Post.objects.get(pk=pk)
-                # print("000000000022")
                 if obj.author.user == request.user:
-                    # print("000000000000333")
                     form = PostModelForm(request.POST,instance=obj)
                     if form.is_valid():
                         form.save()
                         obj = form.save()
                         obj.save()
-                        # print("000000000000444")
                         context = {
                             'form':form,
                         }
-                        return render(request,'posts/update.html',context)
+                        return redirect(reverse('posts:postsDetails',args=pk))
                 else:
                     messages.warning(request,"You are not the author of this post")
                     return redirect('posts:allposts')
@@ -196,7 +162,6 @@ def PostDetails(request,pk):
                     instance.user = profile
                     instance.post = Post.objects.get(id = request.POST.get('post_id'))
                     instance.save()
-                    # comment_form = CommentModelForm()
                     messages.success(request,'Comment Added')
                     obj = Post.objects.get(pk=pk)
                     comment_form = CommentModelForm()
@@ -220,25 +185,24 @@ def PostDetails(request,pk):
 
 
 #///////////////////////////  Comment section ////////////////////////////////////
-def commentEdit(request,pk):
+
+
+
+def commentEdit(request,pk,postid):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            print("0000000000111")
             try:
                 obj = Comment.objects.get(pk=pk)
-                print("000000000022")
                 if obj.user.user == request.user:
-                    print("000000000000333")
                     form = CommentModelForm(request.POST,instance=obj)
                     if form.is_valid():
                         form.save()
                         obj = form.save()
                         obj.save()
-                        print("000000000000444")
                         context = {
                             'form':form,
                         }
-                        return render(request,'posts/commentEdit.html',context)
+                        return redirect(reverse('posts:postsDetails',args=postid))
                 else:
                     messages.warning(request,"You are not the author of this post")
                     return redirect('posts:allposts')
@@ -280,7 +244,6 @@ def commentDelete(request,pk,postid):
                     'post':post_obj,
                     'comment_form':comment_form,
                 }
-                # return render(request,'posts/post_details.html',context)
                 return redirect(reverse('posts:postsDetails',args=postid))
             else:
                 messages.warning(request,"You are not the author of this post")

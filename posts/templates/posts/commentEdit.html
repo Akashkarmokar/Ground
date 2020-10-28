@@ -7,10 +7,10 @@
             <div class="col-12 ptb-50">
                 <div class="edit-comment">
                     <h3>Edit Comment</h3>
-                    <form action="" method="POST" enctype=multipart/form-data>
+                    <form action="" method="POST" >
                         {% csrf_token %}
                         {{form}}
-                        <a type="submit" class="btn btn-success mt-4">Update</a>
+                        <button type="submit" class="btn btn-success mt-4">Update</button>
                     </form>
                 </div>
             </div>

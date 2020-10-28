@@ -1,0 +1,10 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+    <ul>
+        {% for item in qs %}
+            <li>{{item}}</li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
