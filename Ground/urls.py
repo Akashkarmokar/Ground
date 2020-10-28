@@ -23,6 +23,7 @@ from home import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name="home_url"),
+    path('blog/',include('blog.urls',namespace='blog')),
     path('feedback/',views.feedback,name='feedback'),
     path('pastebin/',include('pastebin.urls',namespace='pastebin')),
     path('user/',include('users.urls',namespace='users')),
