@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'pastebin',
     'users',
     'posts',
+    'blog',
 
     'crispy_forms',
 ]
