@@ -1526,6 +1526,8 @@ Home Post Area Css
           box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   border-radius: 2px;
   margin-bottom: 30px;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 .home-post-area .single-post .profile {
@@ -1574,6 +1576,23 @@ Home Post Area Css
 .home-post-area .single-post .post-content .show-read-more {
   font-size: 17px;
   margin-bottom: 15px;
+  white-space: pre-wrap;
+}
+
+.home-post-area .single-post .post-content .post-content-head {
+  position: relative;
+  z-index: 1;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+}
+
+.home-post-area .single-post .post-content .post-content-head h2 {
+  font-size: 26px;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 1;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 .home-post-area .single-post .like-comment {
@@ -1739,6 +1758,11 @@ Home Post Area Css
   margin-left: 5px;
 }
 
+.home-post-area .single-post .like-comment .box-btn {
+  font-size: 15px;
+  padding: 9px 20px;
+}
+
 .home-post-area .single-post .post-comment {
   position: relative;
 }
@@ -1759,10 +1783,6 @@ Home Post Area Css
   position: relative;
   border-bottom: 1px solid #eeeeee;
   padding: 15px 0;
-}
-
-.home-post-area .single-post .single-comment:last-child {
-  border-bottom: 0;
 }
 
 .home-post-area .single-post .single-comment .comment img {
@@ -1921,6 +1941,14 @@ Home Post Area Css
   display: block;
 }
 
+.home-post-area .single-post:hover .post-content-head h2 {
+  color: tomato;
+}
+
+.home-post-area .single-post:hover .post-content-head h2::before {
+  width: 100%;
+}
+
 .home-post-area .like-btn {
   background: transparent;
   color: red;
@@ -1947,8 +1975,8 @@ Home Post Area Css
 .comment-field input#id_body {
   position: relative;
   border-radius: 30px;
-  height: 45px;
-  width: 91%;
+  height: 250px;
+  width: 100%;
   margin: 0 0 0 auto;
 }
 
@@ -1979,20 +2007,28 @@ Home Post Area Css
 
 .comment-field .emojionearea.form-control.emojionearea-inline {
   position: relative;
-  border-radius: 30px;
-  height: 45px;
-  width: 91%;
+  border-radius: 3px;
+  height: 250px;
+  width: 100%;
   margin: 0 0 0 auto;
 }
 
 .comment-field .emojionearea.emojionearea-inline > .emojionearea-editor {
   padding: 11px 10px;
+  height: 250px;
+  min-height: 250px;
+  white-space: pre-wrap;
 }
 
 .comment-field .emojionearea.emojionearea-inline > .emojionearea-button {
   position: absolute;
   top: 9px;
-  right: 47px;
+  right: 10px;
+}
+
+.comment-field .comment-heading {
+  padding: 15px 0;
+  margin-bottom: 0;
 }
 
 /*
@@ -2175,7 +2211,7 @@ Profile Content Area Style
   position: relative;
 }
 
-.list-post-area .post-banner-area {
+.post-banner-area {
   position: relative;
   background-position: center center;
   background-repeat: no-repeat;
@@ -2185,7 +2221,7 @@ Profile Content Area Style
   z-index: 1;
 }
 
-.list-post-area .post-banner-area::before {
+.post-banner-area::before {
   position: absolute;
   content: "";
   background-color: #000;
@@ -2197,16 +2233,46 @@ Profile Content Area Style
   z-index: -1;
 }
 
-.list-post-area .post-banner-area .banner-tittle {
+.post-banner-area .banner-tittle {
   margin-top: 65px;
 }
 
-.list-post-area .post-banner-area .banner-tittle h1 {
+.post-banner-area .banner-tittle h1 {
   color: tomato;
 }
 
-.list-post-area .post-banner-area .banner-tittle p {
+.post-banner-area .banner-tittle p {
   color: #ffffff;
+}
+
+.post-banner-area .head-list {
+  position: relative;
+}
+
+.post-banner-area .head-list li {
+  display: inline-block;
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  padding-right: 15px;
+  padding-left: 15px;
+  color: #ffffff;
+}
+
+.post-banner-area .head-list li a {
+  position: relative;
+}
+
+.post-banner-area .head-list li a::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  right: -22px;
+  background-color: #70a1ff;
+  width: 8px;
+  height: 8px;
+  -webkit-animation: rotaed360 6s infinite linear;
+          animation: rotaed360 6s infinite linear;
 }
 
 .edit-comment {
@@ -2272,6 +2338,10 @@ Profile Content Area Style
   border-radius: 50%;
   border: 1px solid tomato;
   padding: 5px;
+  width: 80px;
+  height: 80px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .review-area .single-slider .testimonial-item .review-content p {
@@ -2283,6 +2353,7 @@ Profile Content Area Style
   font-size: 19px;
   margin-bottom: 0;
   color: tomato;
+  text-transform: capitalize;
 }
 
 .review-area .single-slider .testimonial-item .review-content span {
@@ -2348,6 +2419,7 @@ Profile Content Area Style
   text-align: center;
   border: 1px solid #ddd;
   padding: 5px;
+  margin-bottom: 30px;
 }
 
 .main-post-area .state-inner .single-state::before {
@@ -2508,5 +2580,17 @@ Profile Content Area Style
   color: #929292;
   display: block;
   margin-bottom: 1px;
+}
+
+.post-details-area {
+  position: relative;
+}
+
+.post-details-area .post-banner-area .banner-tittle {
+  text-align: center;
+}
+
+.post-details-area .post-banner-area ul {
+  text-align: center;
 }
 /*# sourceMappingURL=style.css.map */

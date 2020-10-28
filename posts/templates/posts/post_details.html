@@ -3,112 +3,120 @@
 
 {% block content %}
 
-<div class="row">
-    {% include 'home/sidebarLeft.html' %}
-
-    <div class="col-lg-5 col-md-6 ptb-50">
-
-        <div class="home-post-area">
-            {% comment %} {% for post in all_posts %} {% endcomment %}
-            <div class="single-post">
-                <div class="row">
-                    <div class="col-lg-6 col-md-6">
-                        <div class="profile d-flex">
-                            <img src="{{post.author.avater.url}}" alt="demo">
-                            <ul class="user-details">
+<div class="post-details-area">
+    <div class="post-banner-area ">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12">
+                            <div class="banner-tittle">
+                                <h1>
+                                    {{post.heading}}
+                                </h1>
+                            </div>
+                            <ul class="head-list">
                                 <li>
-                                    <a class="username" href="#">{{ post.author.user }}</a>
+                                    <a href="/">
+                                        Home
+                                    </a>
                                 </li>
-                                <li>
-                                    <p>{{ post.created|timesince}} ago</p>
-                                </li>
+                                <li>{{post.heading}}</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-6 text-right">
-                        {% ifequal request.user post.author.user %}
-                        <div class="post-menu">
-                            <a class="postbtn bx bx-dots-vertical-rounded"></a>
-                            <div class="menu-content">
-                                <a href="{% url 'posts:postsUpdate' post.pk %}">Edit</a>
-                                <!--<a href="#" data-toggle="modal" data-target="#exampleModalCenter">Edit</a> -->
-
-                                <a href="{% url 'posts:postsDelete' post.pk %}">Delete</a>
-                                <a href="#">Hide</a>
-                            </div>
-                        </div>
-                        {% endifequal %}
-                    </div>
-
-                    <!--Edit Post Modal -->
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    <h2>hello</h2>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
                 </div>
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 col-12">
-                        <div class="post-content">
-                            {% if post.link %}
-                                <p class="p-link">Problem Link: <a target="_blank"
-                                    href="{{post.link}}">{{post.link}}</a></p>
-                            {% endif %}
-                            <p class="show-read-more">{{post.content|capfirst }}</p>
-                            {% if post.image %}
-                            <div>
-                                <img src="{{post.image.url}}" alt="post-img">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 ptb-50m">
+                <div class="home-post-area">
+                    {% comment %} {% for post in all_posts %} {% endcomment %}
+                    <div class="single-post">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <div class="profile d-flex">
+                                    <img src="{{post.author.avater.url}}" alt="demo">
+                                    <ul class="user-details">
+                                        <li>
+                                            <a class="username" href="#">{{ post.author.user }}</a>
+                                        </li>
+                                        <li>
+                                            <p>{{ post.created|timesince}} ago</p>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            {% endif %}
-
-                        </div>
-
-                        <!--Like  Comments-->
-                        <div class="like-comment">
-                            <div class="like">
-                                <form class='like-form' id='{{post.id}}' action="{% url 'posts:postsLike' %}" method="POST" enctype=multipart/form-data>
-                                    {% csrf_token %}
-                                    <input type="hidden" name="post_id" value={{post.id}}>
-
-                                    <button type="submit" href="javascript:void(0);" class="like-button{{post.id}}">
-                                        {% if request.user.profile not in post.liked.all %}
-                                            <span class="material-icons">thumb_up</span>
-                                        {% else %}
-                                            <span class="material-icons">thumb_down</span>
-                                        {% endif %}
-                                    </button>
-                                    <span class="like-count{{post.id}}">{{post.num_likes}}</span>
-                                </form>
-                            </div>
-                            <div class="comment">
-                                <a href=""><i class='bx bxs-comment-dots'></i></a>
-                                <!--<span class="comment-count">{{post.num_comments}} Comments</span> -->
-                                <span class="comment-count">{{post.num_comments}} Comments</span>
+                            <div class="col-lg-6 text-right">
+                                {% ifequal request.user post.author.user %}
+                                <div class="post-menu">
+                                    <a class="postbtn bx bx-dots-vertical-rounded"></a>
+                                    <div class="menu-content">
+                                        <a href="{% url 'posts:postsUpdate' post.pk %}">Edit</a>
+                                        <a href="{% url 'posts:postsDelete' post.pk %}">Delete</a>
+                                        <a href="#">Hide</a>
+                                    </div>
+                                </div>
+                                {% endifequal %}
                             </div>
                         </div>
 
-                        <div class="comments">
-                            {% if not post.comment_set.all %}
-                                {% comment %} <h6>No Comments Yet</h6> {% endcomment %}
-                            {% else %}
-                                {% for comment in post.comment_set.all %}
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-12">
+                                <div class="post-content">
+                                   <a class="post-content-head" href="{% url 'posts:postsDetails' post.pk %}"><h2>{{post.heading}}</h2></a>
+                                    {% if post.link %}
+                                    <p class="p-link">Problem Link: <a target="_blank"
+                                            href="{{post.link}}">{{post.link}}</a></p>
+                                    {% endif %}
+                                    <p class="show-read-more">{{post.content|capfirst }}</p>
+                                    {% if post.image %}
+                                    <div>
+                                        <img src="{{post.image.url}}" alt="post-img">
+                                    </div>
+                                    {% endif %}
+
+                                </div>
+
+                                <!--Like  Comments-->
+                                <div class="like-comment">
+                                    <div class="like">
+                                        <form class='like-form' id='{{post.id}}' action="{% url 'posts:postsLike' %}"
+                                            method="POST" enctype=multipart/form-data>
+                                            {% csrf_token %}
+                                            <input type="hidden" name="post_id" value={{post.id}}>
+
+                                            <button type="submit" href="javascript:void(0);"
+                                                class="like-button{{post.id}}">
+                                                {% if request.user.profile not in post.liked.all %}
+                                                <span class="material-icons">thumb_up</span>
+                                                {% else %}
+                                                <span class="material-icons">thumb_down</span>
+                                                {% endif %}
+                                            </button>
+                                            <span class="like-count{{post.id}}">{{post.num_likes}}</span>
+                                        </form>
+                                    </div>
+                                    <div class="comment">
+                                        <a href=""><i class='bx bxs-comment-dots'></i></a>
+                                         <span class="comment-count">{{post.num_comments}} Comments</span>
+                                    </div>
+                                </div>
+
+                                <div class="comments">
+                                    {% if not post.comment_set.all %}
+                                    {% else %}
+                                    {% for comment in post.comment_set.all %}
                                     <div class="single-comment">
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="comment comment-box d-flex">
 
                                                     <img src="{{comment.user.avater.url}}" alt="demo">
-                                                    
+
                                                     <ul class="user-details">
                                                         <li>
                                                             <a class="username" href="#">{{comment.user.user}}</a>
@@ -116,18 +124,21 @@
                                                         <li>
                                                             <p>{{comment.created}}</p>
                                                         </li>
-                                                    </ul> 
+                                                    </ul>
 
                                                     <!-- Comment edit delete -->
 
                                                     <ul class="comment-edit">
                                                         {% ifequal request.user comment.user.user%}
-                                                            <li>
-                                                                <a href="{% url 'posts:commentEdit' comment.id %}"><span class="material-icons edit">create </span></a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{% url 'posts:commentDelete' comment.id post.id %}"><span class="material-icons delete">delete </span></a>
-                                                            </li>
+                                                        <li>
+                                                            <a href="{% url 'posts:commentEdit' comment.id %}"><span
+                                                                    class="material-icons edit">create </span></a>
+                                                        </li>
+                                                        <li>
+                                                            <a
+                                                                href="{% url 'posts:commentDelete' comment.id post.id %}"><span
+                                                                    class="material-icons delete">delete </span></a>
+                                                        </li>
                                                         {% endifequal %}
                                                     </ul>
                                                 </div>
@@ -135,28 +146,72 @@
                                             </div>
                                         </div>
                                     </div>
-                                {% endfor %}
-                            {% endif %}
-                        </div>
+                                    {% endfor %}
+                                    {% endif %}
+                                </div>
 
-                        <div class="comment-field">
-                            <form action="" method="POST">
-                                {% csrf_token %}
-                                {{comment_form}}
-                                {% if request.user.is_authenticated %}
-                                    <div class="comment-img">
-                                        <img src="{{request.user.profile.avater.url}}" alt="demo">
-                                    </div>
-                                {% endif %}
-                                <input type="hidden" name='post_id' value={{post.id}}>
-                                <button type="submit" class="send-btn" name="comment_submit_form"><i
-                                        class='bx bxs-send'></i></button>
-                            </form>
+                                <div class="comment-field">
+                                    <h3 class="comment-heading">Leave a comment</h3>
+                                    <form action="" method="POST">
+                                        {% csrf_token %}
+                                        {{comment_form}}
+                                        {% if request.user.is_authenticated %}
+                                        {% endif %}
+                                        <input type="hidden" name='post_id' value={{post.id}}>
+                                        <button type="submit" class="box-btn mt-3" name="comment_submit_form">Submit</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% comment %} {% endfor %} {% endcomment %}
+                </div>
+            </div>
+            <div class="col-lg-4 ptb-50m">
+                <div class="main-post-area">
+                    
+                    <div class="state-inner">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="single-state">
+                                    <span style="color: #2d6ff7;">Post</span>
+                                    <h4>99</h4>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="single-state">
+                                    <span style="color: tomato;">Blog</span>
+                                    <h4>99</h4>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="single-state">
+                                    <span style="color: #1fae5b;">User</span>
+                                    <h4>99</h4>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="single-state">
+                                    <span style="color: #2d6ff7;">Answer</span>
+                                    <h4>99</h4>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <div class="related-post">
+                    <div class="header">
+                        <h3><span class="material-icons">help</span>Related Questions</h3>
+                    </div>
+
+                    {% for posts in all_posts %}
+                        <!-- <img src="{{post.author.avater.url}}" alt="demo"> -->
+                        <a href="{% url 'posts:postsDetails' post.pk %}">{{posts.heading}}</a>
+                    {% endfor %}
+
+                </div>
             </div>
-            {% comment %} {% endfor %} {% endcomment %}
         </div>
     </div>
 </div>

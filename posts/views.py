@@ -220,21 +220,18 @@ def PostDetails(request,pk):
 
 
 #///////////////////////////  Comment section ////////////////////////////////////
+
 def commentEdit(request,pk):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            print("0000000000111")
             try:
                 obj = Comment.objects.get(pk=pk)
-                print("000000000022")
                 if obj.user.user == request.user:
-                    print("000000000000333")
                     form = CommentModelForm(request.POST,instance=obj)
                     if form.is_valid():
                         form.save()
                         obj = form.save()
                         obj.save()
-                        print("000000000000444")
                         context = {
                             'form':form,
                         }

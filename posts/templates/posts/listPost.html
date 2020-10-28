@@ -103,7 +103,7 @@
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-12">
                                     <div class="post-content">
-                                        <h2>{{post.heading}}</h2>
+                                       <a class="post-content-head" href="{% url 'posts:postsDetails' post.pk %}"><h2>{{post.heading}}</h2></a>
                                         {% if post.link %}
                                             <p class="p-link">Problem Link: <a target="_blank"
                                                 href="{{post.link}}">{{post.link}}</a></p>
@@ -137,17 +137,15 @@
                                         </div>
                                         <div class="comment">
                                             <a href=""><i class='bx bxs-comment-dots'></i></a>
-                                            <!--<span class="comment-count">{{post.num_comments}} Comments</span> -->
-                                            <span class="comment-count">{{post.num_comments}} Comments</span>
+                                             <span class="comment-count">{{post.num_comments}} Comments</span>
                                         </div>
                                         <div class="comment-count">
-                                            <a href="{% url 'posts:postsDetails' post.pk %}">See more</a>
+                                            <a class="box-btn" href="{% url 'posts:postsDetails' post.pk %}">Reply</a>
                                         </div>
                                     </div>
         
                                     {% comment %} <div class="comments">
                                         {% if not post.comment_set.all %}
-                                        <!-- <h6>No Comments Yet</h6> -->
                                         {% else %}
                                         {% for comment in post.comment_set.all %}
                                         <div class="single-comment">

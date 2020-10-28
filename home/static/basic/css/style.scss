@@ -1243,6 +1243,7 @@ Home Post Area Css
         box-shadow: $box-shadow;
         border-radius: 2px;
         margin-bottom: 30px;
+        transition: $transition;
         .profile {
             margin-bottom: 20px;
             img {
@@ -1281,6 +1282,19 @@ Home Post Area Css
             .show-read-more {
                 font-size: 17px;
                 margin-bottom: 15px;
+                white-space: pre-wrap;
+            }
+            .post-content-head {
+                position: relative;
+                z-index: 1;
+                transition: $transition;
+                h2 {
+                    font-size: 26px;
+                    margin-bottom: 15px;
+                    position: relative;
+                    z-index: 1;
+                    transition: $transition;
+                }
             }
         }
 
@@ -1392,6 +1406,10 @@ Home Post Area Css
                     margin-left: 5px;
                 }
             }
+            .box-btn {
+                font-size: 15px;
+                padding: 9px 20px;
+            }
         }
         .post-comment {
             position: relative;
@@ -1411,9 +1429,6 @@ Home Post Area Css
             position: relative;
             border-bottom: 1px solid #eeeeee;
             padding: 15px 0;
-            &:last-child {
-                border-bottom: 0;
-            }
 
             .comment {
                 img {
@@ -1541,6 +1556,16 @@ Home Post Area Css
                 }
             }
         }
+        &:hover {
+            .post-content-head {
+                h2 {
+                    color: tomato;
+                    &::before {
+                        width: 100%;
+                    }
+                }
+            }
+        }
     }
     .like-btn {
         background: transparent;
@@ -1564,8 +1589,8 @@ Home Post Area Css
     input#id_body {
         position: relative;
         border-radius: 30px;
-        height: 45px;
-        width: 91%;
+        height: 250px;
+        width: 100%;
         margin: 0 0 0 auto;
     }
     .send-btn {
@@ -1591,19 +1616,26 @@ Home Post Area Css
     }
     .emojionearea.form-control.emojionearea-inline {
         position: relative;
-        border-radius: 30px;
-        height: 45px;
-        width: 91%;
+        border-radius: 3px;
+        height: 250px;
+        width: 100%;
         margin: 0 0 0 auto;
     }
     .emojionearea.emojionearea-inline > .emojionearea-editor {
         padding: 11px 10px;
+        height: 250px;
+        min-height: 250px;
+        white-space: pre-wrap;
     }
 
     .emojionearea.emojionearea-inline > .emojionearea-button {
         position: absolute;
         top: 9px;
-        right: 47px;
+        right: 10px;
+    }
+    .comment-heading {
+        padding: 15px 0;
+        margin-bottom: 0;
     }
 }
 
@@ -1759,40 +1791,65 @@ Profile Content Area Style
 
 .list-post-area {
     position: relative;
+}
+.post-banner-area {
+    position: relative;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 330px;
+    background: url(../images/banner.jpg);
+    z-index: 1;
 
-    .post-banner-area {
-        position: relative;
-        background-position: center center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        height: 330px;
-        background: url(../images/banner.jpg);
-        z-index: 1;
+    &::before {
+        position: absolute;
+        content: "";
+        background-color: #000;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0.7;
+        z-index: -1;
+    }
 
-        &::before {
-            position: absolute;
-            content: "";
-            background-color: #000;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            opacity: 0.7;
-            z-index: -1;
+    .banner-tittle {
+        margin-top: 65px;
+        h1 {
+            color: tomato;
         }
+        p {
+            color: $white-color;
+        }
+    }
+    .head-list {
+        position: relative;
+        li {
+            display: inline-block;
+            position: relative;
+            font-size: 15px;
+            font-weight: 500;
+            padding-right: 15px;
+            padding-left: 15px;
+            color: #ffffff;
 
-        .banner-tittle {
-            margin-top: 65px;
-            h1 {
-                color: tomato;
-            }
-            p {
-                color: $white-color;
+            a {
+                position: relative;
+
+                &::before {
+                    content: "";
+                    position: absolute;
+                    top: 12px;
+                    right: -22px;
+                    background-color: #70a1ff;
+                    width: 8px;
+                    height: 8px;
+                    animation: rotaed360 6s infinite linear;
+                }
             }
         }
     }
 }
-
 .edit-comment {
     padding: 40px;
     max-width: 540px;
@@ -1845,6 +1902,9 @@ Profile Content Area Style
                     border-radius: 50%;
                     border: 1px solid tomato;
                     padding: 5px;
+                    width: 80px;
+                    height: 80px;
+                    object-fit: cover;
                 }
             }
             .review-content {
@@ -1856,6 +1916,7 @@ Profile Content Area Style
                     font-size: 19px;
                     margin-bottom: 0;
                     color: tomato;
+                    text-transform: capitalize;
                 }
                 span {
                     font-size: 13px;
@@ -1916,6 +1977,7 @@ Profile Content Area Style
             text-align: center;
             border: 1px solid #ddd;
             padding: 5px;
+            margin-bottom: 30px;
 
             &::before {
                 content: "";
@@ -2043,7 +2105,7 @@ Profile Content Area Style
                     background-color: $heading-color;
                 }
             }
-            .info{
+            .info {
                 .title {
                     margin-bottom: 0;
                     line-height: 1.5;
@@ -2057,13 +2119,29 @@ Profile Content Area Style
                         }
                     }
                 }
-                span{
+                span {
                     font-size: 12px;
                     color: #929292;
                     display: block;
                     margin-bottom: 1px;
                 }
             }
+        }
+    }
+}
+
+// post details
+
+.post-details-area {
+    position: relative;
+    .post-banner-area {
+        .banner-tittle {
+            text-align: center;
+            h1 {
+            }
+        }
+        ul {
+            text-align: center;
         }
     }
 }

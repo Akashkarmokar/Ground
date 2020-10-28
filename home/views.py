@@ -16,7 +16,7 @@ def home(request):
         context = {
             'feedbacks':obj,
         }
-        return render(request,'home/home.html')
+        return render(request,'home/home.html',context)
 
 
 def feedback(request):
