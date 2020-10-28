@@ -20,6 +20,7 @@ class Profile(models.Model):
     updated = models.DateTimeField(auto_now=True)
     created =models.DateTimeField(auto_now_add=True)
 
+
     def get_friends(self):
         return self.friends.all()
     
@@ -83,6 +84,7 @@ class Relationship(models.Model):
     status = models.CharField(max_length=8,choices=STATUS_CHOICES)
     updated = models.DateTimeField(auto_now=True)
     created =models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return f"{self.sender}-{self.receiver}-{self.status}"

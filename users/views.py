@@ -2,7 +2,7 @@ from django.shortcuts import render,HttpResponseRedirect,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from .forms import SignUpForm,LoginForm,ProfileModelForm
-from .models import Profile
+from .models import Profile,Relationship
 from posts.models import Post
 
 # Create your views here.
@@ -69,3 +69,6 @@ def user_logout(request):
     logout(request)
     messages.success(request,'Logout Successfully!!')
     return HttpResponseRedirect('/')
+
+
+    

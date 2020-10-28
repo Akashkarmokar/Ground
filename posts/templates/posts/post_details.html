@@ -130,15 +130,12 @@
 
                                                     <ul class="comment-edit">
                                                         {% ifequal request.user comment.user.user%}
-                                                        <li>
-                                                            <a href="{% url 'posts:commentEdit' comment.id %}"><span
-                                                                    class="material-icons edit">create </span></a>
-                                                        </li>
-                                                        <li>
-                                                            <a
-                                                                href="{% url 'posts:commentDelete' comment.id post.id %}"><span
-                                                                    class="material-icons delete">delete </span></a>
-                                                        </li>
+                                                            <li>
+                                                                <a href="{% url 'posts:commentEdit' comment.id post.id %}"><span class="material-icons edit">create </span></a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{% url 'posts:commentDelete' comment.id post.id %}"><span class="material-icons delete">delete </span></a>
+                                                            </li>
                                                         {% endifequal %}
                                                     </ul>
                                                 </div>
