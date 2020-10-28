@@ -71,12 +71,4 @@ def user_logout(request):
     return HttpResponseRedirect('/')
 
 
-
-def invites_received_view(request):
-    profile = Profile.objects.get(user=request.user)
-    qs = Relationship.objects.invitations_received(profile)
-
-    context = {
-        'qs':qs,
-    }
-    return render(request,'users/myInvites.html',context)
+    
