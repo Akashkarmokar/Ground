@@ -4,7 +4,7 @@ from .models import Post,Comment,Like
 
 class Postadmin(admin.ModelAdmin):
 
-    list_display = ('content' , 'post_photo')
+    list_display = ('content' , 'image')
     list_per_page = 5
     list_max_show_all = 50
 

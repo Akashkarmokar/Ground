@@ -7,6 +7,8 @@ from users.models import Profile
 
 # Post model 
 class Post(models.Model):
+    heading = models.CharField(max_length=50)
+    link = models.CharField(max_length=150)
     content = models.TextField()
     image = models.ImageField(upload_to='posts',validators=[FileExtensionValidator(['png','jpg','jpeg'])],blank=True)
     liked = models.ManyToManyField(Profile,blank=True,related_name='likes')
@@ -25,8 +27,8 @@ class Post(models.Model):
     def num_comments(self):
         return self.comment_set.all().count()
 
-    def post_photo(self):
-        return mark_safe('<img src="{}" width="70"/>'.format(self.image.url))
+    # def post_photo(self):
+    #     return mark_safe('<img src="{}" width="70"/>'.format(self.image.url))
 
     class Meta:
         ordering = ('-created',)

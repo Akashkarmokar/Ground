@@ -3,11 +3,13 @@ from .models import Post,Comment
 
 
 class PostModelForm(forms.ModelForm):
+    heading = forms.CharField(label='',widget=forms.Textarea(attrs={'rows':'3','placeholder':'Heading...'}))
+    link = forms.CharField(required=False,label='',widget=forms.Textarea(attrs={'rows':'3','placeholder':'Your Problem Link'}))
     content = forms.CharField(label='',widget=forms.Textarea(attrs={'rows':'3','placeholder':'What is on your mind...'}))
     image = forms.ImageField(required=False,label='',widget=forms.FileInput(attrs={'class':'file-upload-field','id':'actual-btn'}))
     class Meta:
         model = Post
-        fields = ['content','image']
+        fields = ['heading','link','content','image']
 
 
 class CommentModelForm(forms.ModelForm):
