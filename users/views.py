@@ -9,26 +9,29 @@ from posts.models import Post
 
 
 #profile function 
-def profile(request):
-    profile = Profile.objects.get(user=request.user)
-    form = ProfileModelForm(request.POST or None, request.FILES or None , instance=profile)
-    
-    update_confirm = False
+def profile(request,profileId):
+    if request.user.is_authenticated:
+        # profile = Profile.objects.get(user=request.user)
+        profile = Profile.objects.get(id=profileId)
+        form = ProfileModelForm(request.POST or None, request.FILES or None , instance=profile)
+        posts = Post.objects.filter(author=profile)
+        # print(posts)
+        update_confirm = False
 
-    if request.method == "POST":
-        if form.is_valid():
-            form.save()
-            update_confirm = True
+        if request.method == "POST":
+            if form.is_valid():
+                form.save()
+                update_confirm = True
 
-
-
-
-    context = {
-        'profile':profile,
-        'form':form,
-        'update_confirm':update_confirm,
-    }
-    return render(request,'users/profile.html',context)
+        context = {
+            'profile':profile,
+            'form':form,
+            'update_confirm':update_confirm,
+            'posts':posts,
+        }
+        return render(request,'users/profile.html',context)
+    else:
+        return redirect('users:login')
 
 #signup function
 def signup(request):
@@ -71,4 +74,3 @@ def user_logout(request):
     return HttpResponseRedirect('/')
 
 
-    

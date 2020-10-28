@@ -42,7 +42,7 @@
                                     <img src="{{post.author.avater.url}}" alt="demo">
                                     <ul class="user-details">
                                         <li>
-                                            <a class="username" href="#">{{ post.author.user }}</a>
+                                            <a class="username" href="{% url 'users:profile' post.author.user.profile.id %}">{{ post.author.user }}</a>
                                         </li>
                                         <li>
                                             <p>{{ post.created|timesince}} ago</p>

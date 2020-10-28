@@ -27,9 +27,11 @@
                     </div>
 
                     <!-- Edit Prfile -->
-                    <button type="button" class="box-btn w-100" data-toggle="modal" data-target="#exampleModalCenter">
-                        Edit
-                    </button>
+                    {% if request.user.profile.id == profile.id %}
+                        <button type="button" class="box-btn w-100" data-toggle="modal" data-target="#exampleModalCenter">
+                            Edit
+                        </button>
+                    {% endif %}
                     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-md modal-dialog modal-dialog-centered" role="document">
@@ -132,7 +134,17 @@
                     <div class="tabs_item">
                         <div class="row">
                             <div class="col-lg-12">
-                                <h2>hello</h2>
+                                <h2 class="mt-2"> All posts</h2>
+                                {% if posts %}
+                                    {% for post in posts %}
+                                        <div class='mt-3'>
+                                           <p>{{post.heading}}</p> 
+                                           <p>{{post.content|truncatewords:50}}</p>
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    <h3>User Has no Post</h3>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
