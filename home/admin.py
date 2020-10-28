@@ -4,6 +4,6 @@ from .models import Feedback
 # Register your models here.
 @admin.register(Feedback)
 class FeedbackAdmin(admin.ModelAdmin):
-    list_display = ['content','name','email','mobileNo','created',]
+    list_display = ['content','created','author']
 
 

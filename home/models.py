@@ -1,12 +1,13 @@
 from django.db import models
-
+from users.models import Profile
 # Create your models here.
 class Feedback(models.Model):
-    name = models.CharField(max_length=70,blank=False)
-    email = models.EmailField(max_length=200,blank=False)
-    mobileNo = models.CharField(max_length=20,blank=False)
-    created = models.DateTimeField(auto_now_add=True)
     content = models.TextField(blank=False)
+    created = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(Profile,on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.content[:20])
 
     class Meta:
         ordering = ('-created',)

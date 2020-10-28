@@ -42,6 +42,16 @@
                         </form>
                     </div>
                 </div>
+                {% for feedback in feedbacks %}
+                    <div class="col-12">
+                        <div class="signup-form">
+                            <img src="{{feedback.author.avater.url}}" alt="demo">
+                            <h3>{{feedback.author}}</h3>
+                            <h3>{{feedback.created}}</h3>
+                            <h3>{{feedback.content}}</h3>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </section>
