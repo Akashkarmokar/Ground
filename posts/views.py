@@ -9,6 +9,8 @@ from .forms import PostModelForm,CommentModelForm
 from django.contrib import messages
 from django.views.generic import UpdateView,DeleteView
 from django.urls import reverse_lazy ,reverse
+from django.contrib.auth.models import User
+from home.models import Feedback
 
 # Create your views here.
 
@@ -40,11 +42,20 @@ def list_all_post_comments(request):
 
             post_form = PostModelForm()
             comment_form = CommentModelForm()
+
+
+            total_post_num = all_posts.count()
+            total_user_num = User.objects.all().count()
+            total_feedback_num = Feedback.objects.all().count()
+
             context={
                 'all_posts':all_posts,
                 'profile':profile,
                 'post_form':post_form,
                 'comment_form':comment_form,
+                'total_post':total_post_num,
+                'total_user':total_user_num,
+                'total_feedback':total_feedback_num,
             }
             return render(request,'posts/listPost.html',context)
         else:
@@ -54,10 +65,18 @@ def list_all_post_comments(request):
         all_posts = Post.objects.all()
         post_form = PostModelForm()
         comment_form = CommentModelForm()
+
+
+        total_post_num = all_posts.count()
+        total_user_num = User.objects.all().count()
+        total_feedback_num = Feedback.objects.all().count()
         context={
             'all_posts':all_posts,
             'post_form':post_form,
             'comment_form':comment_form,
+            'total_post':total_post_num,
+            'total_user':total_user_num,
+            'total_feedback':total_feedback_num,
         }
         return render(request,'posts/listPost.html',context)
 

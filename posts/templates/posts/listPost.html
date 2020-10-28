@@ -127,9 +127,9 @@
         
                                                 <button type="submit" href="javascript:void(0);" class="like-button{{post.id}}">
                                                     {% if request.user.profile not in post.liked.all %}
-                                                    <span class="material-icons">thumb_up</span>
+                                                        <span class="material-icons">thumb_up</span>
                                                     {% else %}
-                                                    <span class="material-icons">thumb_down</span>
+                                                        <span class="material-icons">thumb_down</span>
                                                     {% endif %}
                                                 </button>
                                                 <span class="like-count{{post.id}}">{{post.num_likes}}</span>
@@ -140,7 +140,7 @@
                                              <span class="comment-count">{{post.num_comments}} Comments</span>
                                         </div>
                                         <div class="comment-count">
-                                            <a class="box-btn" href="{% url 'posts:postsDetails' post.pk %}">Reply</a>
+                                            <a class="box-btn" href="{% url 'posts:postsDetails' post.pk %}">More</a>
                                         </div>
                                     </div>
         
@@ -246,7 +246,7 @@
                             <div class="col-6">
                                 <div class="single-state">
                                     <span style="color: #2d6ff7;">Post</span>
-                                    <h4>99</h4>
+                                    <h4>{{total_post}}</h4>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -258,13 +258,13 @@
                             <div class="col-6">
                                 <div class="single-state">
                                     <span style="color: #1fae5b;">User</span>
-                                    <h4>99</h4>
+                                    <h4>{{total_user}}</h4>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="single-state">
-                                    <span style="color: #2d6ff7;">Answer</span>
-                                    <h4>99</h4>
+                                    <span style="color: #2d6ff7;">Feedback</span>
+                                    <h4>{{total_feedback}}</h4>
                                 </div>
                             </div>
                         </div>

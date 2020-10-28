@@ -33,6 +33,9 @@ class Profile(models.Model):
     def get_all_authors_posts(self):
         return self.posts.all()
 
+    def get_pastebin_no(self):
+        return self.pastebin.all().count()
+
     def get_likes_given_no(self):
         likes = self.like_set.all()
         total_liked = 0
