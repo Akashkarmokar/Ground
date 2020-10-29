@@ -6,7 +6,6 @@ from django.contrib import messages
 from users.forms import LoginForm
 from users.models import Profile
 from .forms import PostModelForm,CommentModelForm
-from django.contrib import messages
 from django.views.generic import UpdateView,DeleteView
 from django.urls import reverse_lazy ,reverse
 from django.contrib.auth.models import User
@@ -30,7 +29,6 @@ def list_all_post_comments(request):
                     instance =  post_form.save(commit=False)
                     instance.author = profile
                     instance.save()
-                    messages.success(request,'Your Post successfully posted')
             if 'comment_submit_form' in request.POST:
                 comment_form = CommentModelForm(request.POST or None)
                 if comment_form.is_valid():
@@ -38,7 +36,6 @@ def list_all_post_comments(request):
                     instance.user = profile
                     instance.post = Post.objects.get(id = request.POST.get('post_id'))
                     instance.save()
-                    messages.success(request,'Comment Added')
 
             post_form = PostModelForm()
             comment_form = CommentModelForm()
@@ -59,7 +56,6 @@ def list_all_post_comments(request):
             }
             return render(request,'posts/listPost.html',context)
         else:
-            messages.info(request,"Login First.......!")
             return HttpResponseRedirect('/user/login')
     else:
         all_posts = Post.objects.all()
@@ -109,7 +105,6 @@ def like_comment_post(request):
         return redirect('posts:allposts')
     
     else:
-        messages.success(request,"Login First ...!!")
         return HttpResponseRedirect('/user/login/')
 
 
@@ -121,12 +116,10 @@ def PostDelete(request,pk):
                 obj.delete()
                 return redirect('posts:allposts')
             else:
-                messages.warning(request,"You are not the author of this post")
                 return redirect('posts:allposts')
         except Post.DoesNotExist:
             raise Http404("Your link is Wrong or it is not available.Here") 
     else:
-        messages.info(request,"Login First............!")
         return redirect('users:login')
 
 
@@ -146,7 +139,6 @@ def PostUpdate(request,pk):
                         }
                         return redirect(reverse('posts:postsDetails',args=pk))
                 else:
-                    messages.warning(request,"You are not the author of this post")
                     return redirect('posts:allposts')
             except Post.DoesNotExist:
                 raise Http404("Your link is Wrong or it is not available.Here")
@@ -161,12 +153,10 @@ def PostUpdate(request,pk):
                     }
                     return render(request,'posts/update.html',context)
                 else:
-                    messages.warning(request,"You are not the author of this post")
                     return redirect('posts:allposts')
             except Post.DoesNotExist:
                 raise Http404("Your link is Wrong or it is not available.Here") 
     else:
-        messages.info(request,"Login First............!")
         return redirect('users:login')
 
 
@@ -181,7 +171,6 @@ def PostDetails(request,pk):
                     instance.user = profile
                     instance.post = Post.objects.get(id = request.POST.get('post_id'))
                     instance.save()
-                    messages.success(request,'Comment Added')
                     obj = Post.objects.get(pk=pk)
                     comment_form = CommentModelForm()
                     context = {
@@ -190,7 +179,6 @@ def PostDetails(request,pk):
                     }
                     return render(request,'posts/post_details.html',context)
         else:
-            messages.info(request,"Login First............!")
             return redirect('users:login')
     else:
         obj = Post.objects.get(pk=pk)
@@ -223,7 +211,6 @@ def commentEdit(request,pk,postid):
                         }
                         return redirect(reverse('posts:postsDetails',args=postid))
                 else:
-                    messages.warning(request,"You are not the author of this post")
                     return redirect('posts:allposts')
             except Post.DoesNotExist:
                 raise Http404("Your link is Wrong or it is not available.Here")
@@ -238,12 +225,10 @@ def commentEdit(request,pk,postid):
                     }
                     return render(request,'posts/commentEdit.html',context)
                 else:
-                    messages.warning(request,"You are not the author of this post")
                     return redirect('posts:allposts')
             except Post.DoesNotExist:
                 raise Http404("Your link is Wrong or it is not available.Here") 
     else:
-        messages.info(request,"Login First............!")
         return redirect('users:login')
 
 
@@ -265,10 +250,8 @@ def commentDelete(request,pk,postid):
                 }
                 return redirect(reverse('posts:postsDetails',args=postid))
             else:
-                messages.warning(request,"You are not the author of this post")
                 return redirect('posts:allposts')
         except Comment.DoesNotExist:
             raise Http404("Your link is Wrong or it is not available.Here") 
     else:
-        messages.info(request,"Login First............!")
         return redirect('users:login')

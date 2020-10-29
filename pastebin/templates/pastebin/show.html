@@ -1,16 +1,6 @@
 {% extends 'home/base.html' %}
 {% load static %}
 {% block content %}
-{% if messages %}
-{% for msg in messages %}
-<div {% if msg.tags %} class="alert alert-success {{msg.tags}}  fade show" {% endif %}>
-    <strong>{{msg}}</strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-            aria-hidden="true">&times;</span></button>
-</div>
-{% endfor %}
-{% endif %}
-
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-12 ptb-50">

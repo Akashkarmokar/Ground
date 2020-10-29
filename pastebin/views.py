@@ -44,7 +44,6 @@ def bin(request):
                 return render(request,'pastebin/show.html',context)
                 
         else:
-            messages.success(request,"Sign In to continue!!!")
             return HttpResponseRedirect('/user/login/')
             
     else :   
@@ -85,7 +84,6 @@ def delete(request,id):
             return render(request,'pastebin/show.html',data)
     else :
         fm = pasteFm()
-        messages.info(request,"Code Deleted successfully!!!")
         data = {'form':fm}
         db_rw = Pastebindb.objects.get(pk=id)
         db_rw.delete()
@@ -100,7 +98,6 @@ def update_post(request,up_id):
             fm.save()
             user_data = fm.save()
             user_data.save()
-            messages.info(request,"Your Code is updated successfully!!")
             data={'db_row':user_data}
             return render(request,'pastebin/show.html',data)
     else :
