@@ -141,3 +141,12 @@ STATIC_ROOT = os.path.join((BASE_DIR),"static_cdn","static_root")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join((BASE_DIR),"static_cdn","media_root")
+
+
+#SMTP Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'ground.mu@gmail.com'
+EMAIL_HOST_PASSWORD = 'ground1234'
