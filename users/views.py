@@ -1,9 +1,11 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect
-from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth import authenticate,login,logout,update_session_auth_hash
+from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm
 from django.contrib import messages
 from .forms import SignUpForm,LoginForm,ProfileModelForm
 from .models import Profile,Relationship
 from posts.models import Post
+from django.urls import reverse
 
 # Create your views here.
 
@@ -74,3 +76,17 @@ def user_logout(request):
     return HttpResponseRedirect('/')
 
 
+#user Password Change
+def changepass(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user,data=request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request,form.user)
+            return redirect('posts:allposts')
+    else:
+        form = PasswordChangeForm(user=request.user)
+        context = {
+            'form':form,
+        }
+        return render(request,'users/changepass.html',context)
