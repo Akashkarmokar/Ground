@@ -3,166 +3,194 @@
 {% load crispy_forms_tags %}
 {% block content %}
 {% if update_confirm %}
+
 <div class="alert alert-success alert-dismissible fade show">
     <strong>Your Profile is updated</strong>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
             aria-hidden="true">&times;</span></button>
 </div>
 {% endif %}
-<div class="container">
-    <div class="row">
-        <div class="user-profile col-lg-8 m-auto col-md-8 ptb-50">
-            <h2 class="text-center">Welcome, {{profile.first_name}}</h2>
-            <p class="pro-msg">You are Almost Done</p>
 
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="bio">
-                        <div class="bio-img">
-                            <img class="boder-gradient" src="{{profile.avater.url}}" alt="profile">
-                        </div>
-                        <hr>
-                        <p class="text-center"> {{profile.bio}} </p>
-                        <hr>
+
+
+
+<section class="user-profile">
+    <div class="user-profile-banner"></div>
+    <div class="container">
+        <div class="row profile-info">
+            <div class="col-lg-4">
+                <div class="profile-social">
+                    <div class="profile-photo">
+                        <img class="boder-gradient" src="{{profile.avater.url}}" alt="profile">
                     </div>
-
-                    <!-- Edit Prfile -->
                     {% if request.user.profile.id == profile.id %}
-                        <button type="button" class="box-btn w-100" data-toggle="modal" data-target="#exampleModalCenter">
-                            Edit
-                        </button>
+                    <button type="button" class="edit-btn box-btn" data-toggle="modal" data-target="#exampleModalCenter">
+                        <span class="material-icons">create</span>
+                    </button>
                     {% endif %}
-                    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                        <div class="modal-md modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h3>Update Profile Info</h3>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="" method="POST" enctype='multipart/form-data'>
-                                        {% csrf_token %}
-                                        <div class="form-group">
-                                            {{form|crispy}}
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Close</button>
-                                            <button type="submit" class="box-btn">Save changes</button>
-                                        </div>
-                                    </form>
-                                </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="user-details">
+                    <h2>{{profile.first_name}}</h2>
+                    <p> {{profile.bio}} </p>
+                    <ul class="social">
+                        <li>
+                            <a href="#" target="_blank"><i class='bx bxl-facebook'></i></a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank"><i class='bx bxl-twitter'></i></a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank"><i class='bx bxl-instagram'></i></a>
+                        </li>
+                        <li>
+                            <a href="#" target="_blank"><i class='bx bxl-pinterest'></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-md modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Update Profile Info</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST" enctype='multipart/form-data'>
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        {{form|crispy}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="submit" class="box-btn">Save changes</button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-
-                </div>
-
-                <div class="col-lg-7">
-                    <table class="table">
-                        <tbody>
-                            <tr>
-                                <td>User Name:</td>
-                                <td>{{profile.user}}</td>
-                            </tr>
-                            <tr>
-                                <td>First Name:</td>
-                                <td>{{profile.first_name}}</td>
-                            </tr>
-                            <tr>
-                                <td>Last Name:</td>
-                                <td>{{profile.last_name}}</td>
-                            </tr>
-                            <tr>
-                                <td>Email:</td>
-                                <td>{{profile.email}}</td>
-                            </tr>
-                            <tr>
-                                <td>Followers:</td>
-                                <td>{{profile.get_friends_no}}</td>
-                            </tr>
-                            <tr>
-                                <td>Followers List:</td>
-                                <td>
-                                    <ul>
-                                        {% for friend in profile.get_friends %}
-                                        <li><a href="">{{friend}}</a></li>
-                                        {% endfor %}
-                                    </ul>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Posts:</td>
-                                <td>{{profile.get_posts_no}}</td>
-                            </tr>
-                            <tr>
-                                <td>Pastebin:</td>
-                                <td>{{profile.get_pastebin_no}}</td>
-                            </tr>
-                            <tr>
-                                <td>Total Likes Given:</td>
-                                <td>{{profile.get_likes_given_no}}</td>
-                            </tr>
-                            <tr>
-                                <td>Total Likes Received:</td>
-                                <td>{{profile.get_likes_received_no}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
             </div>
-            <hr>
         </div>
     </div>
-
-    <!-- Start Profile Content Area -->
-    <section class="profile-content-area">
-        <div class="container">
-            <div class="tab quote-list-tab">
-                <ul class="tabs">
-                    <li>
-                        <a href="#">
-                            Posts
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            Blogs
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab_content">
-                    <div class="tabs_item">
+</section>
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="user-profile-content">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="state-inner">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <h2 class="mt-2"> All posts</h2>
-                                {% if posts %}
-                                    {% for post in posts %}
-                                        <div class='mt-3'>
-                                           <p>{{post.heading}}</p> 
-                                           <p>{{post.content|truncatewords:50}}</p>
-                                        </div>
-                                    {% endfor %}
-                                {% else %}
-                                    <h3>User Has no Post</h3>
-                                {% endif %}
+                            <div class="col-6">
+                                <div class="single-state">
+                                    <span style="color: #2d6ff7;">Post</span>
+                                    <h4>{{profile.get_posts_no}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="single-state">
+                                    <span style="color: tomato;">Blog</span>
+                                    <h4>{{profile.get_posts_no}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="single-state">
+                                    <span style="color: #1fae5b;">Pastebin</span>
+                                    <h4>{{profile.get_pastebin_no}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="single-state">
+                                    <span style="color: #2d6ff7;">Feedback</span>
+                                    <h4>0</h4>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="tabs_item">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <h2>hello from blog</h2>
+                </div>
+                <div class="col-lg-8">
+                    <div class="profile-content-area">
+                        <div class="container">
+                            <div class="tab quote-list-tab">
+                                <ul class="tabs">
+                                    <li>
+                                        <a href="#">
+                                            Posts
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            Blogs
+                                        </a>
+                                    </li>
+                                </ul>
+                                <div class="tab_content">
+                                    <div class="tabs_item">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                {% if posts %}
+                                                {% for post in posts %}
+                                                <div class="tab-content">
+                                                    <div class="post-avater">
+                                                        <img src="{{post.author.avater.url}}" alt="demo">
+                                                    </div>
+                                                    <div class='single-user-post'>
+                                                        <a href="">
+                                                            <h3>{{post.heading}}</h3>
+                                                        </a>
+                                                        <p>{{post.content|truncatewords:50}}</p>
+                                                        <hr>
+                                                        <ul>
+                                                            <li>
+                                                                <p>{{post.num_comments}} comment</p>
+                                                            </li>
+                                                            <li>
+                                                                <a href="">See More</a>
+                                                            </li>
+                                                        </ul>
+                                                        <hr>
+                                                    </div>
+                                                </div>
+                                                {% endfor %}
+                                                {% else %}
+                                                <h3>User Has no Post</h3>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tabs_item">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <h2 class="mt-2"> All Blog</h2>
+                                                {% if posts %}
+                                                {% for post in posts %}
+                                                <div class='single-user-post'>
+                                                    <a href="">
+                                                        <h3>{{post.heading}}</h3>
+                                                    </a>
+                                                    <p>{{post.content|truncatewords:50}}</p>
+                                                    <p>{{post.num_comments}} comment</p>
+                                                </div>
+                                                {% endfor %}
+                                                {% else %}
+                                                <h3>User Has no Post</h3>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- End Profile Content Area -->
+    </div>
 </div>
 {% endblock content %}

@@ -32,7 +32,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-8 ptb-50m">
+            <div class="col-lg-10 m-auto col-md-8 ptb-50m">
                 <div class="home-post-area">
                     {% comment %} {% for post in all_posts %} {% endcomment %}
                     <div class="single-post">
@@ -162,51 +162,6 @@
                         </div>
                     </div>
                     {% comment %} {% endfor %} {% endcomment %}
-                </div>
-            </div>
-            <div class="col-lg-4 ptb-50m">
-                <div class="main-post-area">
-                    
-                    <div class="state-inner">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="single-state">
-                                    <span style="color: #2d6ff7;">Post</span>
-                                    <h4>99</h4>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="single-state">
-                                    <span style="color: tomato;">Blog</span>
-                                    <h4>99</h4>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="single-state">
-                                    <span style="color: #1fae5b;">User</span>
-                                    <h4>99</h4>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="single-state">
-                                    <span style="color: #2d6ff7;">Answer</span>
-                                    <h4>99</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="related-post">
-                    <div class="header">
-                        <h3><span class="material-icons">help</span>Related Questions</h3>
-                    </div>
-
-                    {% for posts in all_posts %}
-                        <!-- <img src="{{post.author.avater.url}}" alt="demo"> -->
-                        <a href="{% url 'posts:postsDetails' post.pk %}">{{posts.heading}}</a>
-                    {% endfor %}
-
                 </div>
             </div>
         </div>
