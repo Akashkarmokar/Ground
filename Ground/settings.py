@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'blog',
 
     'crispy_forms',
+    'ckeditor',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
