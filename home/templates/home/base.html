@@ -36,7 +36,12 @@
         {% block content %}
         {% endblock content %}
     </div>
-
+    
+    <a href="#" class="go-top">
+        <i class="bx bx-chevrons-up"></i>
+        <i class="bx bx-chevrons-up"></i>
+    </a>
+    
     <!-- jQuery Min JS -->
     <script src="{% static 'basic/js/jquery.js' %}"></script>
     <!-- Boostrap Js  -->
@@ -47,7 +52,7 @@
     <script src="{% static 'basic/js/jquery.meanmenu.js' %}"></script>
     <!-- Prism Js  -->
     <script src="{% static 'basic/js/prism.js' %}"></script>
-    <!-- Prism Js  -->
+    <!-- Box Icons Js  -->
     <script src="{% static 'basic/js/boxicons.js' %}"></script>
 
     <script src="{% static 'basic/js/emojionearea.min.js' %}"></script>
@@ -67,15 +72,7 @@
         })
 
 
-    </script>
-
-    <!-- <script>
-        $(document).ready(function () {
-            $(".comment").click(function () {
-                $(".comments").toggle();
-            });
-        });
-    </script> -->
+    </script>                                               
 
     <script>
         function replyFunction() {
@@ -152,23 +149,15 @@
         }
     </script>
 
-    <script>
+    <!-- <script>
         const actualBtn = document.getElementById('actual-btn');
         const fileChosen = document.getElementById('file-chosen');
         actualBtn.addEventListener('change', function () {
             fileChosen.textContent = this.files[0].name
         })
-    </script>
+    </script> -->
 
-    <script>
-        $(document).on("scroll", function () {
-            if ($(document).scrollTop() > 10) {
-                $(".main-nav").addClass("is-sticky ");
-            } else {
-                $(".main-nav").removeClass("is-sticky ");
-            }
-        });
-    </script>
+
 
     <script>
 
@@ -227,7 +216,7 @@
 
     <script>
         // Tabs
-        $('.tab ul.tabs').addClass('active').find('> li:eq(0)').addClass('current');
+        $('.tab ul.tabs').addClass('actives').find('> li:eq(0)').addClass('current');
         $('.tab ul.tabs li a').on('click', function (g) {
             var tab = $(this).closest('.tab'),
                 index = $(this).closest('li').index();
@@ -268,7 +257,18 @@
             }
         });
     </script>
+    
+    <script>
+    // Go to Top
 
+	$(window).on('scroll', function(){
+		var scrolled = $(window).scrollTop();
+		if (scrolled > 300) $('.go-top').addClass('goactive');
+		if (scrolled < 300) $('.go-top').removeClass('goactive');
+    });  
+
+    </script>
+    
 </body>
 
 </html>

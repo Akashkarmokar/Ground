@@ -24,11 +24,14 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.home,name="home_url"),
+    path('privecy/',views.privecy,name="privecy"),
+    path('terms_condition/',views.terms_condition,name="terms_condition"),
     path('blog/',include('blog.urls',namespace='blog')),
     path('feedback/',views.feedback,name='feedback'),
     path('pastebin/',include('pastebin.urls',namespace='pastebin')),
     path('user/',include('users.urls',namespace='users')),
     path('posts/',include('posts.urls',namespace='posts')),
+
 
 
     path('reset_password/',

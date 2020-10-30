@@ -260,6 +260,101 @@ textarea {
     }
 }
 
+/*
+Go Top Style*/
+
+.go-top{
+	position: fixed;
+	cursor: pointer;
+	top: 93%;
+	right: -10%;
+	background-color: $main-color;
+	z-index: 40;
+	width: 40px;
+	text-align: center;
+	height: 42px;
+	line-height: 42px;
+	opacity: 0;
+	visibility: hidden;
+    transition: .9s;
+	i {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 0;
+		right: 0;
+		margin: 0 auto;
+		color: $white-color;
+		transition: 0.5s;
+		font-size: 20px;
+		&:last-child {
+			opacity: 0;
+			visibility: hidden;
+			top: 60%;
+		}
+	}
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: -1;
+		background-color: $main-color;
+		opacity: 0;
+		visibility: hidden;
+		transition: 0.5s;
+	}
+	&:hover {
+		color: $white-color;
+        background-color: $heading-color;
+		&::before {
+			opacity: 1;
+			visibility: visible;
+		}
+		i {
+			&:first-child {
+				opacity: 0;
+				top: 0;
+				visibility: hidden;
+			}
+			&:last-child {
+				opacity: 1;
+				visibility: visible;
+				top: 50%;
+			}
+		}
+	}
+	&:focus {
+		color: $white-color;
+		&::before {
+			opacity: 1;
+			visibility: visible;
+		}
+		i {
+			&:first-child {
+				opacity: 0;
+				top: 0;
+				visibility: hidden;
+			}
+			&:last-child {
+				opacity: 1;
+				visibility: visible;
+				top: 50%;
+			}
+		}
+	}
+}
+.go-top.goactive {
+	transform: translateY(0);
+	opacity: 1;
+	visibility: visible;
+	right: 2%;
+    top: 93%;
+}
+
+
 /** Section tittle Css **/
 .section-title {
     position: relative;
@@ -398,7 +493,7 @@ Navbar Area Css
                         &:hover,
                         &:focus,
                         &.active {
-                            color: #70a1ff;
+                            color: tomato;
                         }
                         i {
                             font-size: 16px;
@@ -410,7 +505,7 @@ Navbar Area Css
                     &:hover,
                     &.active {
                         a {
-                            color: #70a1ff;
+                            color: tomato;
                         }
                     }
                     .dropdown-menu {
@@ -596,6 +691,16 @@ img.nav-profile-img {
                 }
             }
         }
+    }
+    .active::before {
+        position: absolute;
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: tomato;
+        top: 11px;
+        left: -5px;
     }
 }
 
@@ -807,11 +912,9 @@ Footer Area Css
 .footer-area {
     position: relative;
     overflow: hidden;
-    background: #09101f;
-    background-size: cover;
-    background-position: center;
+    background: #1a1e25;
     z-index: 1;
-    padding-top: 80px;
+    padding-top: 60px;
 
     .content {
         margin-bottom: 30px;
@@ -901,11 +1004,49 @@ Footer Area Css
         }
     }
     .copy-area {
-        margin-top: 70px;
+        margin-top: 40px;
         padding: 20px 0;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         p {
             color: #fff;
+        }
+    }
+}
+.footer-area-2 {
+    position: relative;
+    background: #1a1e25;
+    z-index: 1;
+    .foot-img {
+        a {
+            img {
+                padding: 20px 0;
+            }
+        }
+    }
+    p {
+        color: #868c96;
+        margin-bottom: 3px;
+    }
+    .copy-area {
+        margin-top: 11px;
+        padding: 20px 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        p {
+            color: #868c96;
+        }
+    }
+    .privecy {
+        a {
+            color: #cccc;
+            text-decoration: underline;
+            margin-bottom: 4px;
+            &:hover {
+                color: tomato;
+            }
+        }
+        span {
+            padding: 0 3px;
+            color: #868c96 !important;
         }
     }
 }
@@ -915,6 +1056,7 @@ Pastebin Area Css
 ======================================================*/
 .pastbin-area {
     position: relative;
+    padding-bottom: 80px;
     .single-pastbin {
         margin-top: 30px;
     }
@@ -1579,7 +1721,7 @@ Home Post Area Css
                 background-color: #fff;
                 min-width: 140px;
                 box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-                z-index: 1;
+                z-index: 5;
                 transition: 0.3s;
 
                 a {
@@ -1904,46 +2046,48 @@ Profile Content Area Style
     position: relative;
     padding: 10px;
     box-shadow: $box-shadow;
-    .modal-header {
-        position: absolute;
-        right: -7px;
-        border: 0;
-        z-index: 1;
-        top: -15px;
-    }
-    .close {
-        font-size: 2rem !important;
-    }
-
-    .state-inner {
-        position: relative;
-        margin-top: 30px;
-        .row {
-            margin: 0;
+    .main-post-area-content {
+        .modal-header {
+            position: absolute;
+            right: -7px;
+            border: 0;
+            z-index: 1;
+            top: -15px;
         }
-        .single-state {
+        .close {
+            font-size: 2rem !important;
+        }
+
+        .state-inner {
             position: relative;
-            text-align: center;
-            border: 1px solid #ddd;
-            padding: 5px;
-            margin-bottom: 30px;
-
-            &::before {
-                content: "";
-                position: absolute;
-                left: 0;
-                top: 13px;
-                height: 45px;
-                background: tomato;
-                width: 2px;
+            margin-top: 30px;
+            .row {
+                margin: 0;
             }
+            .single-state {
+                position: relative;
+                text-align: center;
+                border: 1px solid #ddd;
+                padding: 5px;
+                margin-bottom: 30px;
 
-            span {
-                font-size: 12px;
-                font-weight: 600;
-            }
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 13px;
+                    height: 45px;
+                    background: tomato;
+                    width: 2px;
+                }
 
-            h4 {
+                span {
+                    font-size: 12px;
+                    font-weight: 600;
+                }
+
+                h4 {
+                }
             }
         }
     }
@@ -2564,8 +2708,8 @@ textarea#id_content {
     }
     button.edit-btn.box-btn {
         position: absolute;
-        bottom: 110px;
-        right: 75px;
+        bottom: 122px;
+        right: 100px;
         padding: 14px;
         border-radius: 50%;
     }
@@ -2631,10 +2775,184 @@ textarea#id_content {
     .single-user-post {
         margin-bottom: 30px;
     }
+
+    .user-personal-info {
+        ul {
+            padding: 0 15px;
+            li {
+                display: flex;
+                align-items: center;
+                position: relative;
+                border: 1px solid #ddd;
+                padding: 10px;
+                margin-bottom: 20px;
+                &::before {
+                    content: "";
+                    position: absolute;
+                    left: 0;
+                    top: 8px;
+                    height: 30px;
+                    background: tomato;
+                    width: 2px;
+                }
+                i {
+                    font-size: 20px;
+                    margin:0 10px;
+                    color:#868c96;
+                }
+                h5 {
+                    display: inline-block;
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
 }
 
-
-textarea#id_heading ,textarea#id_link {
+textarea#id_heading,
+textarea#id_link {
     height: 60px;
     margin-bottom: 10px;
+}
+
+.reset-pass {
+    input#id_email,
+    .input#id_new_password1,
+    .input#id_new_password2 {
+        height: 50px;
+        color: $heading-color;
+        border: 1px solid #e2caca;
+        background-color: transparent;
+        border-radius: 0;
+        padding: 0;
+        font-size: 15px;
+        padding: 10px 20px;
+        width: 100%;
+        &::placeholder {
+            color: #495057;
+            font-size: 13px;
+        }
+        &:focus {
+            color: $black-color;
+            background-color: transparent;
+            box-shadow: unset;
+            outline: 0;
+            border: 1px solid $main-color;
+        }
+    }
+    p {
+        color: tomato;
+        text-align: center;
+    }
+}
+
+.reset-passform {
+    input#id_new_password1,
+    input#id_new_password2 {
+        height: 50px;
+        color: $heading-color;
+        border: 1px solid #e2caca;
+        background-color: transparent;
+        border-radius: 0;
+        padding: 0;
+        font-size: 15px;
+        padding: 10px 20px;
+        width: 100%;
+        &::placeholder {
+            color: #495057;
+            font-size: 13px;
+        }
+        &:focus {
+            color: $black-color;
+            background-color: transparent;
+            box-shadow: unset;
+            outline: 0;
+            border: 1px solid $main-color;
+        }
+    }
+    label {
+        margin-top: 20px;
+    }
+    ul.errorlist {
+        color: tomato;
+    }
+}
+.reset-passform span.helptext {
+    display: none;
+}
+
+.active {
+    position: relative;
+    &::before {
+        position: absolute;
+        content: "";
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: tomato;
+        top: 15px;
+        left: -5px;
+    }
+}
+
+// Review Area
+.main-review-area {
+    .tab {
+        &.quote-list-tab {
+            .tabs {
+                display: inline-block;
+                border-bottom: 1px solid #e2caca;
+                margin-bottom: 20px;
+                width: 100%;
+                li {
+                    display: inline-block;
+                    padding: 0 10px;
+                    font-family: $heading-font-family;
+                    color: $heading-color;
+                    font-size: 18px;
+                    font-weight: 600;
+                    a {
+                        color: $main-color;
+                        padding: 5px 25px;
+                    }
+                }
+                .current {
+                    border-bottom: 2px solid tomato;
+                    a {
+                        color: tomato;
+                    }
+                }
+            }
+        }
+    }
+    .single-reviews {
+        position: relative;
+        padding: 30px;
+        .content {
+            .review-img {
+                position: relative;
+                img {
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+            a {
+                font-size: 20px;
+                color: tomato;
+                margin-left: 19px;
+                text-transform: capitalize;
+            }
+
+            span {
+                margin-left: auto;
+            }
+        }
+        p {
+            max-width: 70%;
+            margin-left: 80px;
+            margin-top: -10px;
+        }
+    }
 }

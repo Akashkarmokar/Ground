@@ -2,20 +2,10 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-{% if update_confirm %}
-
-<div class="alert alert-success alert-dismissible fade show">
-    <strong>Your Profile is updated</strong>
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-            aria-hidden="true">&times;</span></button>
-</div>
-{% endif %}
-
-
-
 
 <section class="user-profile">
-    <div class="user-profile-banner"></div>
+    <div class="user-profile-banner">
+    </div>
     <div class="container">
         <div class="row profile-info">
             <div class="col-lg-4">
@@ -85,6 +75,22 @@
         <div class="user-profile-content">
             <div class="row">
                 <div class="col-lg-4">
+                    <div class="user-personal-info">
+                        <ul>
+                            <li>
+                                <i class='bx bx-user'></i>
+                                <h5>Atikul Islam Atik</h5>
+                            </li>
+                            <li>
+                                <i class='bx bx-id-card'></i>
+                                <h5>99</h5>
+                            </li>
+                            <li>
+                                <i class='bx bxs-institution' ></i>
+                                <h5>Metropolitan University</h5>
+                            </li>
+                        </ul>
+                    </div>
                     <div class="state-inner">
                         <div class="row">
                             <div class="col-6">
@@ -117,70 +123,87 @@
                 <div class="col-lg-8">
                     <div class="profile-content-area">
                         <div class="container">
-                            <div class="tab quote-list-tab">
-                                <ul class="tabs">
-                                    <li>
-                                        <a href="#">
-                                            Posts
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            Blogs
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="tab_content">
-                                    <div class="tabs_item">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                {% if posts %}
-                                                {% for post in posts %}
-                                                <div class="tab-content">
-                                                    <div class="post-avater">
-                                                        <img src="{{post.author.avater.url}}" alt="demo">
-                                                    </div>
-                                                    <div class='single-user-post'>
-                                                        <a href="">
-                                                            <h3>{{post.heading}}</h3>
-                                                        </a>
-                                                        <p>{{post.content|truncatewords:50}}</p>
-                                                        <hr>
-                                                        <ul>
-                                                            <li>
-                                                                <p>{{post.num_comments}} comment</p>
-                                                            </li>
-                                                            <li>
-                                                                <a href="">See More</a>
-                                                            </li>
-                                                        </ul>
-                                                        <hr>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="tab quote-list-tab">
+                                        <ul class="tabs">
+                                            <li>
+                                                <a href="#">
+                                                    Posts
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    Blogs
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="#">
+                                                    Pastebin
+                                                </a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab_content">
+                                            <div class="tabs_item">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        {% if posts %}
+                                                        {% for post in posts %}
+                                                        <div class="tab-content">
+                                                            <div class="post-avater">
+                                                                <img src="{{post.author.avater.url}}" alt="demo">
+                                                            </div>
+                                                            <div class='single-user-post'>
+                                                                <a href="">
+                                                                    <h3>{{post.heading}}</h3>
+                                                                </a>
+                                                                <p>{{post.content|truncatewords:50}}</p>
+                                                                <hr>
+                                                                <ul>
+                                                                    <li>
+                                                                        <p>{{post.num_comments}} comment</p>
+                                                                    </li>
+                                                                    <li>
+                                                                        <a href="">See More</a>
+                                                                    </li>
+                                                                </ul>
+                                                                <hr>
+                                                            </div>
+                                                        </div>
+                                                        {% endfor %}
+                                                        {% else %}
+                                                        <h3>User Has no Post</h3>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
-                                                {% endfor %}
-                                                {% else %}
-                                                <h3>User Has no Post</h3>
-                                                {% endif %}
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="tabs_item">
-                                        <div class="row">
-                                            <div class="col-lg-12">
-                                                <h2 class="mt-2"> All Blog</h2>
-                                                {% if posts %}
-                                                {% for post in posts %}
-                                                <div class='single-user-post'>
-                                                    <a href="">
-                                                        <h3>{{post.heading}}</h3>
-                                                    </a>
-                                                    <p>{{post.content|truncatewords:50}}</p>
-                                                    <p>{{post.num_comments}} comment</p>
+                                            <div class="tabs_item">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <h2 class="mt-2"> All Blog</h2>
+                                                        {% if posts %}
+                                                        {% for post in posts %}
+                                                        <div class='single-user-post'>
+                                                            <a href="">
+                                                                <h3>{{post.heading}}</h3>
+                                                            </a>
+                                                            <p>{{post.content|truncatewords:50}}</p>
+                                                            <p>{{post.num_comments}} comment</p>
+                                                        </div>
+                                                        {% endfor %}
+                                                        {% else %}
+                                                        <h3>User Has no Post</h3>
+                                                        {% endif %}
+                                                    </div>
                                                 </div>
-                                                {% endfor %}
-                                                {% else %}
-                                                <h3>User Has no Post</h3>
-                                                {% endif %}
+                                            </div>
+                                            <div class="tabs_item">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <h2 class="mt-2"> Pastebon</h2>
+                                                        
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -193,4 +216,7 @@
         </div>
     </div>
 </div>
+
+{% include "home/footer.html" %}
+
 {% endblock content %}

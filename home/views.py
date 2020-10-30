@@ -15,6 +15,7 @@ def home(request):
         obj = Feedback.objects.all()
         context = {
             'feedbacks':obj,
+            'active':'active',
         }
         return render(request,'home/home.html',context)
 
@@ -40,3 +41,10 @@ def feedback(request):
             'feedbacks':feedbacks,
         }
         return render(request,'home/feedback.html',context)
+
+
+def privecy(request):
+    return render(request,'home/privecy.html')
+
+def terms_condition(request):
+    return render(request,'home/terms_condition.html')

@@ -14,27 +14,27 @@
                Ground
             </a>
             <div class="collapse navbar-collapse mean-menu" id="navbarSupportedContent">
+               {% with url_name=request.resolver_match.url_name %}
                <ul class="navbar-nav m-auto">
-                  <li class="nav-item">
+                  <li class="nav-item {% if url_name == 'home_url' %}{{active}}{% endif %}">
                      <a href="{% url 'home_url' %}" class="nav-link">Home</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item {% if url_name == 'allposts' %}{{active}}{% endif %}">
                      <a href="{% url 'posts:allposts' %}" class="nav-link">Posts</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item {% if url_name == 'bin_url' %}{{active}}{% endif %}">
                      <a class="nav-link" href="{% url 'pastebin:bin_url' %}">Pastebin</a>
                   </li>
-                  <li class="nav-item">
+                  <li class="nav-item {% if url_name == 'eno url link dis' %}{{active}}{% endif %}">
                      <a href="#" class="nav-link ">Archive</a>
                   </li>
-                  <li class="nav-item">
-                     <a class="nav-link" href="{% url 'feedback' %}">Feedback</a>
-                  </li>
-                  <li class="nav-item">
+                  <li class="nav-item {% if url_name == 'all_blog' %}{{active}}{% endif %}">
                      <a class="nav-link" href="{% url 'blog:all_blog' %}">Blog</a>
                   </li>
                </ul>
+               {% endwith %}
             </div>
+
             <ul class="navbar-nav mr-auto">
                {% if request.user.is_authenticated %}
                <li class="nav-item">
@@ -45,6 +45,9 @@
                      </li>
                      <li class="nav-item">
                         <a href="{% url 'users:changepass' %}" class="nav-link">Change Password</a>
+                     </li>
+                     <li class="nav-item">
+                        <a class="nav-link" href="{% url 'feedback' %}">Feedback</a>
                      </li>
                      <li class="nav-item">
                         <a href="{% url 'users:logout' %}" class="nav-link">Logout</a>

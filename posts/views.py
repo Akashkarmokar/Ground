@@ -53,6 +53,7 @@ def list_all_post_comments(request):
                 'total_post':total_post_num,
                 'total_user':total_user_num,
                 'total_feedback':total_feedback_num,
+                'active':'active',
             }
             return render(request,'posts/listPost.html',context)
         else:
@@ -73,6 +74,7 @@ def list_all_post_comments(request):
             'total_post':total_post_num,
             'total_user':total_user_num,
             'total_feedback':total_feedback_num,
+            'active':'active',
         }
         return render(request,'posts/listPost.html',context)
 
@@ -136,6 +138,7 @@ def PostUpdate(request,pk):
                         obj.save()
                         context = {
                             'form':form,
+                            'active':'active',
                         }
                         return redirect(reverse('posts:postsDetails',args=pk))
                 else:
@@ -150,6 +153,7 @@ def PostUpdate(request,pk):
                     form = PostModelForm(instance=obj)
                     context = {
                         'form':form,
+                        'active':'active',
                     }
                     return render(request,'posts/update.html',context)
                 else:
@@ -176,6 +180,7 @@ def PostDetails(request,pk):
                     context = {
                         'post':obj,
                         'comment_form':comment_form,
+                        'active':'active',
                     }
                     return render(request,'posts/post_details.html',context)
         else:
@@ -186,6 +191,7 @@ def PostDetails(request,pk):
         context = {
             'post':obj,
             'comment_form':comment_form,
+            'active':'active',
         }
         return render(request,'posts/post_details.html',context)
 
@@ -208,6 +214,7 @@ def commentEdit(request,pk,postid):
                         obj.save()
                         context = {
                             'form':form,
+                            'active':'active',
                         }
                         return redirect(reverse('posts:postsDetails',args=postid))
                 else:
@@ -222,6 +229,7 @@ def commentEdit(request,pk,postid):
                     form = CommentModelForm(instance=obj)
                     context = {
                         'form':form,
+                        'active':'active',
                     }
                     return render(request,'posts/commentEdit.html',context)
                 else:
@@ -247,6 +255,7 @@ def commentDelete(request,pk,postid):
                 context = {
                     'post':post_obj,
                     'comment_form':comment_form,
+                    'active':'active',
                 }
                 return redirect(reverse('posts:postsDetails',args=postid))
             else:
