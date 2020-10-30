@@ -49,6 +49,7 @@
                 <button type="button" class="box-btn w-100" data-toggle="modal" data-target="#askQuestion">
                     Create Blog
                 </button>
+                <a href="{% url 'blog:create_blog' %}">Create Blog</a>
 
                 <div class="modal fade" id="askQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
                     aria-hidden="true">
@@ -60,7 +61,11 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                vlog
+                                <form action="" method="POST">
+                                    {% csrf_token %}
+                                    {{blog_create_form}}
+                                    <button type="submit" class="box-btn mt-4 w-100" name="blog_submit_form">Post</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -68,28 +73,36 @@
             </div>
         </div>
         <div class="row">
+        {% for blog  in blog_obj %}
             <div class="col-lg-4 col-md-6">
                 <div class="single-blog">
                     <div class="content">
                         <ul>
                             <li>
-                                10 April 2020
+                                {{blog.created}}
                             </li>
                             <li>
-                                <span>By Admin</span>
+                                <a href=""><span>By {{blog.author.user}}</span></a>
                             </li>
                         </ul>
 
                         <a href="#">
-                            <h3>Joe’s Company Software Development Case</h3>
+                            <h3>{{blog.title}}</h3>
                         </a>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas in fugit minima modi
-                            perspiciatis nam aspernatur porro</p>
-
-                        <a href="{% url 'blog:single_blog' %}" class="line-bnt">Read More</a>
+                        <p>{{blog.content|slice:'20'|safe}}</p>
+                        <p>{{blog.category}}</p>
+                        
+                        <form action="{% url 'blog:single_blog' blog.pk  %}" id='{{blog.id}}' method="POST" >
+                            {% csrf_token %}
+                            <input type="hidden" name="read_more" value="{{blog.id}}">
+                            <button type="submit">Read More</button>
+                        </form>
+                        <p>Total Read: {{blog.read.all.count}}</p>
+                        {% comment %} <a href="{% url 'blog:single_blog' blog.pk request.user.id %}" class="line-bnt">Read More</a> {% endcomment %}
                     </div>
                 </div>
             </div>
+        {% endfor %}
         </div>
     </div>
 </section>
