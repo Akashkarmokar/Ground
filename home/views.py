@@ -7,6 +7,7 @@ from .forms import FeedbackForm
 from users.models import Profile
 from django.contrib.auth.models import User
 from django.db.models import Q
+from blog.models import Blog
 # Create your views here.
 
 
@@ -15,8 +16,10 @@ def home(request):
         return redirect('posts:allposts')
     else:
         obj = Feedback.objects.all()
+        recent_blogs = Blog.objects.all()[:3]
         context = {
             'feedbacks':obj,
+            'recent_blogs':recent_blogs,
             'active':'active',
         }
         return render(request,'home/home.html',context)

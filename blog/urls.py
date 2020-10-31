@@ -12,4 +12,6 @@ urlpatterns = [
 
     path('delete_comment/<pk>/<postid>/',views.delete_comment,name='delete_comment'),
     path('update_comment/<pk>/<postid>/',views.update_comment,name='update_comment'),
+
+    path('search/',views.blog_search,name='blog_search')
 ]

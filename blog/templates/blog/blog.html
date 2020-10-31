@@ -35,9 +35,9 @@
             <div class="col-lg-8">
                 <div class="widget widget_search mb-5">
                     <div class="post-wrap">
-                        <form class="search-form">
+                        <form class="search-form" method="GET" action="{% url 'blog:blog_search' %}" >
                             <label>
-                                <input type="search" class="search-field" placeholder="Search...">
+                                <input type="search" class="search-field" placeholder="Search by title or category" name="query" id="query">
                             </label>
                             <button type="submit"><i class="bx bx-search"></i></button>
                         </form>

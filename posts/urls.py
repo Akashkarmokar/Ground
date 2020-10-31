@@ -10,5 +10,6 @@ urlpatterns = [
     path('update/<pk>/',views.PostUpdate,name='postsUpdate'),
     path('details/<pk>',views.PostDetails,name='postsDetails'),
     path('delete/<pk>/<postid>/',views.commentDelete,name='commentDelete'),
-    path('edit/<pk>/<postid>/',views.commentEdit,name='commentEdit'),   
+    path('edit/<pk>/<postid>/',views.commentEdit,name='commentEdit'), 
+    path('search/',views.search_post,name='search_post'),  
 ]

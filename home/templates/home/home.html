@@ -208,28 +208,35 @@
         </div>
 
         <div class="row">
+        {% for recent in recent_blogs %}
             <div class="col-lg-4 col-md-6">
-                <div class="single-blog">
-                    <div class="content">
-                        <ul>
-                            <li>
-                                10 April 2020
-                            </li>
-                            <li>
-                                <span>By Admin</span>
-                            </li>
-                        </ul>
+                
+                    <div class="single-blog">
+                        <div class="content">
+                            <ul>
+                                <li>
+                                    {{recent.created|date}}
+                                </li>
+                                <li>
+                                    <span>By {{recent.author.user}}</span>
+                                </li>
+                                <li>
+                                    <span>view {{recent.read.all.count}}</span>
+                                </li>
+                                <li>
+                                    <span>comment {{recent.num_comments}}</span>
+                                </li>
+                            </ul>
 
-                        <a href="#">
-                            <h3>Joe’s Company Software Development Case</h3>
-                        </a>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas in fugit minima modi
-                            perspiciatis nam aspernatur porro</p>
-
-                        <a href="#" class="line-bnt">Read More</a>
+                            <a href="#">
+                                <h3>{{recent.title|slice:20}}</h3>
+                            </a>
+                            <a href="{% url 'blog:single_blog' recent.id %}" class="line-bnt">Read More</a>
+                        </div>
                     </div>
-                </div>
+                
             </div>
+        {% endfor %}
         </div>
         <div class="blog-btn text-center">
             <p>We Have More Usefull Blogs For You. <a href="#">View More</a></p>

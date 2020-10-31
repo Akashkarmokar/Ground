@@ -4,6 +4,8 @@ from users.models import Profile
 from .forms import CreateBlogModelForm,blogCommentModalForm,CategoryModelForm
 from django.contrib.auth import authenticate,login,logout
 from django.urls import reverse
+from django.db.models import Q
+from posts.models import Post
 # Create your views here.
 
 
@@ -55,8 +57,11 @@ def blog_details(request,pk):
                     read.value = 'Read'
                 blog_obj.save()
                 read.save()
+
+                recent_posts = Post.objects.all()[:10]
                 context = {
                     'blog_obj':blog_obj,
+                    'recent_posts':recent_posts,
                     'comment_form':comment_form,
                     'active':'active',
                 }
@@ -82,9 +87,11 @@ def blog_details(request,pk):
             return redirect('users:login')
     else:
         blog_obj = Blog.objects.get(pk=pk)
+        recent_posts = Post.objects.all()[:10]
         comment_form = blogCommentModalForm()
         context = {
             'blog_obj':blog_obj,
+            'recent_posts':recent_posts,
             'comment_form':comment_form,
             'active':'active',
         }
@@ -230,3 +237,41 @@ def update_comment(request,pk,postid):
                 return render(request,'home/error.html') 
     else:
         return redirect('users:login')
+
+
+
+
+
+# ///////////////////////////////  Blog Search /////////////////////////////
+
+def blog_search(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            blog_create_form=CreateBlogModelForm(request.POST or None)
+            profile = Profile.objects.get(user=request.user)
+            if blog_create_form.is_valid():
+                instance = blog_create_form.save(commit=False)
+                instance.author = profile
+                instance.save()
+                CreateBlogModelForm()
+                blog_obj=Blog.objects.all()
+                blog_create_form = CreateBlogModelForm()
+                context = {
+                    'blog_obj':blog_obj,
+                    'blog_create_form':blog_create_form,
+                    'active':'active',
+                }
+                return render(request,'blog/blog.html',context)
+        else:
+            return redirect('users:login')
+    else:
+        # blog_obj=Blog.objects.all()
+        query = request.GET['query']
+        blog_obj=Blog.objects.filter(Q(title__icontains=query)|Q(category__name__icontains=query))
+        blog_create_form = CreateBlogModelForm()
+        context = {
+            'blog_obj':blog_obj,
+            'blog_create_form':blog_create_form,
+            'active':'active',
+        }
+        return render(request, 'blog/blog.html',context)
