@@ -43,9 +43,11 @@
                         <div class="entry-meta">
                             <ul>
                                 <li><span>Posted On:</span> <a href="#">{{blog_obj.created}}</a></li>
-                                <li><span>Posted By:</span> <a href="#">{{blog_obj.author.user}}</a></li>
-                                <li><a href="{% url 'blog:update_blog' blog_obj.id %}">Edit</a></li>
-                                <li><a href="{% url 'blog:delete_blog' blog_obj.id %}">Delete</a></li>
+                                <li><span>Posted By:</span> <a href="{% url 'users:profile' blog_obj.author.user.id %}">{{blog_obj.author.user}}</a></li>
+                                {% if blog_obj.author.user == request.user %}
+                                    <li><a href="{% url 'blog:update_blog' blog_obj.id %}">Edit</a></li>
+                                    <li><a href="{% url 'blog:delete_blog' blog_obj.id %}">Delete</a></li>
+                                {% endif %}
                             </ul>
                         </div>
 

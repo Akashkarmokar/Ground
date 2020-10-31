@@ -11,6 +11,12 @@ class Profile(models.Model):
     first_name = models.CharField(max_length=200,blank=True)
     last_name =  models.CharField(max_length=200,blank=True)
     user = models.OneToOneField(User,on_delete=models.CASCADE)
+    institute = models.CharField(max_length=50,blank=True)
+    facebook_link = models.CharField(max_length=50,blank=True)
+    linkdin_link = models.CharField(max_length=50,blank=True)
+    github_link = models.CharField(max_length=50,blank=True)
+    codeforces_link = models.CharField(max_length=50,blank=True)
+    website_link = models.CharField(max_length=50,blank=True)
     bio =models.TextField(default="Hey there ! I am using Ground",max_length=500)
     email =models.EmailField(max_length=200,blank=True)
     country = models.CharField(max_length=200,blank=True)
@@ -29,6 +35,12 @@ class Profile(models.Model):
 
     def get_posts_no(self):
         return self.posts.all().count()
+    
+    def get_blogs_no(self):
+        return self.blogs.all().count()
+
+    def get_pastebins_no(self):
+        return self.pastebin.all().count()
 
     def get_all_authors_posts(self):
         return self.posts.all()

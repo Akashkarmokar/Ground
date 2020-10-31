@@ -5,6 +5,8 @@ from django.contrib import messages
 from .forms import SignUpForm,LoginForm,ProfileModelForm
 from .models import Profile,Relationship
 from posts.models import Post
+from blog.models import Blog
+from pastebin.models import Pastebindb
 from django.urls import reverse
 
 # Create your views here.
@@ -17,7 +19,8 @@ def profile(request,profileId):
         profile = Profile.objects.get(id=profileId)
         form = ProfileModelForm(request.POST or None, request.FILES or None , instance=profile)
         posts = Post.objects.filter(author=profile)
-        # print(posts)
+        blogs = Blog.objects.filter(author=profile)
+        pastebins = Pastebindb.objects.filter(user=profile)
         update_confirm = False
 
         if request.method == "POST":
@@ -30,6 +33,9 @@ def profile(request,profileId):
             'form':form,
             'update_confirm':update_confirm,
             'posts':posts,
+            'blogs':blogs,
+            'pastebins':pastebins,
+            'active':'active',
         }
         return render(request,'users/profile.html',context)
     else:
@@ -41,10 +47,15 @@ def signup(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('../login')
+            # return HttpResponseRedirect('../login')
+            return redirect('users:login')
     else:        
         form = SignUpForm()
-    return render(request,'users/signup.html',{'form':form})
+        context = {
+            'form':form,
+            'active':'active',
+        }
+    return render(request,'users/signup.html',context)
 
 
 #user login function
@@ -61,7 +72,11 @@ def user_login(request):
                     return HttpResponseRedirect('/')
         else:
             form = LoginForm()
-        return render(request,'users/login.html',{'form':form})
+            context = {
+                'form':form,
+                'active':'active',
+            }
+        return render(request,'users/login.html',context)
     else:
         return HttpResponseRedirect('/')
 
@@ -84,5 +99,6 @@ def changepass(request):
         form = PasswordChangeForm(user=request.user)
         context = {
             'form':form,
+            'active':'active',
         }
         return render(request,'users/changepass.html',context)

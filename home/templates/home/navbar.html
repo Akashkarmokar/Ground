@@ -31,36 +31,42 @@
                   <li class="nav-item {% if url_name == 'all_blog' %}{{active}}{% endif %}">
                      <a class="nav-link" href="{% url 'blog:all_blog' %}">Blog</a>
                   </li>
+                  <li class="nav-item">
+                     <form class="form-inline my-2 my-lg-0" method='GET' action="{% url 'user_search' %}">
+                        <input class="form-control mr-sm-2" type="search" placeholder="User Id or Username" aria-label="Search" name="query" id="query">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                     </form>
+                  </li>
                </ul>
                {% endwith %}
             </div>
 
             <ul class="navbar-nav mr-auto">
                {% if request.user.is_authenticated %}
-               <li class="nav-item">
-                  <a href="{% url 'users:profile' request.user.profile.id %}" class="nav-link dropdown-toggle"><img class="nav-profile-img" src="{{request.user.profile.avater.url}}" alt="profile"> {{user}} </a>
-                  <ul class="dropdown-menu">
-                     <li class="nav-item">
-                        <a href="{% url 'users:profile' request.user.profile.id  %}" class="nav-link">Profile</a>
-                     </li>
-                     <li class="nav-item">
-                        <a href="{% url 'users:changepass' %}" class="nav-link">Change Password</a>
-                     </li>
-                     <li class="nav-item">
-                        <a class="nav-link" href="{% url 'feedback' %}">Feedback</a>
-                     </li>
-                     <li class="nav-item">
-                        <a href="{% url 'users:logout' %}" class="nav-link">Logout</a>
-                     </li>
-                  </ul>
-               </li>
+                  <li class="nav-item">
+                     <a href="{% url 'users:profile' request.user.profile.id %}" class="nav-link dropdown-toggle"><img class="nav-profile-img" src="{{request.user.profile.avater.url}}" alt="profile"> {{user}} </a>
+                     <ul class="dropdown-menu">
+                        <li class="nav-item">
+                           <a href="{% url 'users:profile' request.user.profile.id  %}" class="nav-link">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                           <a href="{% url 'users:changepass' %}" class="nav-link">Change Password</a>
+                        </li>
+                        <li class="nav-item">
+                           <a class="nav-link" href="{% url 'feedback' %}">Feedback</a>
+                        </li>
+                        <li class="nav-item">
+                           <a href="{% url 'users:logout' %}" class="nav-link">Logout</a>
+                        </li>
+                     </ul>
+                  </li>
                {% else %}
-               <li class="nav-item">
-                  <a href="{% url 'users:signup' %}" class="nav-link">Sign Up</a>
-               </li>
-               <li class="nav-item">
-                  <a href="{% url 'users:login' %}" class="nav-link">Sign In</a>
-               </li>
+                  <li class="nav-item {% if url_name == 'signup' %}{{active}}{% endif %}">
+                     <a href="{% url 'users:signup' %}" class="nav-link">Sign Up</a>
+                  </li>
+                  <li class="nav-item {% if url_name == 'login' %}{{active}}{% endif %}">
+                     <a href="{% url 'users:login' %}" class="nav-link">Sign In</a>
+                  </li>
                {% endif %}
             </ul>
          </nav>

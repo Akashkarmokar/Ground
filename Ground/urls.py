@@ -31,7 +31,9 @@ urlpatterns = [
     path('pastebin/',include('pastebin.urls',namespace='pastebin')),
     path('user/',include('users.urls',namespace='users')),
     path('posts/',include('posts.urls',namespace='posts')),
+    
 
+    path('search/',views.user_search,name='user_search'),
 
 
     path('reset_password/',

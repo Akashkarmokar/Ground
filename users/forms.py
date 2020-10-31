@@ -36,4 +36,4 @@ class ProfileModelForm(forms.ModelForm):
     
     class Meta:
         model = Profile
-        fields = ['first_name','last_name','bio','avater']
+        fields = ['first_name','last_name','institute','facebook_link','linkdin_link','github_link','codeforces_link','website_link','country','bio','avater']

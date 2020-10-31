@@ -40,7 +40,11 @@ def bin(request):
                     timestamp = pst_dt,
                 )
                 user_posted_code_details.save()
-                context = {'db_row':user_posted_code_details,'current_site':current_site}
+                context = {
+                    'db_row':user_posted_code_details,
+                    'current_site':current_site,
+                    'active':'active',
+                }
                 return render(request,'pastebin/show.html',context)
                 
         else:
@@ -48,8 +52,11 @@ def bin(request):
             
     else :   
         fm = pasteFm()
-        data = {'form':fm}
-        return render(request,'pastebin/bin.html',data)
+        context = {
+            'form':fm,
+            'active':'active',
+        }
+        return render(request,'pastebin/bin.html',context)
 
 
 
@@ -66,11 +73,6 @@ def delete(request,id):
                 pst_url = str(uuid.uuid4[:15])
 
 
-            #print('poster name ',pst_nm)
-            #print('poster type ',pst_tp)
-            #print('poster ',pst)
-            #print('poster url :',pst_url)
-
             user_posted_code_details = Pastebindb(
                 user=request.user,
                 poster_name=pst_nm,
@@ -80,36 +82,67 @@ def delete(request,id):
                 timestamp = pst_dt,
             )
             user_posted_code_details.save()
-            data = {'db_row':user_posted_code_details}
-            return render(request,'pastebin/show.html',data)
+            context = {
+                'db_row':user_posted_code_details,
+                'active':'active',
+            }
+            return render(request,'pastebin/show.html',context)
     else :
         fm = pasteFm()
-        data = {'form':fm}
+        context = {
+            'form':fm,
+            'active':'active',
+        }
         db_rw = Pastebindb.objects.get(pk=id)
         db_rw.delete()
-    return render(request,'pastebin/bin.html',data)
+    return render(request,'pastebin/bin.html',context)
 
 
 def update_post(request,up_id):
     if request.method == 'POST':
-        user_data = Pastebindb.objects.get(pk=up_id)
-        fm = pasteFm(request.POST,instance=user_data)
-        if fm.is_valid():
-            fm.save()
-            user_data = fm.save()
-            user_data.save()
-            data={'db_row':user_data}
-            return render(request,'pastebin/show.html',data)
+        if request.user.is_authenticated:
+            user_data = Pastebindb.objects.get(pk=up_id)
+            if user_data.user.user == request.user:
+                fm = pasteFm(request.POST,instance=user_data)
+                if fm.is_valid():
+                    fm.save()
+                    user_data = fm.save()
+                    user_data.save()
+                    context={
+                        'db_row':user_data,
+                        'active':'active',
+                    }
+                    return render(request,'pastebin/show.html',context)
+            else:
+                return render(request,'home/error.html')
+        else:
+            return redirect('users:login')
     else :
         user_data = Pastebindb.objects.get(pk=up_id)
         fm = pasteFm(instance=user_data)
-        data = {'form':fm}
-    return render(request,'pastebin/bin.html',data)
+        context = {
+            'form':fm,
+            'active':'active',
+        }
+    return render(request,'pastebin/bin.html',context)
 
 def show(request,rand_url):
     try:
         sharedCode = Pastebindb.objects.get(poster_url=rand_url)
-        context={'sharedCode':sharedCode}
+        context={
+            'sharedCode':sharedCode,
+            'active':'active',
+        }
         return render(request,'pastebin/shareCode.html',context)
     except Pastebindb.DoesNotExist:
         raise Http404("your link is Wrong or it is not available.Here")
+
+
+def poster_details(request,pk):
+    qs = Pastebindb.objects.get(pk=pk)
+    current_site = get_current_site(request)
+    context = {
+        'db_row':qs,
+        'current_site':current_site,
+    }
+    return render(request,'pastebin/poster_details.html',context)

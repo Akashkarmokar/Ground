@@ -22,6 +22,7 @@ def blog(request):
                 context = {
                     'blog_obj':blog_obj,
                     'blog_create_form':blog_create_form,
+                    'active':'active',
                 }
                 return render(request,'blog/blog.html',context)
         else:
@@ -32,6 +33,7 @@ def blog(request):
         context = {
             'blog_obj':blog_obj,
             'blog_create_form':blog_create_form,
+            'active':'active',
         }
     return render(request, 'blog/blog.html',context)
 
@@ -56,6 +58,7 @@ def blog_details(request,pk):
                 context = {
                     'blog_obj':blog_obj,
                     'comment_form':comment_form,
+                    'active':'active',
                 }
                 return render(request, 'blog/blog-details.html',context)
 
@@ -72,6 +75,7 @@ def blog_details(request,pk):
                     context = {
                         'blog_obj':blog_obj,
                         'comment_form':comment_form,
+                        'active':'active',
                     }
                     return render(request, 'blog/blog-details.html',context)    
         else:
@@ -82,6 +86,7 @@ def blog_details(request,pk):
         context = {
             'blog_obj':blog_obj,
             'comment_form':comment_form,
+            'active':'active',
         }
         return render(request, 'blog/blog-details.html',context)    
 
@@ -108,6 +113,7 @@ def create_blog(request):
                     context = {
                         'blog_obj':blog_obj,
                         'blog_create_form':blog_create_form,
+                        'active':'active',
                     }
                     return render(request,'blog/blog.html',context)
         else:
@@ -118,6 +124,7 @@ def create_blog(request):
         context = {
             'blog_create_form':blog_create_form,
             'category_form':category_form,
+            'active':'active',
         }
         return render(request,'blog/createBlog.html',context)
 
@@ -143,6 +150,11 @@ def update_blog(request,pk):
             try:
                 obj = Blog.objects.get(pk=pk)
                 if obj.author.user == request.user:
+                    if 'category_submit_form' in request.POST:
+                        created_category = CategoryModelForm(request.POST or None)
+                        if created_category.is_valid():
+                            created_category.save()
+                            return redirect('blog:update_blog')
                     form = CreateBlogModelForm(request.POST,instance=obj)
                     if form.is_valid():
                         form.save()
@@ -158,8 +170,11 @@ def update_blog(request,pk):
                 obj = Blog.objects.get(pk=pk)
                 if obj.author.user == request.user:
                     form = CreateBlogModelForm(instance=obj)
+                    category_form = CategoryModelForm()
                     context={
                         'form':form,
+                        'category_form':category_form,
+                        'active':'active',
                     }
                     return render(request,'blog/updateBlog.html',context)
             except Blog.DoesNotExist:
@@ -208,6 +223,7 @@ def update_comment(request,pk,postid):
                     form = blogCommentModalForm(instance=obj)
                     context={
                         'form':form,
+                        'active':'active',
                     }
                     return render(request,'blog/update_comment.html',context)
             except blogComment.DoesNotExist:

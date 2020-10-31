@@ -9,4 +9,5 @@ urlpatterns = [
     path('bin/delete/<int:id>/',views.delete,name='delete_url'),
     path('bin/update/<int:up_id>/',views.update_post,name='update_url'),
     path('sharedCode/<str:rand_url>/',views.show,name='sharedCode'),
+    path('poster_details/<pk>/',views.poster_details,name='poster_details'),
 ]

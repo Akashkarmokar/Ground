@@ -22,21 +22,34 @@
             </div>
             <div class="col-lg-6">
                 <div class="user-details">
-                    <h2>{{profile.first_name}}</h2>
+                    <h2>{{profile.user.username}}</h2>
                     <p> {{profile.bio}} </p>
                     <ul class="social">
-                        <li>
-                            <a href="#" target="_blank"><i class='bx bxl-facebook'></i></a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank"><i class='bx bxl-twitter'></i></a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank"><i class='bx bxl-instagram'></i></a>
-                        </li>
-                        <li>
-                            <a href="#" target="_blank"><i class='bx bxl-pinterest'></i></a>
-                        </li>
+                        {% if profile.facebook_link %}
+                            <li>
+                                <a href="{{profile.facebook_link}}" target="_blank"><i class='bx bxl-facebook'></i></a>
+                            </li>
+                        {% endif %}
+                        {% if profile.linkdin_link %}
+                            <li>
+                                <a href="{{profile.linkdin_link}}" target="_blank"><i class='bx bxl-twitter'></i></a>
+                            </li>
+                        {% endif %}
+                        {% if profile.github_link %}
+                            <li>
+                                <a href="{{profile.github_link}}" target="_blank"><i class='bx bxl-twitter'></i></a>
+                            </li>
+                        {% endif %}
+                        {% if profile.codeforces_link %}
+                            <li>
+                                <a href="{{profile.codeforces_link}}" target="_blank"><i class='bx bxl-instagram'></i></a>
+                            </li>
+                        {% endif %}
+                        {% if profile.website_link %}
+                            <li>
+                                <a href="{{profile.website_link}}" target="_blank"><i class='bx bxl-pinterest'></i></a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
@@ -79,18 +92,23 @@
                         <ul>
                             <li>
                                 <i class='bx bx-user'></i>
-                                <h5>Atikul Islam Atik</h5>
+                                <h5>{{profile.first_name}} {{profile.last_name}}</h5>
                             </li>
                             <li>
                                 <i class='bx bx-id-card'></i>
-                                <h5>99</h5>
+                                <h5>{{profile.user.id}}</h5>
                             </li>
                             <li>
                                 <i class='bx bxs-institution' ></i>
-                                <h5>Metropolitan University</h5>
+                                <h5>{{profile.institute}}</h5>
+                            </li>
+                            <li>
+                                <i class='bx bxs-institution' ></i>
+                                <h5>{{profile.country}}</h5>
                             </li>
                         </ul>
                     </div>
+                    <!--
                     <div class="state-inner">
                         <div class="row">
                             <div class="col-6">
@@ -102,7 +120,7 @@
                             <div class="col-6">
                                 <div class="single-state">
                                     <span style="color: tomato;">Blog</span>
-                                    <h4>{{profile.get_posts_no}}</h4>
+                                    <h4>{{profile.get_blogs_no}}</h4>
                                 </div>
                             </div>
                             <div class="col-6">
@@ -119,6 +137,7 @@
                             </div>
                         </div>
                     </div>
+                    -->
                 </div>
                 <div class="col-lg-8">
                     <div class="profile-content-area">
@@ -129,20 +148,21 @@
                                         <ul class="tabs">
                                             <li>
                                                 <a href="#">
-                                                    Posts
+                                                    Posts-({{profile.get_posts_no}})
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#">
-                                                    Blogs
+                                                    Blogs-({{profile.get_blogs_no}})
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="#">
-                                                    Pastebin
+                                                    Pastebin-({{profile.get_pastebin_no}})
                                                 </a>
                                             </li>
                                         </ul>
+                                        <!--Post area-->
                                         <div class="tab_content">
                                             <div class="tabs_item">
                                                 <div class="row">
@@ -164,7 +184,7 @@
                                                                         <p>{{post.num_comments}} comment</p>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="">See More</a>
+                                                                        <a href="{% url 'posts:postsDetails' post.id %}">See More</a>
                                                                     </li>
                                                                 </ul>
                                                                 <hr>
@@ -177,31 +197,71 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!--Blog area-->
                                             <div class="tabs_item">
                                                 <div class="row">
                                                     <div class="col-lg-12">
-                                                        <h2 class="mt-2"> All Blog</h2>
-                                                        {% if posts %}
-                                                        {% for post in posts %}
-                                                        <div class='single-user-post'>
-                                                            <a href="">
-                                                                <h3>{{post.heading}}</h3>
-                                                            </a>
-                                                            <p>{{post.content|truncatewords:50}}</p>
-                                                            <p>{{post.num_comments}} comment</p>
-                                                        </div>
-                                                        {% endfor %}
+                                                        {% if blogs %}
+                                                            {% for blog in blogs %}
+                                                                <div class="tab-content">
+                                                                    <div class="post-avater">
+                                                                        <img src="{{blog.author.avater.url}}" alt="demo">
+                                                                    </div>
+                                                                    <div class='single-user-post'>
+                                                                        <a href="">
+                                                                            <h3>{{blog.title}}</h3>
+                                                                        </a>
+                                                                        <p>{{blog.content|truncatewords:50}}</p>
+                                                                        <hr>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <p>{{blog.num_comments}} comment</p>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="{% url 'blog:single_blog' blog.id %}">See More</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <hr>
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
                                                         {% else %}
-                                                        <h3>User Has no Post</h3>
+                                                            <h3>User Has no Blogs</h3>
                                                         {% endif %}
                                                     </div>
                                                 </div>
                                             </div>
+                                            <!--Pastebin area-->
                                             <div class="tabs_item">
                                                 <div class="row">
                                                     <div class="col-lg-12">
-                                                        <h2 class="mt-2"> Pastebon</h2>
-                                                        
+                                                        {% if pastebins %}
+                                                            {% for pastebin in pastebins %}
+                                                                <div class="tab-content">
+                                                                    <div class="post-avater">
+                                                                        <img src="{{pastebin.user.avater.url}}" alt="demo">
+                                                                    </div>
+                                                                    <div class='single-user-post'>
+                                                                        <a href="">
+                                                                            <h3>Poster Name: {{pastebin.poster_name}}</h3>
+                                                                        </a>
+                                                                        <p>Poster: {{pastebin.poster|slice:10}}......</p>
+                                                                        <hr>
+                                                                        <ul>
+                                                                            <li>
+                                                                                <p>Poster Type:{{pastebin.poster_type}}</p>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a href="{% url 'pastebin:poster_details' pastebin.id %}">See More</a>
+                                                                            </li>
+                                                                        </ul>
+                                                                        <hr>
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                        {% else %}
+                                                            <h3>User Has no Pastebin Recoord</h3>
+                                                        {% endif %}
                                                     </div>
                                                 </div>
                                             </div>
