@@ -108,36 +108,6 @@
                             </li>
                         </ul>
                     </div>
-                    <!--
-                    <div class="state-inner">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="single-state">
-                                    <span style="color: #2d6ff7;">Post</span>
-                                    <h4>{{profile.get_posts_no}}</h4>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="single-state">
-                                    <span style="color: tomato;">Blog</span>
-                                    <h4>{{profile.get_blogs_no}}</h4>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="single-state">
-                                    <span style="color: #1fae5b;">Pastebin</span>
-                                    <h4>{{profile.get_pastebin_no}}</h4>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="single-state">
-                                    <span style="color: #2d6ff7;">Feedback</span>
-                                    <h4>0</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    -->
                 </div>
                 <div class="col-lg-8">
                     <div class="profile-content-area">
@@ -238,9 +208,6 @@
                                                         {% if pastebins %}
                                                             {% for pastebin in pastebins %}
                                                                 <div class="tab-content">
-                                                                    <div class="post-avater">
-                                                                        <img src="{{pastebin.user.avater.url}}" alt="demo">
-                                                                    </div>
                                                                     <div class='single-user-post'>
                                                                         <a href="">
                                                                             <h3>Poster Name: {{pastebin.poster_name}}</h3>

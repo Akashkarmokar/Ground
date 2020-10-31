@@ -11,6 +11,9 @@ class CategoryModelForm(forms.ModelForm):
 
 class CreateBlogModelForm(forms.ModelForm):
     title = forms.CharField(label='',widget=forms.Textarea(attrs={'class':'form-control heading-form','rows':'1','placeholder':'Title'}))
+    
+    # category = forms.Select(widget=forms.Select(attrs={'class':'form-control heading-form','rows':'1','placeholder':'sss'}))
+
     class Meta:
         model = Blog
         fields = ['title','category','content']

@@ -20,7 +20,7 @@
                                     Home
                                 </a>
                             </li>
-                            <li>Blog Details</li>
+                            <li>Create Blog</li>
                         </ul>
                     </div>
                 </div>
@@ -30,27 +30,29 @@
 </div>
 
 <!-- Blog Create Area -->
-<div class="row">
-    <div class="col-lg-3">
-        <h3>hello</h3>
-    </div>
-    <div class="col-lg-6 text-center mt-5">
-        <form action="" method="POST">
-            {% csrf_token %}
-            {{blog_create_form.media}}
-            {% comment %} {{blog_create_form.as_p}} {% endcomment %}
-            {% for fm in blog_create_form %}
-                {{fm}}
-                {% ifequal fm.label|lower 'category' %}
+
+<div class="blog-create">
+    <div class="container">
+        <h2 class="text-center mt-5">Create Your Blog</h2>
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 text-center mt-5">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {{blog_create_form.media}}
+                    {% comment %} {{blog_create_form.as_p}} {% endcomment %}
+                    {% for fm in blog_create_form %}
+                    
+                    {{fm}}
+                    {% ifequal fm.label|lower 'category' %}
                     <button type="button" class="edit-btn box-btn" data-toggle="modal" data-target="#addCategory">
-                        <span class="material-icons">create</span>
+                        <i class='bx bx-plus'></i>
                     </button>
-                {% endifequal %}
-            {% endfor %}
-            <button type="submit" class="box-btn mt-4 w-100" name="blog_submit_form">Post</button>
-        </form>
-        <!--Modal-->
-        <div class="modal fade" id="addCategory" tabindex="-1" role="dialog"
+                    {% endifequal %}
+                    {% endfor %}
+                    <button type="submit" class="box-btn mt-4 blog" name="blog_submit_form">Post</button>
+                </form>
+                <!--Modal-->
+                <div class="modal fade" id="addCategory" tabindex="-1" role="dialog"
                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-md modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -70,18 +72,18 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-dismiss="modal">Close</button>
-                                        <button type="submit" class="box-btn" name="category_submit_form">Save changes</button>
+                                        <button type="submit" class="box-btn" name="category_submit_form">Add
+                                            Category</button>
                                     </div>
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-    </div>
-    <!--Moadl-->
-    <div class="col-lg-3">
-        <h3>hello</h3>
+            </div>
+        </div>
     </div>
 </div>
+
 <!-- Blog Create Area -->
 {% endblock content %}

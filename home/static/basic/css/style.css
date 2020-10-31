@@ -351,8 +351,8 @@ Go Top Style*/
   line-height: 42px;
   opacity: 0;
   visibility: hidden;
-  -webkit-transition: .9s;
-  transition: .9s;
+  -webkit-transition: 0.9s;
+  transition: 0.9s;
 }
 
 .go-top i {
@@ -376,7 +376,7 @@ Go Top Style*/
 }
 
 .go-top::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -541,7 +541,7 @@ Navbar Area Css
           box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.12);
   -webkit-transition: 0.7s;
   transition: 0.7s;
-  padding: 5px 0;
+  padding: 0;
   border-bottom: 2px solid;
   border-image-source: linear-gradient(to right, #ef3b36, #ffffff);
   border-image-slice: 2;
@@ -1552,6 +1552,7 @@ Blog Area Css
   -webkit-box-shadow: 2px 2px 20px 4px rgba(0, 0, 0, 0.07);
           box-shadow: 2px 2px 20px 4px rgba(0, 0, 0, 0.07);
   z-index: 1;
+  padding: 30px 0;
 }
 
 .home-blog-area .single-blog .content {
@@ -1605,6 +1606,12 @@ Blog Area Css
   color: #051242;
 }
 
+.home-blog-area .single-blog .content button {
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  background: transparent;
+}
+
 .home-blog-area .single-blog::after {
   position: absolute;
   content: "";
@@ -1644,6 +1651,10 @@ Blog Area Css
   color: tomato;
   letter-spacing: 1px;
   text-decoration: underline;
+}
+
+.home-blog-area .single-blog h3 {
+  font-size: 20px;
 }
 
 .home-blog-area .blog-btn {
@@ -2628,11 +2639,13 @@ Profile Content Area Style
 
 .widget-area .widget-peru-posts-thumb .item .thumb {
   float: left;
-  height: 80px;
+  height: 65px;
   overflow: hidden;
   position: relative;
-  width: 80px;
+  width: 65px;
   margin-right: 15px;
+  border-radius: 50%;
+  background: #dddd;
 }
 
 .widget-area .widget-peru-posts-thumb .item .thumb .fullimage {
@@ -2821,6 +2834,7 @@ Blog Details Area Style
 
 .blog-details-area .comments-area .comment-meta {
   margin-bottom: 0.8em;
+  position: relative;
 }
 
 .blog-details-area .comments-area .comment-author {
@@ -2836,12 +2850,15 @@ Blog Details Area Style
   position: absolute;
   width: 50px;
   border-radius: 50%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .blog-details-area .comments-area .comment-author .fn {
   font-weight: 600;
   color: #293a5c;
   font-size: 18px;
+  text-transform: capitalize;
 }
 
 .blog-details-area .comments-area .comment-author .says {
@@ -2867,6 +2884,27 @@ Blog Details Area Style
 
 .blog-details-area .comments-area .comment-content p {
   font-size: 14px;
+}
+
+.blog-details-area .comments-area ul.blog-edit {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  z-index: 2;
+}
+
+.blog-details-area .comments-area ul.blog-edit span.material-icons.edit {
+  font-size: 18px;
+  color: green;
+}
+
+.blog-details-area .comments-area ul.blog-edit span.material-icons.delete {
+  font-size: 18px;
+  color: tomato;
+  margin-left: 5px;
 }
 
 .blog-details-area .comments-area .comment-respond {
@@ -2916,7 +2954,7 @@ Blog Details Area Style
   display: block;
   width: 100%;
   background-color: #f7f7f7;
-  border: 1px solid #eeeeee;
+  border: 1px solid #dddd;
   padding: 0.625em 0.7375em;
   outline: 0;
   -webkit-transition: 0.5s;
@@ -3014,10 +3052,10 @@ Blog Details Area Style
 
 .blog-details-area .widget-area .widget-peru-posts-thumb .item .thumb {
   float: left;
-  height: 80px;
+  height: 65px;
   overflow: hidden;
   position: relative;
-  width: 80px;
+  width: 65px;
   margin-right: 15px;
 }
 
@@ -3551,5 +3589,145 @@ textarea#id_link {
   max-width: 70%;
   margin-left: 80px;
   margin-top: -10px;
+}
+
+.search-box {
+  position: relative;
+}
+
+.search-box .search-form {
+  position: relative;
+  margin-right: 20px;
+}
+
+.search-box .search-form .search-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 35px;
+  height: 45px;
+  font-size: 18px;
+  border-radius: 0 5px 5px 0px;
+  background: tomato;
+}
+
+.search-box .search-form .search-button i {
+  color: #fff;
+  position: absolute;
+  top: 14px;
+  left: 8px;
+}
+
+.search-box .form-control {
+  height: 45px;
+  border-radius: 5px;
+}
+
+.search-box .form-control:focus {
+  color: #000000;
+  background-color: transparent;
+  -webkit-box-shadow: unset;
+          box-shadow: unset;
+  outline: 0;
+  border: 1px solid #1d42d9;
+  border-radius: 5px;
+}
+
+textarea#id_title {
+  height: 50px;
+  width: 91%;
+}
+
+.django-ckeditor-widget {
+  width: 100%;
+}
+
+select#id_category {
+  width: 83%;
+  height: 50px;
+  margin-left: -81px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+select#id_category::before {
+  position: absolute;
+  content: "Select a catagorty ";
+}
+
+select#id_category::-webkit-input-placeholder {
+  color: #495057;
+  font-size: 13px;
+}
+
+select#id_category:-ms-input-placeholder {
+  color: #495057;
+  font-size: 13px;
+}
+
+select#id_category::-ms-input-placeholder {
+  color: #495057;
+  font-size: 13px;
+}
+
+select#id_category::placeholder {
+  color: #495057;
+  font-size: 13px;
+}
+
+select#id_category:focus {
+  color: #000000;
+  background-color: transparent;
+  -webkit-box-shadow: unset;
+          box-shadow: unset;
+  outline: 0;
+  border: 1px solid #1d42d9;
+}
+
+button.box-btn.mt-4.blog {
+  width: 91%;
+  margin-left: -83px;
+}
+
+input#id_old_password, input#id_new_password1, input#id_new_password2 {
+  height: 50px;
+  color: #293a5c;
+  border: 1px solid #e2caca;
+  background-color: transparent;
+  border-radius: 0;
+  padding: 0;
+  font-size: 15px;
+  padding: 10px 20px;
+  width: 100%;
+}
+
+input#id_old_password::-webkit-input-placeholder, input#id_new_password1::-webkit-input-placeholder, input#id_new_password2::-webkit-input-placeholder {
+  color: #495057;
+  font-size: 13px;
+}
+
+input#id_old_password:-ms-input-placeholder, input#id_new_password1:-ms-input-placeholder, input#id_new_password2:-ms-input-placeholder {
+  color: #495057;
+  font-size: 13px;
+}
+
+input#id_old_password::-ms-input-placeholder, input#id_new_password1::-ms-input-placeholder, input#id_new_password2::-ms-input-placeholder {
+  color: #495057;
+  font-size: 13px;
+}
+
+input#id_old_password::placeholder, input#id_new_password1::placeholder, input#id_new_password2::placeholder {
+  color: #495057;
+  font-size: 13px;
+}
+
+input#id_old_password:focus, input#id_new_password1:focus, input#id_new_password2:focus {
+  color: #000000;
+  background-color: transparent;
+  -webkit-box-shadow: unset;
+          box-shadow: unset;
+  outline: 0;
+  border: 1px solid #1d42d9;
 }
 /*# sourceMappingURL=style.css.map */

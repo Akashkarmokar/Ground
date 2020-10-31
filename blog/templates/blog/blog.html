@@ -46,34 +46,11 @@
             </div>
 
             <div class="col-lg-3 offset-lg-3">
-                <button type="button" class="box-btn w-100" data-toggle="modal" data-target="#askQuestion">
-                    Create Blog
-                </button>
-                <a href="{% url 'blog:create_blog' %}">Create Blog</a>
-
-                <div class="modal fade" id="askQuestion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-                    aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">    
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="" method="POST">
-                                    {% csrf_token %}
-                                    {{blog_create_form}}
-                                    <button type="submit" class="box-btn mt-4 w-100" name="blog_submit_form">Post</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <a class="box-btn" href="{% url 'blog:create_blog' %}">Create Blog</a>
             </div>
         </div>
         <div class="row">
-        {% for blog  in blog_obj %}
+            {% for blog  in blog_obj %}
             <div class="col-lg-4 col-md-6">
                 <div class="single-blog">
                     <div class="content">
@@ -86,23 +63,23 @@
                             </li>
                         </ul>
 
-                        <a href="#">
-                            <h3>{{blog.title}}</h3>
+                        <a href="{% url 'blog:single_blog' blog.pk  %}">
+                            <h3>{{blog.title|slice:50}}...</h3>
                         </a>
-                        <p>{{blog.content|slice:'20'|safe}}</p>
-                        <p>{{blog.category}}</p>
-                        
-                        <form action="{% url 'blog:single_blog' blog.pk  %}" id='{{blog.id}}' method="POST" >
+                        <!-- <p>{{blog.content|slice:'110'|safe}}</p>-->
+                        <!-- <p>{{blog.category}}</p> -->
+
+                        <form action="{% url 'blog:single_blog' blog.pk  %}" id='{{blog.id}}' method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="read_more" value="{{blog.id}}">
-                            <button type="submit">Read More</button>
+                            <button class="line-bnt mr-3 mt-3" type="submit">Read More</button>
+                            <span><i class='bx bx-low-vision'></i>{{blog.read.all.count}} views</span>
+                            <p class="d-inline ml-3" style="color: tomato; text-transform: capitalize;">{{blog.category}}</p>
                         </form>
-                        <p>Total Read: {{blog.read.all.count}}</p>
-                        {% comment %} <a href="{% url 'blog:single_blog' blog.pk request.user.id %}" class="line-bnt">Read More</a> {% endcomment %}
                     </div>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
         </div>
     </div>
 </section>
