@@ -32,6 +32,7 @@ urlpatterns = [
     path('user/',include('users.urls',namespace='users')),
     path('posts/',include('posts.urls',namespace='posts')),
     
+    
 
     path('search/',views.user_search,name='user_search'),
 
@@ -51,6 +52,8 @@ urlpatterns = [
     path('reset_password_complete/',
         auth_views.PasswordResetCompleteView.as_view(template_name="users/passwordResetDone.html"),
         name="password_reset_complete"),
+
+    path('archive/',include('archive.urls',namespace='archive')),
 ]
 
 urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
