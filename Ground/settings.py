@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'users',
     'posts',
     'blog',
+    'archive',
 
     'crispy_forms',
     'ckeditor',

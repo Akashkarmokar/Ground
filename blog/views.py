@@ -154,8 +154,7 @@ def update_blog(request,pk):
                         created_category = CategoryModelForm(request.POST or None)
                         if created_category.is_valid():
                             created_category.save()
-                            # return redirect('blog:update_blog')
-                            return redirect(reverse('blog:update_blog',args=pk))
+                            return redirect('blog:update_blog')
                     form = CreateBlogModelForm(request.POST,instance=obj)
                     if form.is_valid():
                         form.save()

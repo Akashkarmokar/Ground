@@ -1,0 +1,68 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="post-details-area">
+    <div class="post-banner-area ">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12">
+                            <div class="banner-tittle">
+                                <h1>
+                                    {{post.heading}}
+                                </h1>
+                            </div>
+                            <ul class="head-list">
+                                <li>
+                                    <a href="/">
+                                        Home
+                                    </a>
+                                </li>
+                                <li>Archive</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<!--Atik-->
+<div class=row>
+    <div class="col-lg-3">
+        <h2>Hello</h2>
+    </div>
+    <div class="col-lg-6 text-center">
+        <h1>Mike testing</h1>
+        {% for solution in solutions %}
+            <div class="row">
+                {{solution.domain}} <br>
+                {{solution.number}} <br>
+                {{solution.link}} <br>
+                {{solution.author}} <br>
+            </div>
+            <hr>
+        {% endfor %}
+    </div>  
+    <div class="col-lg-3">
+        <h2>Hello</h2>
+    </div>
+</div>
+<!--Atik-->
+
+
+
+
+
+
+
+{% comment %} {% include "home/footer.html" %} {% endcomment %}
+
+{% endblock content %}
