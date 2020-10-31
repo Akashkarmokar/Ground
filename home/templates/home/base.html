@@ -20,6 +20,7 @@
 
     <link rel="stylesheet" href="{% static 'basic/css/owl.carousel.min.css' %}">
     <link rel="stylesheet" href="{% static 'basic/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'basic/css/jquery.dataTables.min.css' %}">
 
 
     <!-- Main CSS -->
@@ -36,12 +37,12 @@
         {% block content %}
         {% endblock content %}
     </div>
-    
+
     <a href="#" class="go-top">
         <i class="bx bx-chevrons-up"></i>
         <i class="bx bx-chevrons-up"></i>
     </a>
-    
+
     <!-- jQuery Min JS -->
     <script src="{% static 'basic/js/jquery.js' %}"></script>
     <!-- Boostrap Js  -->
@@ -58,6 +59,7 @@
     <script src="{% static 'basic/js/emojionearea.min.js' %}"></script>
 
     <script src="{% static 'basic/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'basic/js/jquery.dataTables.min.js' %}"></script>
 
     <!-- Main Js  -->
     <script src="{% static 'basic/js/main.js' %}"></script>
@@ -72,11 +74,26 @@
         })
 
 
-    </script>                                               
+    </script>
 
     <script>
-        function replyFunction() {
-            document.getElementById('replyField').className = "show";
+        function toggle(ele) {
+            var cont = document.getElementById('cont');
+            if (cont.style.display == 'block') {
+                cont.style.display = 'none';
+    
+                document.getElementById(ele.id).value = 'Show DIV';
+            }
+            else {
+                cont.style.display = 'block';
+                document.getElementById(ele.id).value = 'Hide DIV';
+            }
+        }
+    </script>>
+
+    <script>
+        function archiveFunction() {
+            document.getElementById('showarchive').className = "show";
         }
     </script>
 
@@ -257,19 +274,39 @@
             }
         });
     </script>
-    
-    <script>
-    // Go to Top
 
-	$(window).on('scroll', function(){
-		var scrolled = $(window).scrollTop();
-		if (scrolled > 300) $('.go-top').addClass('goactive');
-		if (scrolled < 300) $('.go-top').removeClass('goactive');
-    });  
+    <script>
+        // Go to Top
+
+        $(window).on('scroll', function () {
+            var scrolled = $(window).scrollTop();
+            if (scrolled > 300) $('.go-top').addClass('goactive');
+            if (scrolled < 300) $('.go-top').removeClass('goactive');
+        });
 
     </script>
 
-    
+
+    <!-- <script>
+        $(document).ready(function () {
+            $('#myTable').dataTable();
+        });
+    </script> -->
+
+    <script>
+        let display = false
+        $(".archive-btn").click(function () {
+            if (display===false) {
+                $(this).next(".show-archive").show("slow");
+                display=true
+            } else {
+                $(this).next(".show-archive").hide("slow");
+                display=false
+            }  
+        });
+        </script>
+
+
 </body>
 
 </html>

@@ -15,7 +15,7 @@ def home(request):
     if request.user.is_authenticated:
         return redirect('posts:allposts')
     else:
-        obj = Feedback.objects.all()
+        obj = Feedback.objects.all()[:4]
         recent_blogs = Blog.objects.all()[:3]
         context = {
             'feedbacks':obj,

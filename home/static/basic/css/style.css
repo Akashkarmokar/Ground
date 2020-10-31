@@ -3722,4 +3722,8 @@ input#id_new_password2:focus {
   bottom: -30px;
   left: -30px;
 }
+
+.show {
+  display: block;
+}
 /*# sourceMappingURL=style.css.map */
