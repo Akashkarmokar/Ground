@@ -691,7 +691,7 @@ img.nav-profile-img {
             }
         }
     }
-    .active::before {
+    .activeNav::before {
         position: absolute;
         content: "";
         width: 5px;
@@ -1263,89 +1263,43 @@ Blog Area Css
 ======================================================*/
 .home-blog-area {
     position: relative;
-    padding: 70px 0;
+    padding: 50px 0;
     .single-blog {
         background: #fff;
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
         position: relative;
         margin-bottom: 30px;
-        overflow: hidden;
         transition: 0.5s;
         box-shadow: 2px 2px 20px 4px rgba(0, 0, 0, 0.07);
         z-index: 1;
-        padding: 30px 0;
+        padding: 30px;
+        overflow: hidden;
         .content {
             ul {
                 padding: 0;
                 margin: 0;
                 li {
-                    font-size: 13px;
-                    display: inline-block;
-                    span {
-                        position: relative;
-                        margin-left: 25px;
-                        &::before {
-                            position: absolute;
-                            content: "";
-                            width: 2px;
-                            height: 15px;
-                            left: -16px;
-                            top: 3px;
-                            background: $body-color;
+                    display:inline-block;
+                    span{
+                        margin-right:10px;
+                        i{
+                            font-size: 17px;
+                            margin-right: 7px;
+                            color: tomato;
                         }
                     }
                 }
             }
-            padding: 30px;
-            span {
-                color: #293a5c;
-                font-weight: 500;
-            }
-            h3 {
-                margin-top: 10px;
-                transition: $transition;
-                margin-bottom: 0;
-            }
-            p {
-                margin-top: 10px;
-                transition: $transition;
-            }
-            .line-bnt {
-                color: $dark-blue-color;
-            }
             button {
                 transition: $transition;
-                background: transparent;
+                margin-top: 20px;
+                padding: 9px 25px;
+                font-size: 15px;
+                width: 100%;
             }
         }
-        &::after {
-            position: absolute;
-            content: "";
-            background: url(../images/bs.png) no-repeat;
-            opacity: 0.8;
-            bottom: 0;
-            left: -17%;
-            right: 0;
-            width: 100%;
-            transition: 0.5s;
-            z-index: -1;
-            height: 100%;
-            top: -210px;
-        }
-        &::before {
-            position: absolute;
-            content: "";
-            background: url(../images/bs.png) no-repeat;
-            opacity: 0.8;
-            bottom: 0;
-            right: -60%;
-            width: 100%;
-            transition: 0.5s;
-            z-index: -1;
-            height: 100%;
-            bottom: -220px;
-        }
+
         &:hover {
             h3 {
                 color: tomato;
@@ -1357,7 +1311,17 @@ Blog Area Css
             }
         }
         h3 {
-            font-size: 20px;
+            font-size: 21px;
+        }
+        .catagory {
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            background: tomato;
+            padding: 4px 15px;
+            border-top-left-radius: 10px;
+            line-height: normal;
+            color:#fff;
         }
     }
     .blog-btn {
@@ -1414,6 +1378,11 @@ Blog Area Css
                 }
             }
         }
+    }
+    a.box-btn.add {
+        position: fixed;
+        right: 0;
+        top: 60%;
     }
 }
 
@@ -2034,16 +2003,18 @@ Profile Content Area Style
         margin-top: 0;
         button {
             span {
-                width: 15px;
-                height: 5px;
+                width: 15px !important;
+                height: 2px !important;
                 border-radius: 0;
-                background: $body-color;
+                background: #fff !important;
                 margin: 1px 2px;
             }
+           
             &.active {
-                background: $heading-color;
+                background: tomato;
             }
         }
+        
     }
 }
 
@@ -3036,9 +3007,9 @@ select#id_category {
     margin-top: 20px;
     margin-bottom: 20px;
     position: relative;
-    &::before{
+    &::before {
         position: absolute;
-        content:"Select a catagorty "
+        content: "Select a catagorty ";
     }
     &::placeholder {
         color: #495057;
@@ -3058,8 +3029,9 @@ button.box-btn.mt-4.blog {
     margin-left: -83px;
 }
 
-
-input#id_old_password ,input#id_new_password1 ,input#id_new_password2{
+input#id_old_password,
+input#id_new_password1,
+input#id_new_password2 {
     height: 50px;
     color: $heading-color;
     border: 1px solid #e2caca;
@@ -3080,6 +3052,31 @@ input#id_old_password ,input#id_new_password1 ,input#id_new_password2{
         outline: 0;
         border: 1px solid $main-color;
     }
+}
 
 
+.about-dev-area{
+    position:relative;
+
+    .single-developer{
+        position: relative;
+        // padding:30px;
+        
+    }
+    .dev-img{
+        position:relative;
+        img{
+
+        }
+        &:before{
+            position: absolute;
+            content: "";
+            background: tomato;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            bottom: -30px;
+            left: -30px;
+        }
+    }
 }

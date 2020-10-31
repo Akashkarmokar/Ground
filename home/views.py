@@ -68,3 +68,7 @@ def privecy(request):
 
 def terms_condition(request):
     return render(request,'home/terms_condition.html')
+
+
+def developer(request):
+    return render(request,'home/developer.html')

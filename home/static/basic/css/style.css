@@ -809,7 +809,7 @@ img.nav-profile-img {
   padding: 10px 0;
 }
 
-.is-sticky .active::before {
+.is-sticky .activeNav::before {
   position: absolute;
   content: "";
   width: 5px;
@@ -1537,7 +1537,7 @@ Blog Area Css
 ======================================================*/
 .home-blog-area {
   position: relative;
-  padding: 70px 0;
+  padding: 50px 0;
 }
 
 .home-blog-area .single-blog {
@@ -1546,17 +1546,13 @@ Blog Area Css
   border-top-right-radius: 4px;
   position: relative;
   margin-bottom: 30px;
-  overflow: hidden;
   -webkit-transition: 0.5s;
   transition: 0.5s;
   -webkit-box-shadow: 2px 2px 20px 4px rgba(0, 0, 0, 0.07);
           box-shadow: 2px 2px 20px 4px rgba(0, 0, 0, 0.07);
   z-index: 1;
-  padding: 30px 0;
-}
-
-.home-blog-area .single-blog .content {
   padding: 30px;
+  overflow: hidden;
 }
 
 .home-blog-area .single-blog .content ul {
@@ -1565,82 +1561,26 @@ Blog Area Css
 }
 
 .home-blog-area .single-blog .content ul li {
-  font-size: 13px;
   display: inline-block;
 }
 
 .home-blog-area .single-blog .content ul li span {
-  position: relative;
-  margin-left: 25px;
+  margin-right: 10px;
 }
 
-.home-blog-area .single-blog .content ul li span::before {
-  position: absolute;
-  content: "";
-  width: 2px;
-  height: 15px;
-  left: -16px;
-  top: 3px;
-  background: #010102;
-}
-
-.home-blog-area .single-blog .content span {
-  color: #293a5c;
-  font-weight: 500;
-}
-
-.home-blog-area .single-blog .content h3 {
-  margin-top: 10px;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-  margin-bottom: 0;
-}
-
-.home-blog-area .single-blog .content p {
-  margin-top: 10px;
-  -webkit-transition: all 0.5s;
-  transition: all 0.5s;
-}
-
-.home-blog-area .single-blog .content .line-bnt {
-  color: #051242;
+.home-blog-area .single-blog .content ul li span i {
+  font-size: 17px;
+  margin-right: 7px;
+  color: tomato;
 }
 
 .home-blog-area .single-blog .content button {
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
-  background: transparent;
-}
-
-.home-blog-area .single-blog::after {
-  position: absolute;
-  content: "";
-  background: url(../images/bs.png) no-repeat;
-  opacity: 0.8;
-  bottom: 0;
-  left: -17%;
-  right: 0;
+  margin-top: 20px;
+  padding: 9px 25px;
+  font-size: 15px;
   width: 100%;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-  z-index: -1;
-  height: 100%;
-  top: -210px;
-}
-
-.home-blog-area .single-blog::before {
-  position: absolute;
-  content: "";
-  background: url(../images/bs.png) no-repeat;
-  opacity: 0.8;
-  bottom: 0;
-  right: -60%;
-  width: 100%;
-  -webkit-transition: 0.5s;
-  transition: 0.5s;
-  z-index: -1;
-  height: 100%;
-  bottom: -220px;
 }
 
 .home-blog-area .single-blog:hover h3 {
@@ -1654,7 +1594,18 @@ Blog Area Css
 }
 
 .home-blog-area .single-blog h3 {
-  font-size: 20px;
+  font-size: 21px;
+}
+
+.home-blog-area .single-blog .catagory {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background: tomato;
+  padding: 4px 15px;
+  border-top-left-radius: 10px;
+  line-height: normal;
+  color: #fff;
 }
 
 .home-blog-area .blog-btn {
@@ -1722,6 +1673,12 @@ Blog Area Css
 
 .home-blog-area .widget_search form button:hover {
   background-color: #293a5c;
+}
+
+.home-blog-area a.box-btn.add {
+  position: fixed;
+  right: 0;
+  top: 60%;
 }
 
 /*
@@ -2473,15 +2430,15 @@ Profile Content Area Style
 }
 
 .review-area .owl-dots button span {
-  width: 15px;
-  height: 5px;
+  width: 15px !important;
+  height: 2px !important;
   border-radius: 0;
-  background: #010102;
+  background: #fff !important;
   margin: 1px 2px;
 }
 
 .review-area .owl-dots button.active {
-  background: #293a5c;
+  background: tomato;
 }
 
 .main-post-area {
@@ -3690,7 +3647,9 @@ button.box-btn.mt-4.blog {
   margin-left: -83px;
 }
 
-input#id_old_password, input#id_new_password1, input#id_new_password2 {
+input#id_old_password,
+input#id_new_password1,
+input#id_new_password2 {
   height: 50px;
   color: #293a5c;
   border: 1px solid #e2caca;
@@ -3702,32 +3661,65 @@ input#id_old_password, input#id_new_password1, input#id_new_password2 {
   width: 100%;
 }
 
-input#id_old_password::-webkit-input-placeholder, input#id_new_password1::-webkit-input-placeholder, input#id_new_password2::-webkit-input-placeholder {
+input#id_old_password::-webkit-input-placeholder,
+input#id_new_password1::-webkit-input-placeholder,
+input#id_new_password2::-webkit-input-placeholder {
   color: #495057;
   font-size: 13px;
 }
 
-input#id_old_password:-ms-input-placeholder, input#id_new_password1:-ms-input-placeholder, input#id_new_password2:-ms-input-placeholder {
+input#id_old_password:-ms-input-placeholder,
+input#id_new_password1:-ms-input-placeholder,
+input#id_new_password2:-ms-input-placeholder {
   color: #495057;
   font-size: 13px;
 }
 
-input#id_old_password::-ms-input-placeholder, input#id_new_password1::-ms-input-placeholder, input#id_new_password2::-ms-input-placeholder {
+input#id_old_password::-ms-input-placeholder,
+input#id_new_password1::-ms-input-placeholder,
+input#id_new_password2::-ms-input-placeholder {
   color: #495057;
   font-size: 13px;
 }
 
-input#id_old_password::placeholder, input#id_new_password1::placeholder, input#id_new_password2::placeholder {
+input#id_old_password::placeholder,
+input#id_new_password1::placeholder,
+input#id_new_password2::placeholder {
   color: #495057;
   font-size: 13px;
 }
 
-input#id_old_password:focus, input#id_new_password1:focus, input#id_new_password2:focus {
+input#id_old_password:focus,
+input#id_new_password1:focus,
+input#id_new_password2:focus {
   color: #000000;
   background-color: transparent;
   -webkit-box-shadow: unset;
           box-shadow: unset;
   outline: 0;
   border: 1px solid #1d42d9;
+}
+
+.about-dev-area {
+  position: relative;
+}
+
+.about-dev-area .single-developer {
+  position: relative;
+}
+
+.about-dev-area .dev-img {
+  position: relative;
+}
+
+.about-dev-area .dev-img:before {
+  position: absolute;
+  content: "";
+  background: tomato;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  bottom: -30px;
+  left: -30px;
 }
 /*# sourceMappingURL=style.css.map */

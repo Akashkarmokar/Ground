@@ -32,8 +32,8 @@
 <section class="home-blog-area">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <div class="widget widget_search">
+            <div class="col-lg-8">
+                <div class="widget widget_search mb-5">
                     <div class="post-wrap">
                         <form class="search-form">
                             <label>
@@ -44,9 +44,8 @@
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-3 offset-lg-3">
-                <a class="box-btn" href="{% url 'blog:create_blog' %}">Create Blog</a>
+            <div class="col-lg-4">
+                <a class="box-btn float-right" href="{% url 'blog:create_blog' %}">Create Blog</a>
             </div>
         </div>
         <div class="row">
@@ -54,27 +53,34 @@
             <div class="col-lg-4 col-md-6">
                 <div class="single-blog">
                     <div class="content">
-                        <ul>
-                            <li>
-                                {{blog.created}}
-                            </li>
-                            <li>
-                                <a href=""><span>By {{blog.author.user}}</span></a>
-                            </li>
-                        </ul>
-
                         <a href="{% url 'blog:single_blog' blog.pk  %}">
                             <h3>{{blog.title|slice:50}}...</h3>
                         </a>
-                        <!-- <p>{{blog.content|slice:'110'|safe}}</p>-->
-                        <!-- <p>{{blog.category}}</p> -->
+                        <ul>
+                            <li>
+                                <span>On: {{blog.created|date}}</span>
+                            </li>
+                            <li>
+                                <a href="">By: {{blog.author.user}}</span></a>
+                            </li>
+
+                        </ul>
+
+                        <ul class="mt-2">
+                            <li>
+                                <span><i class='bx bx-low-vision'></i>{{blog.read.all.count}} views</span>
+                            </li>
+                            <li>
+                                <span><i class='bx bx-comment'></i>{{blog.num_comments}} comments</span>
+                            </li>
+                        </ul>
+
+                        <span class="catagory">{{blog.category}}</span>
 
                         <form action="{% url 'blog:single_blog' blog.pk  %}" id='{{blog.id}}' method="POST">
                             {% csrf_token %}
                             <input type="hidden" name="read_more" value="{{blog.id}}">
-                            <button class="line-bnt mr-3 mt-3" type="submit">Read More</button>
-                            <span><i class='bx bx-low-vision'></i>{{blog.read.all.count}} views</span>
-                            <p class="d-inline ml-3" style="color: tomato; text-transform: capitalize;">{{blog.category}}</p>
+                            <button class="box-btn" type="submit">Read More</button>
                         </form>
                     </div>
                 </div>
