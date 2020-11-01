@@ -1,0 +1,90 @@
+{% extends 'home/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="post-details-area">
+    <div class="post-banner-area ">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-12">
+                            <div class="banner-tittle">
+                                <h1>
+                                    Archive
+                                </h1>
+                            </div>
+                            <ul class="head-list">
+                                <li>
+                                    <a href="/">
+                                        Home
+                                    </a>
+                                </li>
+                                <li>Edit Your Solution</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Blog Create Area -->
+
+<div class="blog-create">
+    <div class="container">
+        <h2 class="text-center mt-5">Edit Your Solution</h2>
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 text-center mt-5">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {% comment %} {{blog_create_form.as_p}} {% endcomment %}
+                    {% for fm in solution_form %}
+                        {{fm}}
+                        {% ifequal fm.label|lower 'domain' %}
+                            <button type="button" class="edit-btn box-btn" data-toggle="modal" data-target="#addDomain">
+                                <i class='bx bx-plus'></i>
+                            </button>
+                        {% endifequal %}
+                    {% endfor %}
+                    <button type="submit" class="box-btn mt-4 mb-5 blog" name="solution_update_form">Update</button>
+                </form>
+            </div>
+        </div>
+
+        <!--Modal-->
+                <div class="modal fade" id="addDomain" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+                    aria-hidden="true">
+                    <div class="modal-md modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3>Category</h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        {% comment %} {{form|crispy}} {% endcomment %}
+                                        {{domain_form}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="submit" class="box-btn" name="domain_submit_form">Add Category</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+    </div>
+</div>
+
+{% include "home/footer.html" %} 
+
+{% endblock content %}

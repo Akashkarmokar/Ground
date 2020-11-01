@@ -54,10 +54,11 @@ def signup(request):
             return redirect('users:login')
     else:        
         form = SignUpForm()
-        context = {
-            'form':form,
-            'active':'active',
-        }
+
+    context = {
+        'form':form,
+        'active':'active',
+    }
     return render(request,'users/signup.html',context)
 
 
@@ -75,10 +76,11 @@ def user_login(request):
                     return HttpResponseRedirect('/')
         else:
             form = LoginForm()
-            context = {
-                'form':form,
-                'active':'active',
-            }
+            
+        context = {
+            'form':form,
+            'active':'active',
+        }
         return render(request,'users/login.html',context)
     else:
         return HttpResponseRedirect('/')
@@ -100,8 +102,9 @@ def changepass(request):
             return redirect('posts:allposts')
     else:
         form = PasswordChangeForm(user=request.user)
-        context = {
-            'form':form,
-            'active':'active',
-        }
-        return render(request,'users/changepass.html',context)
+        
+    context = {
+        'form':form,
+        'active':'active',
+    }
+    return render(request,'users/changepass.html',context)

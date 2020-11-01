@@ -21,7 +21,7 @@ class SignUpForm(UserCreationForm):
             'username':forms.TextInput(attrs={'class':'form-control','placeholder':'UserName'}),
             'first_name':forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}),
             'last_name':forms.TextInput(attrs={'class':'form-control','placeholder':'Last Name'}),
-            'email':forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}),
+            'email':forms.EmailInput(attrs={'class':'form-control','placeholder':'Email'}),
         }
 
 
