@@ -11,6 +11,8 @@ class DomainModelForm(forms.ModelForm):
 
 
 class SolutionModelForm(forms.ModelForm):
+    number = forms.CharField(label='',widget=forms.TextInput(attrs={'class':'form-control','rows':'1','placeholder':'Type Problem Number'}))
+    link = forms.CharField(label='',widget=forms.TextInput(attrs={'class':'form-control','rows':'1','placeholder':'Paste Link Here'}))
     class Meta:
         model = Solution
         fields = ['domain','number','link',]

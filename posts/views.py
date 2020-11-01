@@ -19,6 +19,7 @@ def list_all_post_comments(request):
     if request.method == "POST":
         if request.user.is_authenticated:
             all_posts = Post.objects.all()
+            all_blogs = Blog.objects.all()
             profile = Profile.objects.get(user=request.user)
 
             # Post form, Comment form 
@@ -44,6 +45,7 @@ def list_all_post_comments(request):
 
 
             total_post_num = all_posts.count()
+            total_blog_num = all_blogs.count()
             total_user_num = User.objects.all().count()
             total_feedback_num = Feedback.objects.all().count()
 
@@ -53,6 +55,7 @@ def list_all_post_comments(request):
                 'post_form':post_form,
                 'comment_form':comment_form,
                 'total_post':total_post_num,
+                'total_blog':total_blog_num,
                 'total_user':total_user_num,
                 'total_feedback':total_feedback_num,
                 'active':'active',
@@ -62,12 +65,14 @@ def list_all_post_comments(request):
             return HttpResponseRedirect('/user/login')
     else:
         all_posts = Post.objects.all()
+        all_blogs = Blog.objects.all()
         recent_blogs = Blog.objects.all()[:10]
         post_form = PostModelForm()
         comment_form = CommentModelForm()
 
 
         total_post_num = all_posts.count()
+        total_blog_num = all_blogs.count()
         total_user_num = User.objects.all().count()
         total_feedback_num = Feedback.objects.all().count()
         context={
@@ -76,6 +81,7 @@ def list_all_post_comments(request):
             'post_form':post_form,
             'comment_form':comment_form,
             'total_post':total_post_num,
+            'total_blog':total_blog_num,
             'total_user':total_user_num,
             'total_feedback':total_feedback_num,
             'active':'active',

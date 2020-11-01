@@ -142,7 +142,7 @@
                     <div class="post-wrap">
                         {% for recent in recent_posts %}
                             <article class="item">
-                                <a href="" class="thumb">
+                                <a href="{% url 'posts:postsDetails' recent.id %}" class="thumb blog">
                                     <span class="fullimage cover bg1" role="img"></span>
                                 </a>
                                 <div class="info">

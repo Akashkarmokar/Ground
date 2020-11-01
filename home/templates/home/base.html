@@ -26,6 +26,23 @@
 </head>
 
 <body>
+    <!-- PreLoader Start -->
+    <div class="loader-content">
+        <div class="d-table">
+            <div class="d-table-cell">
+                <div class="preloader loading">
+                    <span class="slice"></span>
+                    <span class="slice"></span>
+                    <span class="slice"></span>
+                    <span class="slice"></span>
+                    <span class="slice"></span>
+                    <span class="slice"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- PreLoader End -->
+
     <div>
         {% include 'home/navbar.html' %}
     </div>
@@ -73,20 +90,21 @@
 
     </script>
     <script>
-        $('.tablemanager').tablemanager({
-            firstSort: [[3, 0], [2, 0], [1, 'asc']],
-    
-            appendFilterby: true,
-            debug: true,
-            vocabulary: {
-                voc_filter_by: 'Filter By',
-                voc_type_here_filter: 'Filter...'
-            },
-            pagination: false,
-            disableFilterBy: [1]
+        // Preloader
+        jQuery(window).on('load', function () {
+            jQuery(".loader-content").fadeOut(500);
         });
     </script>
-
+    <script>
+        $(".answer").hide();
+        $(".add_cata").click(function () {
+            if ($(this).is(":checked")) {
+                $(".answer").show();
+            } else {
+                $(".answer").hide();
+            }
+        });
+    </script>
     <script>
         function toggle(ele) {
             var cont = document.getElementById('cont');
@@ -218,6 +236,15 @@
 
         })
 
+    </script>
+
+    <script>
+        $('.accordion').find('.accordion-title').on('click', function () {
+            $(this).toggleClass('active');
+            $(this).next().slideToggle('fast');
+            $('.accordion-content').not($(this).next()).slideUp('fast');
+            $('.accordion-title').not($(this)).removeClass('active');
+        });
     </script>
 
     <script>

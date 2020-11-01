@@ -12,7 +12,7 @@
                         <div class="col-lg-12">
                             <div class="banner-tittle">
                                 <h1>
-                                    {{post.heading}}
+                                    Archive
                                 </h1>
                             </div>
                             <ul class="head-list">
@@ -31,79 +31,66 @@
     </div>
 </div>
 
-<!-- Domain Form Area-->
-<div class="row">
-    <div class="col-lg-3">
-        {% comment %} <h3>Hello</h3> {% endcomment %}
-    </div>
-    <div class="col-lg-6 mt-5">
-        <form action="" method="POST">
-            {% csrf_token %}
-            {% for form in domain_form %}
-                {{form}}
-                <br>
-            {% endfor %}
-            <button type="submit" class="btn btn-success" name="create_domain_form">Create</button>
-        </form>
-    </div>
-    <div class="col-lg-3">
-        {% comment %} <h3>Hello</h3> {% endcomment %}
-    </div>
-</div>
-<!--Domain Form Area-->
 
-
-<hr>
-
-
-<!-- Solution Form Area-->
-<div class="row">
-    <div class="col-lg-3">
-        {% comment %} <h3>Hello</h3> {% endcomment %}
-    </div>
-    <div class="col-lg-6 mt-5">
-        <form action="" method="POST">
-            {% csrf_token %}
-            {% for form in solution_form %}
-                {{form}}
-                {% ifequal  form.label|lower 'domain' %}
-                    <button class="btn btn-success">Add</button>
-                {% endifequal %}
-                <br>
-            {% endfor %}
-            <button type="submit" class="btn btn-success" name="create_solution_form">Create</button>
-        </form>
-    </div>
-    <div class="col-lg-3">
-        {% comment %} <h3>Hello</h3> {% endcomment %}
-    </div>
-</div>
-<!--Solution Form Area-->
-
-<div class="archive-area ptb-50">
+<div class="archive-area ptb-50m">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <input type="button" value="Show DIV" id="bt" onclick="toggle(this)">
-                <a href="{% url 'archive:main_or_search' %}" class="mx-3">Reset</a>
-                <div style="border:solid 1px #ddd; padding:10px; display:none;" id="cont">
-                    <form  method="GET" action="{% url 'archive:main_or_search' %}">
-                        <div class="form-row">
-                          <div class="col">
-                            {% comment %} <input type="text" class="form-control" placeholder="Domain" name="domain" id="domain"> {% endcomment %}
-                            
-                            <select name="domain" id="domain" class="form-control">
-                                {% for domain in domains %}
-                                    <option value="{{domain.id}}">{{domain.name}}</option>
-                                {% endfor %}
-                            </select>
-                          </div>
-                          <div class="col">
-                            <input type="text" class="form-control" placeholder="Problem Link" name="num" id="num">
-                          </div>
-                        </div>
-                        <button type="submit" class="btn btn-success">Submit</button>
-                      </form>
+                <div class="archive-post-area">
+                    <div class="archive-accordion">
+                        <ul class="accordion">
+                            <li class="accordion-item">
+                                <a class="accordion-title active" href="javascript:void(0)">
+                                    <i class="bx bx-plus"></i> Stocks Your Solutions
+                                </a>
+                                <div class="accordion-content">
+                                    <form action="" method="POST">
+                                        <label>Select a Domain</label>
+                                        {% csrf_token %}
+                                        {% for form in solution_form %}
+                                        {{form}}
+                                        {% ifequal  form.label|lower 'domain' %}
+                                        <fieldset class="question">
+                                            <label for="add_cata">Do you have another Doamin.?</label>
+                                            <input class="add_cata" type="checkbox" name="coupon_question" value="1" />
+                                            <span class="item-text">Yes</span>
+                                            <button type="button" class="btn btn-primary answer" data-toggle="modal"
+                                            data-target="#createArchive"><i class='bx bx-plus'></i></button>
+                                        </fieldset>
+                                        {% endifequal %}
+                                        {% endfor %}
+                                        <button type="submit" class="btn btn-success" name="create_solution_form">Create</button>
+                                    </form>
+                                </div>
+                            </li>
+
+                            <li class="accordion-item">
+                                <a class="accordion-title" href="javascript:void(0)">
+                                    <i class="bx bx-plus"></i>Find Your Solutions
+                                </a>
+                                <div class="accordion-content">
+                                    <form method="GET" action="{% url 'archive:main_or_search' %}">
+                                        <div class="form-row">
+                                            <div class="col-12 mb-3">
+                                                {% comment %} <input type="text" class="form-control" placeholder="Domain" name="domain"
+                                                    id="domain"> {% endcomment %}
+                                                <label>Select a Domain for Filter</label>
+                                                <select name="domain" id="domain" class="form-control">
+                                                    {% for domain in domains %}
+                                                    <option value="{{domain.id}}">{{domain.name}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="col-12 mb-3">
+                                                <input type="text" class="form-control" placeholder="Problem Link" name="num" id="num">
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </div
                 </div>
             </div>
         </div>
@@ -111,29 +98,29 @@
     <div class="container">
         <div class="row">
             <div class="table-responsive">
-                <table class="tablemanager" width="100%">
-                    <thead>
+                <table class="table">
+                    <thead class="thead-dark">
                         <tr>
-                            <th>Domain</th>
-                            <th>Problem Number</th>
-                            <th>Problem Link</th>
-                            <th>Authon</th>
-                            <th>Action</th>
+                            <th scope="col">Domain</th>
+                            <th scope="col">Problem Number</th>
+                            <th scope="col">Problem Link</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for solution in solutions %}
                         <tr>
                             <td>{{solution.domain}} </td>
-                            <td>{{solution.number}} </td>
-                            <td><a href="">{{solution.link}} </a></td>
+                            <td class="problem-number">{{solution.number}} </td>
+                            <td class="problem-link"><a href="{{solution.link}}" target="_blank">{{solution.link}} </a></td>
                             <td>{{solution.author}} </td>
                             <td>
                                 {% if solution.author.user == request.user %}
-                                    <a href="{% url 'archive:delete_solution' solution.id %}">Delete</a>
-                                    <a href="">Edit</a>
+                                <a href="{% url 'archive:delete_solution' solution.id %}">Delete</a>
+                                <a href="">Edit</a>
                                 {% else %}
-                                    <a href="">Like</a>
+                                <a href="">Like</a>
                                 {% endif %}
                             </td>
                         </tr>
@@ -143,6 +130,25 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="createArchive" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {% for form in domain_form %}
+                        {{form}}
+                        {% endfor %}
+                        <button type="submit" class="btn btn-success mt-4" name="create_domain_form">Create</button>
+                        <button type="button" class="btn btn-secondary mt-4" data-dismiss="modal">Close</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {% comment %} {% include "home/footer.html" %} {% endcomment %}
