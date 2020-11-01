@@ -3809,6 +3809,7 @@ input#id_new_password2:focus {
 
 .archive-area {
   position: relative;
+  padding-bottom: 0;
 }
 
 .archive-area th {
@@ -4579,5 +4580,9 @@ a.thumb.post:before {
   height: 2px;
   background: #010102;
   top: 5px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }
 /*# sourceMappingURL=style.css.map */

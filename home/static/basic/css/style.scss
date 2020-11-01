@@ -3099,6 +3099,7 @@ input#id_new_password2 {
 //
 .archive-area {
     position: relative;
+    padding-bottom: 0;
     th {
         width: 150px;
     }
@@ -3347,3 +3348,5 @@ a.thumb.post {
         }
     }
 }
+
+tr:nth-child(even) {background-color: #f2f2f2;}
