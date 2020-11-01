@@ -35,12 +35,16 @@ def main_or_search(request):
             # print("//////")
             domain_query = request.GET['domain']
             number_query = request.GET['num']
-            solutions = Solution.objects.filter(Q(domain=domain_query)|Q(number=number_query))
+            solutions = Solution.objects.filter(Q(domain=domain_query) & Q(number=number_query))
             domains = Domain.objects.all()
             # print(domains)
+            solution_form = SolutionModelForm()
+            domain_form = DomainModelForm()
             context = {
                 'solutions':solutions,
                 'domains':domains,
+                'solution_form':solution_form,
+                'domain_form':domain_form,
             }
             return render(request,'archive/main.html',context)
         else:

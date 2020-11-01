@@ -103,7 +103,7 @@
                         <tr>
                             <th scope="col">Domain</th>
                             <th scope="col">Problem Number</th>
-                            <th scope="col">Problem Link</th>
+                            <th scope="col">Solution Link</th>
                             <th scope="col">Author</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -114,7 +114,7 @@
                             <td>{{solution.domain}} </td>
                             <td class="problem-number">{{solution.number}} </td>
                             <td class="problem-link"><a href="{{solution.link}}" target="_blank">{{solution.link}} </a></td>
-                            <td>{{solution.author}} </td>
+                            <td><a href="{% url 'users:profile' solution.author.id %}">{{solution.author.user}}</a></td>
                             <td>
                                 {% if solution.author.user == request.user %}
                                 <a href="{% url 'archive:delete_solution' solution.id %}">Delete</a>
