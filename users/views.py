@@ -7,6 +7,7 @@ from .models import Profile,Relationship
 from posts.models import Post
 from blog.models import Blog
 from pastebin.models import Pastebindb
+from archive.models import Solution
 from django.urls import reverse
 
 # Create your views here.
@@ -21,6 +22,7 @@ def profile(request,profileId):
         posts = Post.objects.filter(author=profile)
         blogs = Blog.objects.filter(author=profile)
         pastebins = Pastebindb.objects.filter(user=profile)
+        solutions = Solution.objects.filter(author=profile)
         update_confirm = False
 
         if request.method == "POST":
@@ -35,6 +37,7 @@ def profile(request,profileId):
             'posts':posts,
             'blogs':blogs,
             'pastebins':pastebins,
+            'solutions':solutions,
             'active':'active',
         }
         return render(request,'users/profile.html',context)

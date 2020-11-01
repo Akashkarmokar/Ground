@@ -39,6 +39,9 @@ class Profile(models.Model):
     def get_blogs_no(self):
         return self.blogs.all().count()
 
+    def get_archive_no(self):
+        return self.solutions.all().count()
+
     def get_pastebins_no(self):
         return self.pastebin.all().count()
 
