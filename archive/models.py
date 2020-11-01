@@ -17,7 +17,7 @@ class Solution(models.Model):
     domain = models.ForeignKey(Domain,on_delete=models.CASCADE)
     number = models.CharField(max_length=50)
     link = models.CharField(max_length=200)
-    author = models.ForeignKey(Profile,on_delete=models.CASCADE)
+    author = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='solutions')
     like = models.ManyToManyField(Profile,blank=True,related_name='solution_like')
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)

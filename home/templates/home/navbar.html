@@ -24,7 +24,7 @@
                      <a class="nav-link" href="{% url 'pastebin:bin_url' %}">Pastebin</a>
                   </li>
                   <li class="nav-item {% if url_name == 'eno url link dis' %}{{active}}{% endif %}">
-                     <a href="{% url 'archive:main' %}" class="nav-link ">Archive</a>
+                     <a href="{% url 'archive:main_or_search' %}" class="nav-link ">Archive</a>
                   </li>
                   <li class="nav-item {% if url_name == 'all_blog' %}{{active}}{% endif %}">
                      <a class="nav-link" href="{% url 'blog:all_blog' %}">Blog</a>

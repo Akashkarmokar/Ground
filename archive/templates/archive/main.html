@@ -31,23 +31,78 @@
     </div>
 </div>
 
+<!-- Domain Form Area-->
+<div class="row">
+    <div class="col-lg-3">
+        {% comment %} <h3>Hello</h3> {% endcomment %}
+    </div>
+    <div class="col-lg-6 mt-5">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% for form in domain_form %}
+                {{form}}
+                <br>
+            {% endfor %}
+            <button type="submit" class="btn btn-success" name="create_domain_form">Create</button>
+        </form>
+    </div>
+    <div class="col-lg-3">
+        {% comment %} <h3>Hello</h3> {% endcomment %}
+    </div>
+</div>
+<!--Domain Form Area-->
+
+
+<hr>
+
+
+<!-- Solution Form Area-->
+<div class="row">
+    <div class="col-lg-3">
+        {% comment %} <h3>Hello</h3> {% endcomment %}
+    </div>
+    <div class="col-lg-6 mt-5">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% for form in solution_form %}
+                {{form}}
+                {% ifequal  form.label|lower 'domain' %}
+                    <button class="btn btn-success">Add</button>
+                {% endifequal %}
+                <br>
+            {% endfor %}
+            <button type="submit" class="btn btn-success" name="create_solution_form">Create</button>
+        </form>
+    </div>
+    <div class="col-lg-3">
+        {% comment %} <h3>Hello</h3> {% endcomment %}
+    </div>
+</div>
+<!--Solution Form Area-->
 
 <div class="archive-area ptb-50">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <input type="button" value="Show DIV" id="bt" onclick="toggle(this)">
+                <a href="{% url 'archive:main_or_search' %}" class="mx-3">Reset</a>
                 <div style="border:solid 1px #ddd; padding:10px; display:none;" id="cont">
-                    <form>
+                    <form  method="GET" action="{% url 'archive:main_or_search' %}">
                         <div class="form-row">
                           <div class="col">
-                            <input type="text" class="form-control" placeholder="Domain">
+                            {% comment %} <input type="text" class="form-control" placeholder="Domain" name="domain" id="domain"> {% endcomment %}
+                            
+                            <select name="domain" id="domain" class="form-control">
+                                {% for domain in domains %}
+                                    <option value="{{domain.id}}">{{domain.name}}</option>
+                                {% endfor %}
+                            </select>
                           </div>
                           <div class="col">
-                            <input type="text" class="form-control" placeholder="Problem Link">
+                            <input type="text" class="form-control" placeholder="Problem Link" name="num" id="num">
                           </div>
                         </div>
-                        <button type="submit">Submit</button>
+                        <button type="submit" class="btn btn-success">Submit</button>
                       </form>
                 </div>
             </div>
@@ -63,6 +118,7 @@
                             <th>Problem Number</th>
                             <th>Problem Link</th>
                             <th>Authon</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,6 +128,14 @@
                             <td>{{solution.number}} </td>
                             <td><a href="">{{solution.link}} </a></td>
                             <td>{{solution.author}} </td>
+                            <td>
+                                {% if solution.author.user == request.user %}
+                                    <a href="{% url 'archive:delete_solution' solution.id %}">Delete</a>
+                                    <a href="">Edit</a>
+                                {% else %}
+                                    <a href="">Like</a>
+                                {% endif %}
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
