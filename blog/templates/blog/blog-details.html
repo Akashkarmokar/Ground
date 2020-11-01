@@ -148,7 +148,7 @@
                                 <div class="info">
                                     <h4 class="title usmall">
                                         <a href="{% url 'posts:postsDetails' recent.id %}">
-                                            {{recent.heading}}
+                                            {{recent.heading|slice:50}}..
                                         </a>
                                     </h4>
                                     <time>{{recent.created|date}}</time>

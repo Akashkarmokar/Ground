@@ -1,38 +1,86 @@
-{% extends 'home/base.html' %}
+<!DOCTYPE html>
 {% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'basic/css/bootstrap.css' %}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'basic/css/meanmenu.css' %}">
+    <!-- Prism CSS -->
+    <link rel="stylesheet" href="{% static 'basic/css/prism.css' %}">
+    <!-- Boxicon  CSS -->
+    <link rel="stylesheet" href="{% static 'basic/css/boxicons.min.css' %}">
+    <!-- Icon CSS -->
+    <link rel="stylesheet" href="{% static 'basic/css/icon.css' %}">
+    <!-- Emoji CSS -->
+    <link rel="stylesheet" href="{% static 'basic/css/emojionearea.min.css' %}">
+    <!-- Owl Carousel CSS -->
+    <link rel="stylesheet" href="{% static 'basic/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'basic/css/owl.theme.default.min.css' %}">
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'basic/css/style.css' %}">
+    <title>Ground</title>
+</head>
 
 {% block content %}
 <!-- Footer Area -->
-<footer class="footer-area-2">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-6 offset-lg-3">
-                <div class="footer-content-2">
-                    <div class="foot-img text-center">
-                        <a href="/"><img src="../../static/basic/images/logo.png" alt="logo"></a>
-                    </div>
-                    <p class="text-center">
-                        Ground is a social questions & Answers Engine which will help you establis your community and
-                        connect with other people.
-                    </p>
 
-                    <div class="privecy text-center">
-                        <a href="{% url 'privecy' %}">Privecy</a>
-                        <span>|</span>
-                        <a href="{% url 'terms_condition' %}">Terms of Use</a>
-                        <span>|</span>
-                        <a href="{% url 'developer' %}">About Dev</a>
-                    </div>
+<body>
 
+    <footer class="footer-area-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 offset-lg-3">
+                    <div class="footer-content-2">
+                        <div class="foot-img text-center">
+                            <a href="/"><img src="../../static/basic/images/logo.png" alt="logo"></a>
+                        </div>
+                        <p class="text-center">
+                            Ground is a social questions & Answers Engine which will help you establis your community
+                            and
+                            connect with other people.
+                        </p>
+
+                        <div class="privecy text-center">
+                            <a href="{% url 'privecy' %}">Privecy</a>
+                            <span>|</span>
+                            <a href="{% url 'terms_condition' %}">Terms of Use</a>
+                            <span>|</span>
+                            <a href="{% url 'developer' %}">About Dev</a>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="copy-area">
-        <p class="text-center">
-            Copyright &copy; 2020 Ground. All Rights Reserved.
-        </p>
-    </div>
-</footer>
+        <div class="copy-area">
+            <p class="text-center">
+                Copyright &copy; 2020 Ground. All Rights Reserved.
+            </p>
+        </div>
+    </footer>
+</body>
 <!-- End Footer Area -->
 {% endblock content %}
+
+<!-- jQuery Min JS -->
+<script src="{% static 'basic/js/jquery.js' %}"></script>
+<!-- Boostrap Js  -->
+<script src="{% static 'basic/js/bootstrap.js' %}"></script>
+<!-- Popper Js  -->
+<script src="{% static 'basic/js/popper.js' %}"></script>
+<!-- MeanMenu Js  -->
+<script src="{% static 'basic/js/jquery.meanmenu.js' %}"></script>
+<!-- Prism Js  -->
+<script src="{% static 'basic/js/prism.js' %}"></script>
+<!-- Box Icons Js  -->
+<script src="{% static 'basic/js/boxicons.js' %}"></script>
+<!-- Emoji js -->
+<script src="{% static 'basic/js/emojionearea.min.js' %}"></script>
+<!-- Owl Carousel Js -->
+<script src="{% static 'basic/js/owl.carousel.min.js' %}"></script>
+<!-- Main Js  -->
+<script src="{% static 'basic/js/main.js' %}"></script>

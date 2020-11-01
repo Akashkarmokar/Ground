@@ -169,7 +169,7 @@ def update_blog(request,pk):
                         context = {
                             'form':form,
                         }
-                        return redirect(reverse('blog:single_blog',args=pk))
+                        return redirect('blog:single_blog',args=pk)
             except Blog.DoesNotExist:
                 return render(request,'home/error.html')
         else:

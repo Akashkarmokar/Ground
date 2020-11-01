@@ -173,21 +173,22 @@
                 <div class="container">
                     <div class="review-slider owl-carousel owl-theme">
                         {% for feedback in feedbacks %}
-                            <div class="single-slider">
-                                <div class="testimonial-item">
-                                    <div class="review-img">
-                                        <img src="{{feedback.author.avater.url}}" alt="review-img">
-                                    </div>
-                                    <div class="review-content">
-                                        <p><i class='bx bxs-quote-alt-left'></i>{{feedback.content|slice:300}}<i class='bx bxs-quote-alt-right'></i></p>
-                                        <h5>{{feedback.author.user}}</h5>
-                                        <span>Developer</span>
-                                    </div>
-                                    <div class="shape">
-                                        <img src="../../static/basic/images/tshape.png" alt="shape">
-                                    </div>
+                        <div class="single-slider">
+                            <div class="testimonial-item">
+                                <div class="review-img">
+                                    <img src="{{feedback.author.avater.url}}" alt="review-img">
+                                </div>
+                                <div class="review-content">
+                                    <p><i class='bx bxs-quote-alt-left'></i>{{feedback.content|slice:300}}<i
+                                            class='bx bxs-quote-alt-right'></i></p>
+                                    <h5>{{feedback.author.user}}</h5>
+                                    <span>Developer</span>
+                                </div>
+                                <div class="shape">
+                                    <img src="../../static/basic/images/tshape.png" alt="shape">
                                 </div>
                             </div>
+                        </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -208,38 +209,42 @@
         </div>
 
         <div class="row">
-        {% for recent in recent_blogs %}
+            {% for recent in recent_blogs %}
             <div class="col-lg-4 col-md-6">
-                
-                    <div class="single-blog">
-                        <div class="content">
-                            <ul>
-                                <li>
-                                    {{recent.created|date}}
-                                </li>
-                                <li>
-                                    <span>By {{recent.author.user}}</span>
-                                </li>
-                                <li>
-                                    <span>view {{recent.read.all.count}}</span>
-                                </li>
-                                <li>
-                                    <span>comment {{recent.num_comments}}</span>
-                                </li>
-                            </ul>
+                <div class="single-blog">
+                    <div class="content">
+                        <a href="{% url 'blog:single_blog' recent.id %}">
+                            <h3>{{recent.title|slice:50}}</h3>
+                        </a>
+                        <ul>
+                            <li>
+                                <span>On:{{recent.created|date}}</span>
+                            </li>
+                            <li>
+                                <a href=""><span>By {{recent.author.user}}</span></a>
+                            </li>
 
-                            <a href="#">
-                                <h3>{{recent.title|slice:20}}</h3>
-                            </a>
-                            <a href="{% url 'blog:single_blog' recent.id %}" class="line-bnt">Read More</a>
-                        </div>
+                        </ul>
+
+                        <ul class="mt-2">
+                            <li>
+                                <span><i class="bx bx-low-vision"></i>{{recent.read.all.count}} views</span>
+                            </li>
+                            <li>
+                                <span><i class="bx bx-comment"></i>{{recent.num_comments}} comments</span>
+                            </li>
+                        </ul>
+
+                        <span class="catagory">{{recent.category}}</span>
+                        <a href="{% url 'blog:single_blog' recent.id %}" class="box-btn mt-4">Read More</a>
                     </div>
-                
+                </div>
+
             </div>
-        {% endfor %}
+            {% endfor %}
         </div>
         <div class="blog-btn text-center">
-            <p>We Have More Usefull Blogs For You. <a href="#">View More</a></p>
+            <p>We Have More Usefull Blogs For You. <a href="{% url 'blog:all_blog' %}">View More</a></p>
         </div>
     </div>
 </section>

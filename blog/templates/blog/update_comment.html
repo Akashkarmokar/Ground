@@ -20,7 +20,7 @@
                                     Home
                                 </a>
                             </li>
-                            <li>Blog Details</li>
+                            <li>Edit Blog</li>
                         </ul>
                     </div>
                 </div>
@@ -30,17 +30,21 @@
 </div>
 
 <!-- Start Blog Details Area -->
-<div class='row'>
-    <div class="col-12 ptb-50">
-        <div class="edit-comment">
-            <h3>Edit Comment</h3>
-            <form action="" method="POST" >
-                {% csrf_token %}
-                {{form.as_p}}
-                <button type="submit" class="btn btn-success mt-4">Update</button>
-            </form>
+<div class="container">
+    <div class='row'>
+        <div class="col-12 ptb-50m">
+            <div class="edit-comment">
+                <h3>Edit Comment</h3>
+                <form action="" method="POST" >
+                    {% csrf_token %}
+                    {{form.as_p}}
+                    <button type="submit" class="btn btn-success mt-4">Update</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 <!-- End Blog Details Area -->
+{% include "home/footer.html" %}
+
 {% endblock content %}

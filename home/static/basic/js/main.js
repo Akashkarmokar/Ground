@@ -3,7 +3,7 @@ jQuery(function ($) {
 
     // Sticky Nav1
     $(document).on("scroll", function () {
-        if ($(document).scrollTop() > 10) {
+        if ($(document).scrollTop() > 40) {
             $(".main-nav").addClass("is-sticky ");
         } else {
             $(".main-nav").removeClass("is-sticky ");

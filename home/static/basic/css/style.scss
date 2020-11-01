@@ -1280,10 +1280,10 @@ Blog Area Css
                 padding: 0;
                 margin: 0;
                 li {
-                    display:inline-block;
-                    span{
-                        margin-right:10px;
-                        i{
+                    display: inline-block;
+                    span {
+                        margin-right: 10px;
+                        i {
                             font-size: 17px;
                             margin-right: 7px;
                             color: tomato;
@@ -1321,7 +1321,7 @@ Blog Area Css
             padding: 4px 15px;
             border-top-left-radius: 10px;
             line-height: normal;
-            color:#fff;
+            color: #fff;
         }
     }
     .blog-btn {
@@ -1383,6 +1383,10 @@ Blog Area Css
         position: fixed;
         right: 0;
         top: 60%;
+    }
+    a.box-btn.mt-4{
+        padding:9px 25px;
+        font-size:15px;
     }
 }
 
@@ -2009,12 +2013,11 @@ Profile Content Area Style
                 background: #fff !important;
                 margin: 1px 2px;
             }
-           
+
             &.active {
                 background: tomato;
             }
         }
-        
     }
 }
 
@@ -2223,7 +2226,8 @@ Profile Content Area Style
 /*
 Blog Details Area Style
 =====================================================*/
-.blog-details-area {
+.blog-details-area,
+.list-post-area {
     .blog-details-desc {
         .article-image {
             position: relative;
@@ -3054,21 +3058,18 @@ input#id_new_password2 {
     }
 }
 
+.about-dev-area {
+    position: relative;
 
-.about-dev-area{
-    position:relative;
-
-    .single-developer{
+    .single-developer {
         position: relative;
         // padding:30px;
-        
     }
-    .dev-img{
-        position:relative;
-        img{
-
+    .dev-img {
+        position: relative;
+        img {
         }
-        &:before{
+        &:before {
             position: absolute;
             content: "";
             background: tomato;
@@ -3081,8 +3082,66 @@ input#id_new_password2 {
     }
 }
 
-
-
 .show {
     display: block;
+}
+.emojionearea.emojionearea-inline {
+    height: 200px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+table, th, td {
+   border: 1px solid #bbb;
+   text-align: left;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+th {
+    background-color: #ddd;
+}
+th,td {
+    padding: 5px;
+}
+button {
+    cursor: pointer;
+}
+/*Initial style sort*/
+.tablemanager th.sorterHeader {
+    cursor: pointer;
+}
+.tablemanager th.sorterHeader:after {
+    content: " \f0dc";
+    font-family: "FontAwesome";
+}
+/*Style sort desc*/
+.tablemanager th.sortingDesc:after {
+    content: " \f0dd";
+    font-family: "FontAwesome";
+}
+/*Style sort asc*/
+.tablemanager th.sortingAsc:after {
+    content: " \f0de";
+    font-family: "FontAwesome";
+}
+/*Style disabled*/
+.tablemanager th.disableSort {
+
+}
+#for_numrows {
+    padding: 10px;
+    float: left;
+}
+#for_filter_by {
+    padding: 10px;
+    float: right;
+}
+#pagesControllers {
+    display: block;
+    text-align: center;
 }
