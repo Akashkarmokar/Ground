@@ -11,6 +11,7 @@ from archive.models import Solution
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.core import validators
+from django import forms
 
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -78,7 +79,11 @@ def signup(request):
         if form.is_valid():
             user_name = form.cleaned_data['username']
             user_email = form.cleaned_data['email']
-            
+
+            if  User.objects.filter(email=user_email).exists():
+                messages.info(request,'Email is already used.Try with another one')
+                return redirect('users:signup')
+
             user = form.save(commit=False)
             # return HttpResponseRedirect('../login')
             user.is_active = False
