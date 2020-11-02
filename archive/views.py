@@ -76,4 +76,42 @@ def delete_solution(request,pk):
             return render(request,'home/error.html')
     else:
         return redirect('users:login')
+
+
+def edit_solution(request,pk):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            obj = Solution.objects.get(pk=pk)
+            if obj.author.user == request.user:
+                if 'domain_submit_form' in request.POST:
+                    domain_form = DomainModelForm(request.POST or None)
+                    if domain_form.is_valid():
+                        domain_form.save()
+                        return redirect(request.META['HTTP_REFERER'])
+                solution_form = SolutionModelForm(request.POST or None,instance=obj)
+                if solution_form.is_valid():
+                    solution_form.save()
+                    return redirect('archive:main_or_search')
+            else:
+                return render(request,'home/error.html')
+        else:
+            try:
+                obj = Solution.objects.get(pk=pk)
+                if obj.author.user == request.user:
+                    solution_form = SolutionModelForm(instance=obj)
+                    domain_form = DomainModelForm()
+
+                    context={
+                        'solution_form':solution_form,
+                        'domain_form':domain_form,
+                    }
+                    return render(request,'archive/edit_solution.html',context)
+
+                else:
+                    return render(request,'home/error.html')
+            except Solution.DoesNotExist:
+                return render(request,'home/error.html') 
+    else:
+        return redirect('users:login')
+    # return render(request,'archive/edit_solution.html')
     
