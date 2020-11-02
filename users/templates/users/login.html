@@ -6,28 +6,25 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div {% if message.tags %} class="alert alert-{{message.tags}} alert-dismissible fade show" {% endif %}>
+                                <strong>{{message}}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    {% if form.non_field_errors %}
+                                        {% for error in form.non_field_errors %}
+                                            <p class="alert alert-danger my-3">{{error}}</p>
+                                        {% endfor %}
+                                    {% endif %}
                     <div class="signup-form">
                         <div class="section-tittle text-center">
                             <h2>Sign In</h2>
-                            <p>With your social network</p>
                         </div>
                         <form action="" method="POST" novalidate>
                             <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                    <a class="box-btn google" href="#" target="_blank">
-                                        <i class='bx bxl-google'></i> Google
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                    <a class="box-btn facebook" href="#" target="_blank">
-                                        <i class='bx bxl-facebook'></i> Facebook
-                                    </a>
-                                </div>
-                                <div class="col-lg-4 col-md-4 col-sm-12">
-                                    <a class="box-btn twitter" href="#" target="_blank">
-                                        <i class='bx bxl-twitter'></i> Twitter
-                                    </a>
-                                </div>
                                 <div class="col-md-12 col-sm-12">
                                     {% csrf_token %}
                                     {% for fm in form %}
@@ -36,7 +33,6 @@
                                     </div>
                                     {% endfor %}
                                 </div>
-
                                 <div class="col-12 text-center">
                                     <button value="Login" class="box-btn">Sign In</button>
                                     {% if form.non_field_errors %}

@@ -9,7 +9,18 @@ from blog.models import Blog
 from pastebin.models import Pastebindb
 from archive.models import Solution
 from django.urls import reverse
+from django.contrib.auth.models import User
+from django.core import validators
 
+
+from django.contrib.sites.shortcuts import get_current_site
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes
+from django.contrib.auth.tokens import default_token_generator
+from django.core.mail import EmailMessage
+from django.contrib.auth import get_user_model
+UserModel = get_user_model()
 # Create your views here.
 
 
@@ -45,12 +56,51 @@ def profile(request,profileId):
         return redirect('users:login')
 
 #signup function
+# def signup(request):
+#     if request.method == "POST":
+#         form = SignUpForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             # return HttpResponseRedirect('../login')
+#             return redirect('users:login')
+#     else:        
+#         form = SignUpForm()
+
+#     context = {
+#         'form':form,
+#         'active':'active',
+#     }
+#     return render(request,'users/signup.html',context)
+
 def signup(request):
     if request.method == "POST":
         form = SignUpForm(request.POST)
         if form.is_valid():
-            form.save()
+            user_name = form.cleaned_data['username']
+            user_email = form.cleaned_data['email']
+            
+            user = form.save(commit=False)
             # return HttpResponseRedirect('../login')
+            user.is_active = False
+            user.save()
+            current_site = get_current_site(request)
+            mail_subject = 'Active Your Account'
+            # Mail body making
+            uidb64 = urlsafe_base64_encode(force_bytes(user.pk))
+            token = default_token_generator.make_token(user)
+            domain = get_current_site(request).domain
+            link = reverse('users:activate',kwargs={'uidb64':uidb64,'token':token})
+            activate_url = 'http://'+domain+link
+
+            mail_body = 'Hi '+user.username + ',\nPlease click the link below to activate your account \n'+activate_url
+            user_email = form.cleaned_data.get('email')
+            email = EmailMessage(
+                mail_subject,
+                mail_body,
+                to=[user_email]
+            )
+            email.send()
+            messages.success(request,'check your mail and active your account')
             return redirect('users:login')
     else:        
         form = SignUpForm()
@@ -60,6 +110,28 @@ def signup(request):
         'active':'active',
     }
     return render(request,'users/signup.html',context)
+
+
+# class SignupView(View):
+#     def post(self,request):
+#         form = SignUpForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('users:login')
+        
+#         form = SignUpForm()
+#         context = {
+#             'form':form,
+#             'active':'active',
+#         }
+#         return render(request,'users/signup.html',context)
+#     def get(self,request):
+#         form = SignUpForm()
+#         context = {
+#             'form':form,
+#             'active':'active',
+#         }
+#         return render(request,'users/signup.html',context)
 
 
 #user login function
@@ -108,3 +180,23 @@ def changepass(request):
         'active':'active',
     }
     return render(request,'users/changepass.html',context)
+
+
+
+
+
+    
+def activate(request,uidb64,token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user =  UserModel._default_manager.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and default_token_generator.check_token(user,token):
+        user.is_active = True
+        user.save()
+        messages.success(request,'Your account is activated')
+        return redirect('users:login')
+    else:
+        messages.info(request,'Oops!! Activation link is invalid')
+        return redirect('users:login')
