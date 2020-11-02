@@ -4,6 +4,7 @@ from .utils import get_random_token
 from django.template.defaultfilters import slugify
 from django.utils.safestring import mark_safe
 
+
 # Create your models here.
 
 # Profile Model

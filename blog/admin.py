@@ -4,7 +4,7 @@ from .models import Blog,blogComment,blogRead,Category
 
 class BlogAdmin(admin.ModelAdmin):
 
-    list_display = ('content' , 'author')
+    list_display = ('title','category','content' , 'author',)
     list_per_page = 5
     list_max_show_all = 50
 

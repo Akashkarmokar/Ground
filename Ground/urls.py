@@ -20,6 +20,9 @@ from django.conf.urls.static import static
 from home import views
 from django.contrib.auth import views as auth_views
 
+admin.site.site_header='Ground Admin'
+admin.site.site_title='Ground Admin'
+admin.site.index_title='Ground Admin'
 
 urlpatterns = [
     path('admin/', admin.site.urls),

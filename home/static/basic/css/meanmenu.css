@@ -159,7 +159,7 @@ a.meanmenu-reveal {
 }
 .navbar-light .navbar-brand,
 .navbar-light .navbar-brand:hover {
-    color: #fff;
+    color: tomato;
     font-weight: bold;
     text-transform: uppercase;
 }
