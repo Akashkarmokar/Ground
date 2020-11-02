@@ -26,6 +26,9 @@
                                 {% for fm in form %}
                                 <div class="form-group">
                                     {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small>
+                                    {% if fm.help_text %}
+                                        <span class="help-text">{{fm.help_text}}</span>
+                                    {% endif %}
                                 </div>
                                 {% endfor %}
                             </div>

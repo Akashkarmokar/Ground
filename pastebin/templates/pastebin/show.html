@@ -6,7 +6,7 @@
         <div class="col-lg-12 col-12 ptb-50">
             <h1 class="text-center">Ground <span style="color: tomato;">Pastebin</span></h1>
             <div class="paste-info d-flex justify-content-center">
-                <p>Paste from <span style="color: tomato; margin-right:5px">{{db_row.poster_name}}</span> </p>
+                <p>Paste from <span style="color: tomato; margin-right:5px">{{db_row.user.user}}</span> </p>
                 <p> {{db_row.timestamp|date}} , {{db_row.timestamp|time}} </p>
             </div>
             <div id="inviteCode" class="invite-page">

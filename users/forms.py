@@ -10,15 +10,22 @@ from django.core.validators import RegexValidator
 # ^[A-Za-z]\\w{5, 29}$
 # r'^[0-9a-zA-Z]*$'
 
+# ^[a-zA-Z]+([_ -]?[a-zA-Z0-9])*$ ------ recent used regex expression 
+
 
 class SignUpForm(UserCreationForm):
-    password1 = forms.CharField(label='Password',widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Password'}))
-    password2 = forms.CharField(label='Confirm Password',widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Confirm Password'}))
-    username = forms.CharField(label='', validators=[RegexValidator('^[a-zA-Z]+([_ -]?[a-zA-Z0-9])*$', message="Username should be follow characters")],
-                required=True,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Username',}))
+    password1 = forms.CharField(label='Password',min_length=8,max_length=15,
+                                help_text = '*Use 8-15 charecter',
+                                widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Password'}))
+    password2 = forms.CharField(label='Confirm Password',min_length=8,max_length=15,widget=forms.PasswordInput(attrs={'class':'form-control','placeholder':'Confirm Password'}))
+    username  = forms.CharField(label='',min_length=6,max_length=30,help_text = '*Do not use special charecter except underscore',
+                                validators=[RegexValidator('^[a-zA-Z]+([_ -]?[a-zA-Z0-9])*$', message="Username should be follow characters")],
+                                required=True,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Username',}))
     first_name = forms.CharField(label='',required=True,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'First Name'}))
     last_name = forms.CharField(label='',required=True,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Last Name'}))
-    email = forms.EmailField(label='',required=True,widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}))
+    email = forms.EmailField(label='',required=True,
+                            help_text = '*Use valid email for verification purpose',
+                            widget=forms.TextInput(attrs={'class':'form-control','placeholder':'Email'}))
     class Meta:
         model = User
         fields = ['username','first_name','last_name','email']
