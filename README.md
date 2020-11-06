@@ -14,6 +14,6 @@ After cloning this repo use this command first.
 >
 >python manage.py createsuperuser
 
-
+## Miscellaneous
 Project quick video demonstrations link:
 >[https://rb.gy/j4pdax].
