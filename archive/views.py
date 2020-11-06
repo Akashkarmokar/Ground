@@ -45,6 +45,7 @@ def main_or_search(request):
                 'domains':domains,
                 'solution_form':solution_form,
                 'domain_form':domain_form,
+                'search_flag':True,
             }
             return render(request,'archive/main.html',context)
         else:
@@ -115,3 +116,33 @@ def edit_solution(request,pk):
         return redirect('users:login')
     # return render(request,'archive/edit_solution.html')
     
+
+
+def like_comment_solution(request):
+    if request.user.is_authenticated:
+        currentUser = request.user
+        if request.method == 'POST':
+            solution_id = request.POST.get('solution_id')
+            solutionObj = Solution.objects.get(id=solution_id)
+            profileObj = Profile.objects.get(user=currentUser)
+
+            if profileObj in solutionObj.like.all():
+                solutionObj.like.remove(profileObj)
+            else:
+                solutionObj.like.add(profileObj)
+
+            like, created = solutionLike.objects.get_or_create(user=profileObj,solution_id=solution_id)
+            if not created:
+                if like.value == 'Like':
+                    like.value = 'Unlike'
+                else:
+                    like.value = 'Like'
+            else:
+                like.value = 'Like'
+                
+                solutionObj.save()
+                like.save()
+        return redirect('archive:main_or_search')
+    
+    else:
+        return HttpResponseRedirect('/user/login/')

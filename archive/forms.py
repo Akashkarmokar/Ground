@@ -4,7 +4,7 @@ from .models import Domain,Solution
 
 
 class DomainModelForm(forms.ModelForm):
-    name = forms.CharField(label='',widget=forms.TextInput(attrs={'class':'form-control','rows':'1','placeholder':'Type Domain Name'}))
+    name = forms.CharField(label='',widget=forms.TextInput(attrs={'class':'form-control','rows':'1','placeholder':'Create domain'}))
     class Meta:
         model = Domain
         fields = ['name',]

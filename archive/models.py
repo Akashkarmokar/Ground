@@ -25,6 +25,9 @@ class Solution(models.Model):
     def __str__(self):
         return f"{self.domain} ----  {self.number}"
 
+    def num_likes(self):
+        return self.like.all().count()
+
     # class Meta:
     #     ordering = ('like.all.count',)
 

@@ -48,22 +48,21 @@
                                         <label>Select a Domain</label>
                                         {% csrf_token %}
                                         {% for form in solution_form %}
-                                        {{form}}
-                                        {% ifequal  form.label|lower 'domain' %}
-                                        <fieldset class="question">
-                                            <label for="add_cata">Do you have another Doamin.?</label>
-                                            <input class="add_cata" type="checkbox" name="coupon_question" value="1" />
-                                            <span class="item-text">Yes</span>
-                                            <button type="button" class="btn btn-primary answer" data-toggle="modal"
-                                            data-target="#createArchive"><i class='bx bx-plus'></i></button>
-                                        </fieldset>
-                                        {% endifequal %}
+                                            {{form}}
+                                            {% ifequal  form.label|lower 'domain' %}
+                                                <fieldset class="question">
+                                                    <label for="add_cata">Do you have another Doamin.?</label>
+                                                    <input class="add_cata" type="checkbox" name="coupon_question" value="1" />
+                                                    <span class="item-text">Yes</span>
+                                                    <button type="button" class="btn btn-primary answer" data-toggle="modal"
+                                                    data-target="#createArchive"><i class='bx bx-plus'></i></button>
+                                                </fieldset>
+                                            {% endifequal %}
                                         {% endfor %}
                                         <button type="submit" class="btn btn-success" name="create_solution_form">Create</button>
                                     </form>
                                 </div>
                             </li>
-
                             <li class="accordion-item">
                                 <a class="accordion-title" href="javascript:void(0)">
                                     <i class="bx bx-plus"></i>Find Your Solutions
@@ -98,7 +97,73 @@
     <div class="container">
         <div class="row">
             <div class="table-responsive" style="margin-bottom: 50px;">
-                <table class="table">
+                {% if search_flag %}
+                    <a href="{% url 'archive:main_or_search' %}">Reset</a>
+                {% endif %}
+                {% if solutions %}
+                    <table class="table">
+                        <thead class="" style="background-color: #051242; color:#fff; line-height:3;">
+                            <tr style="border-bottom: 1px solid #ecec;">
+                                <th scope="col">Domain</th>
+                                <th scope="col">Problem Number</th>
+                                <th scope="col">Solution Link</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for solution in solutions %}
+                            <tr>
+                                <td>{{solution.domain}} </td>
+                                <td class="problem-number">{{solution.number}} </td>
+                                <td class="problem-link"><a href="{{solution.link}}" target="_blank">{{solution.link}} </a></td>
+                                <td><a href="{% url 'users:profile' solution.author.id %}">{{solution.author.user}}</a></td>
+                                <td>
+                                    {% if solution.author.user == request.user %}
+                                        <a href="{% url 'archive:delete_solution' solution.id %}">Delete</a>
+                                        <a href="{% url 'archive:edit_solution' solution.id %}">Edit</a>
+                                    {% else %}
+                                        <form action="{% url 'archive:like_solution' %}" id='{{solution.id}}' method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="solution_id" value={{solution.id}}>
+                                            <button class="btn btn-success">Like({{solution.num_likes}})</button>
+                                        </form>
+                                        {% comment %} <a href="" data-toggle="modal" data-target="#likes">See All</a> {% endcomment %}
+                                        <!--Modal-->
+                                        <div class="modal fade" id="likes" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-md modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3>People who likes solution</h3>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close</button>
+                                                            {% comment %} <button type="submit" class="box-btn" name="category_submit_form">Add
+                                                                Category</button> {% endcomment %}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <div>
+                        <h2 style="color:tomato">No results found</h2>
+                    </div>
+                {% endif %}
+                {% comment %} <table class="table">
                     <thead class="" style="background-color: #051242; color:#fff; line-height:3;">
                         <tr style="border-bottom: 1px solid #ecec;">
                             <th scope="col">Domain</th>
@@ -120,13 +185,17 @@
                                     <a href="{% url 'archive:delete_solution' solution.id %}">Delete</a>
                                     <a href="{% url 'archive:edit_solution' solution.id %}">Edit</a>
                                 {% else %}
-                                    <a href="">Like</a>
+                                    <form action="{% url 'archive:like_solution' %}" id='{{solution.id}}' method="POST">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="solution_id" value={{solution.id}}>
+                                        <button>Like({{solution.num_likes}})</button>
+                                    </form>
                                 {% endif %}
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
-                </table>
+                </table> {% endcomment %}
             </div>
         </div>
     </div>
@@ -141,8 +210,8 @@
                         {% for form in domain_form %}
                         {{form}}
                         {% endfor %}
-                        <button type="submit" class="btn btn-success mt-4" name="create_domain_form">Create</button>
                         <button type="button" class="btn btn-secondary mt-4" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-success mt-4" name="create_domain_form">Create</button>
                     </form>
                 </div>
             </div>
