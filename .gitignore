@@ -1,15 +1,15 @@
 # Byte-compiled / optimized / DLL files
-__pycache__/
+__pycache__/*
 *.py[cod]
 *$py.class
 
 # Ignore Django Migrations in Development if you are working on team
 # Only for Development only
-# **/migrations/**
-# !**/migrations
-# !**/migrations/__init__.py
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
 # migrations/
 db.sqlite3
-# static_cdn/media_root/
+# static_cdn/media_root
 
 
