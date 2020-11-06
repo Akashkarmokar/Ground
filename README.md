@@ -1,7 +1,8 @@
 # Ground
 
 ### How to start
->Install required packages:
+First insall requirements file
+>pip install -r requirements.txt
 
 After cloning this repo use this command first.
 * python manage.py makemigrations
