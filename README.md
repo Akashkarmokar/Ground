@@ -1,6 +1,6 @@
 # Ground
 
-### How to start
+## How to start
 Clone This repository:
 >[https://github.com/Akashkarmokar/Ground.git]
 
