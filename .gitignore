@@ -8,8 +8,8 @@ __pycache__/
 # **/migrations/**
 # !**/migrations
 # !**/migrations/__init__.py
-migrations/
+# migrations/
 db.sqlite3
-static_cdn/media_root/
+# static_cdn/media_root/
 
 
