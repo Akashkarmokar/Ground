@@ -31,11 +31,11 @@ def main_or_search(request):
         else:
             return redirect('users:login')
     else:
-        if 'domain' in request.GET and 'num' in request.GET:
+        if 'domain' in request.GET or 'num' in request.GET:
             # print("//////")
             domain_query = request.GET['domain']
             number_query = request.GET['num']
-            solutions = Solution.objects.filter(Q(domain=domain_query) & Q(number=number_query))
+            solutions = Solution.objects.filter(Q(domain=domain_query) | Q(number=number_query))
             domains = Domain.objects.all()
             # print(domains)
             solution_form = SolutionModelForm()
