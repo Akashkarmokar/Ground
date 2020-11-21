@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponseRedirect,redirect
 from django.http import Http404
-from .models import Post,Like,Comment
+from .models import Post,Like,Comment,Unlike
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
 from users.forms import LoginForm
@@ -102,22 +102,68 @@ def like_comment_post(request):
                 postObj.liked.remove(profileObj)
             else:
                 postObj.liked.add(profileObj)
+                if profileObj in postObj.unliked.all():
+                    postObj.unliked.remove(profileObj)
+                    unlike = Unlike.objects.get(user=profileObj,post_id=postId)
+                    unlike.value = 'Undo'
+                    unlike.save()
+                    
 
             like, created = Like.objects.get_or_create(user=profileObj,post_id=postId)
             if not created:
+                #print(1111)
                 if like.value == 'Like':
-                    like.value = 'Unlike'
+                    #print(222)
+                    like.value = 'Undo' #////////////////////////
+                   # print(like.value)
                 else:
+                    #print(3333)
                     like.value = 'Like'
             else:
+               # print(4444)
                 like.value = 'Like'
                 
-                postObj.save()
-                like.save()
+            postObj.save()
+            like.save()
         return redirect('posts:allposts')
     
     else:
         return HttpResponseRedirect('/user/login/')
+
+def Unlike_comment_post(request):
+    if request.user.is_authenticated:
+        currentUser = request.user
+        if request.method == 'POST':
+            postId = request.POST.get('post_id')
+            postObj = Post.objects.get(id=postId)
+            profileObj = Profile.objects.get(user=currentUser)
+
+            if profileObj in postObj.unliked.all():
+                postObj.unliked.remove(profileObj)
+            else:
+                postObj.unliked.add(profileObj)
+                if profileObj in postObj.liked.all():
+                    postObj.liked.remove(profileObj)
+                    like = Like.objects.get(user=profileObj,post_id=postId)
+                    like.value='Undo'
+                    like.save()
+
+            unlike, created = Unlike.objects.get_or_create(user=profileObj,post_id=postId)
+            if not created:
+                if unlike.value == 'Unlike':
+                    unlike.value = 'Undo'
+                else:
+                    unlike.value = 'Unlike'
+            else:
+                unlike.value = 'Unlike'
+                
+            postObj.save()
+            unlike.save()
+        return redirect('posts:allposts')
+    
+    else:
+        return HttpResponseRedirect('/user/login/')
+
 
 
 def PostDelete(request,pk):

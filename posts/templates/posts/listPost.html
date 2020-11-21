@@ -136,10 +136,27 @@
                                                 {% if request.user.profile not in post.liked.all %}
                                                 <span class="material-icons">thumb_up</span>
                                                 {% else %}
-                                                <span class="material-icons">thumb_down</span>
+                                                <span class="material-icons" style="color:blue">thumb_up</span>
                                                 {% endif %}
                                             </button>
                                             <span class="like-count{{post.id}}">{{post.num_likes}}</span>
+                                        </form>
+                                    </div>
+                                    <div class="like">
+                                        <form class='like-form' id='{{post.id}}' action="{% url 'posts:postsUnlike' %}"
+                                            method="POST" enctype=multipart/form-data>
+                                            {% csrf_token %}
+                                            <input type="hidden" name="post_id" value={{post.id}}>
+
+                                            <button type="submit" href="javascript:void(0);"
+                                                class="like-button{{post.id}}">
+                                                {% if request.user.profile not in post.unliked.all %}
+                                                <span class="material-icons">thumb_down</span>
+                                                {% else %}
+                                                <span class="material-icons" style="color:blue">thumb_down</span>
+                                                {% endif %}
+                                            </button>
+                                            <span class="like-count{{post.id}}">{{post.num_unlikes}}</span>
                                         </form>
                                     </div>
                                     <div class="comment">

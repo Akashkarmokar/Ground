@@ -1477,7 +1477,7 @@ Home Post Area Css
             margin-top: 8px;
             border-bottom: 1px solid #eeeeee;
             .like {
-                flex: 15%;
+                flex: 10%;
                 margin-bottom: 10px;
                 position: relative;
                 .like-count {
@@ -3354,3 +3354,7 @@ a.thumb.post {
     
 // }
 tr:nth-child(even) {background-color: #f2f2f2;}
+
+button.like-button9 {
+    background: none;
+}

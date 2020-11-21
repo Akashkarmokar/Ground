@@ -12,6 +12,7 @@ class Post(models.Model):
     content = models.TextField()
     image = models.ImageField(upload_to='posts',validators=[FileExtensionValidator(['png','jpg','jpeg'])],blank=True)
     liked = models.ManyToManyField(Profile,blank=True,related_name='likes')
+    unliked = models.ManyToManyField(Profile,blank=True,related_name='unlikes')
     updated = models.DateTimeField(auto_now=True) 
     created = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='posts')
@@ -22,6 +23,9 @@ class Post(models.Model):
 
     def num_likes(self):
         return self.liked.all().count()
+
+    def num_unlikes(self):
+        return self.unliked.all().count()
 
 
     def num_comments(self):
@@ -50,7 +54,7 @@ class Comment(models.Model):
 # Like Model
 LIKE_CHOICES = {
     ('Like','Like'),
-    ('Unlike','Unlike'),
+    ('Undo','Undo'),
 }
 
 class Like(models.Model):
@@ -62,4 +66,22 @@ class Like(models.Model):
     
     def __str__(self):
         return f"{self.user}--{self.post}--{self.value}"
+
+
+
+UNLIKE_CHOICES = {
+    ('Unlike','Unlike'),
+    ('Undo','Undo'),
+}
+class Unlike(models.Model):
+    user = models.ForeignKey(Profile,on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,on_delete=models.CASCADE)
+    value = models.CharField(max_length=10,choices=UNLIKE_CHOICES)
+    updated = models.DateTimeField(auto_now=True)
+    created = models.DateTimeField(auto_now_add=True)
     
+    def __str__(self):
+        return f"{self.user}--{self.post}--{self.value}"
+    
+
+

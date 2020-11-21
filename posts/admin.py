@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post,Comment,Like
+from .models import Post,Comment,Like,Unlike
 
 
 class Postadmin(admin.ModelAdmin):
@@ -18,8 +18,10 @@ class Likeadmin(admin.ModelAdmin):
     
     list_display = ('user' , 'post', 'value')
 
-
+class Unlikeadmin(admin.ModelAdmin):
+    list_display = ('user','post','value')
 # Register your models here.
 admin.site.register(Post,Postadmin)
 admin.site.register(Comment,Commentadmin)
 admin.site.register(Like,Likeadmin)
+admin.site.register(Unlike,Unlikeadmin)
